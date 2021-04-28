@@ -1,10 +1,10 @@
-let debugMode = false
+let debugMode = true
 if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
   if (window.localStorage.getItem('StroeerVideoplayerDebugMode') !== null) {
     debugMode = true
   }
 }
-const Logger = {
+const logger = {
   log: function (...args: any[]) {
     if (debugMode) {
       console.log.apply(console, args)
@@ -12,4 +12,4 @@ const Logger = {
   }
 }
 
-export default Logger
+export default logger

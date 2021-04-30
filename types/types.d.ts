@@ -1,11 +1,7 @@
-// TODO: use better key names (current SMB keys)
-export interface IApiData {
-  created_at: string
-  duration: number
-  embed_url: string
-  producer: string
-  thumbnail: string // preview_image
+export interface IData {
+  image: string
   title: string
+  // add more
 }
 
 export interface IStroeerVideoplayer {
@@ -22,4 +18,5 @@ export interface IEndcardOptions {
   OnClickCallback?: Function
   OnRevolverplayCallback?: Function
   OnRevolverplayPauseCallback?: Function
+  dataKeyMap?: Object
 }

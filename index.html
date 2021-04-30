@@ -116,6 +116,10 @@
 
 			const myvideoplayer = new StroeerVideoplayer(video)
 			myvideoplayer.initPlugin('Endcard', {
+				dataKeyMap: {
+					// oldKey, newKey
+					preview_image: 'image'
+				},
 				OnLoadedCallback: () => {
 				 console.log('OnLoadedCallback triggered')
 			 	},

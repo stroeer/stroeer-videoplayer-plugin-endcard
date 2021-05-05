@@ -16,7 +16,8 @@ class EndcardPlugin {
   OnClickCallback: Function
   OnRevolverplayCallback: Function
   OnRevolverplayPauseCallback: Function
-  dataKeyMap: Object
+  dataKeyMap: object
+  showEndcard: boolean
 
   constructor (stroeervideoplayer: IStroeerVideoplayer, opts: IEndcardOptions = {}) {
     this.videoplayer = stroeervideoplayer
@@ -28,6 +29,7 @@ class EndcardPlugin {
     // TODO: maybe add get and set for endcard-url in videoplayer
     this.endcardUri = this.videoElement.getAttribute('data-endcard-url')
     this.dataKeyMap = opts.dataKeyMap !== undefined ? opts.dataKeyMap : noop
+    this.showEndcard = true
 
     this.OnLoadedCallback = opts.OnLoadedCallback !== undefined ? opts.OnLoadedCallback : noop
     this.OnClickCallback = opts.OnClickCallback !== undefined ? opts.OnClickCallback : noop
@@ -65,7 +67,7 @@ class EndcardPlugin {
   render = (): void => {
     if (this.endcardUri === null) return
 
-    fetchAPI<Object>(
+    fetchAPI<object>(
       this.endcardUri)
       .then((data) => {
         const transformedData = transformData(data, this.dataKeyMap)
@@ -77,15 +79,13 @@ class EndcardPlugin {
         }
       })
       .catch(err => {
-        if (typeof err === 'string') {
-          console.log(`Something went wrong! ${err}`)
-        } else {
-          console.log('Something went wrong!')
-        }
+        logger.log('Something went wrong with fetching api!', err)
+        this.showEndcard = false
       })
   }
 
   show = (): void => {
+    if (!this.showEndcard) return
     this.videoplayer.deinitUI(this.videoplayer.getUIName())
     this.endcardContainer.classList.remove('hidden')
     this.OnLoadedCallback(this.videoElement)

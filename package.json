@@ -13,9 +13,9 @@
   "watch": "npm-run-all watch:*",
   "watch:js": "rollup -c -w",
   "lint": "eslint src/*.ts src/**/*.ts",
-  "test": "jest src",
-  "test:coverage": "jest src --coverage",
-  "test:badges": "jest src --coverage && jest-coverage-badges"
+  "test": "jest tests",
+  "test:coverage": "jest tests --coverage",
+  "test:badges": "jest tests --coverage && jest-coverage-badges"
  },
  "repository": {
   "type": "git",
@@ -34,6 +34,7 @@
   "@stroeer/stroeer-videoplayer-default-ui": "^0.0.7",
   "@stroeer/stroeer-videoplayer-ivad-ui": "^0.0.1",
   "@superevilmegaco/jest-evil-svg-transformer": "^0.0.4",
+  "@types/jest": "^26.0.23",
   "@types/node-fetch": "^2.5.8",
   "@typescript-eslint/eslint-plugin": "4",
   "@typescript-eslint/parser": "^4.14.1",

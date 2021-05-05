@@ -1,8 +1,8 @@
 import { IData } from '../types/types'
 
 // https://www.carlrippon.com/fetch-with-async-await-and-typescript/
-async function fetchAPI<T> (url: RequestInfo): Promise<T> {
-  const response = await fetch(url)
+async function fetchAPI<T> (request: RequestInfo): Promise<T> {
+  const response = await fetch(request)
   let body
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`)
@@ -12,7 +12,7 @@ async function fetchAPI<T> (url: RequestInfo): Promise<T> {
     body = await response.json()
   } catch (err) {
     if (typeof err === 'string') {
-      console.log(`Something went wrong! ${err}`)
+      console.log(`Something went wrong! error: ${err}`)
     } else {
       console.log('Something went wrong!')
     }

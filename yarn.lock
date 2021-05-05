@@ -779,6 +779,14 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
+"@types/jest@^26.0.23":
+  "integrity" "sha512-ZHLmWMJ9jJ9PTiT58juykZpL7KjwJywFN3Rr2pTSkyQfydf/rk22yS7W8p5DaVUMQ2BQC7oYiU3FjbTM/mYrOA=="
+  "resolved" "https://npm.stroeermediabrands.de/@types%2fjest/-/jest-26.0.23.tgz"
+  "version" "26.0.23"
+  dependencies:
+    "jest-diff" "^26.0.0"
+    "pretty-format" "^26.0.0"
+
 "@types/json-schema@^7.0.3":
   "integrity" "sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA=="
   "resolved" "https://npm.stroeermediabrands.de/@types%2fjson-schema/-/json-schema-7.0.7.tgz"
@@ -3821,7 +3829,7 @@
   dependencies:
     "mkdirp" "0.5.1"
 
-"jest-diff@^26.6.2":
+"jest-diff@^26.0.0", "jest-diff@^26.6.2":
   "integrity" "sha512-6m+9Z3Gv9wN0WFVasqjCL/06+EFCMTqDEUl/b87HYK2rAPTyfz4ZIuSlPhY51PIQRWx5TaxeF1qmXKe9gfN3sA=="
   "resolved" "https://npm.stroeermediabrands.de/jest-diff/-/jest-diff-26.6.2.tgz"
   "version" "26.6.2"
@@ -5287,7 +5295,7 @@
   "resolved" "https://npm.stroeermediabrands.de/pretty-bytes/-/pretty-bytes-5.6.0.tgz"
   "version" "5.6.0"
 
-"pretty-format@^26.6.2":
+"pretty-format@^26.0.0", "pretty-format@^26.6.2":
   "integrity" "sha512-7AeGuCYNGmycyQbCqd/3PWH4eOoX/OiCa0uphp57NVTeAGdJGaAliecxwBDHYQCIvrW7aDBZCYeNTP/WX69mkg=="
   "resolved" "https://npm.stroeermediabrands.de/pretty-format/-/pretty-format-26.6.2.tgz"
   "version" "26.6.2"

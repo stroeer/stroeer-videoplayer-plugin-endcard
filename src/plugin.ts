@@ -55,7 +55,7 @@ class EndcardPlugin {
       })
     })
 
-    if (pauseButton == null) return
+    if (pauseButton === null) return
     pauseButton.addEventListener('click', (e) => {
       e.preventDefault()
       this.OnRevolverplayPauseCallback(this.videoElement)
@@ -101,13 +101,13 @@ const plugin = {
     const videoEl = stroeervideoplayer.getVideoEl()
 
     // for development change "contentVideoFirstQuartile" to "loadedmetadata"
-    videoEl.addEventListener('loadedmetadata', () => {
+    videoEl.addEventListener('contentVideoFirstQuartile', () => {
       endcardPlugin.render()
       endcardPlugin.addClickEvents()
     })
 
     // for development change "contentVideoEnded" to "loadedmetadata"
-    videoEl.addEventListener('loadedmetadata', () => {
+    videoEl.addEventListener('contentVideoEnded', () => {
       endcardPlugin.show()
     })
   },

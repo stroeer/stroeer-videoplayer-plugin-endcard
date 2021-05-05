@@ -1,4 +1,4 @@
-let debugMode = true
+let debugMode = false
 if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
   if (window.localStorage.getItem('StroeerVideoplayerDebugMode') !== null) {
     debugMode = true

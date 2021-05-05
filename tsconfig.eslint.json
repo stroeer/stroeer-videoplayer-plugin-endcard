@@ -1,5 +1,5 @@
 {
-  "forceConsitentCasingInFileNames": true,
+  "forceConsistentCasingInFileNames": true,
   "compilerOptions": {
     "rootDir": ".",
     "esModuleInterop": true,

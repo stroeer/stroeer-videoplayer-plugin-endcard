@@ -23,8 +23,7 @@ const transformData: Function = (data: [], keyMap: IData) => {
   for (const [oldKey, newKey] of Object.entries(keyMap)) {
     data.forEach(item => {
       if (!item[oldKey]) return
-      Object.assign(item, { [String(newKey)]: item[oldKey] })
-      // delete item[oldKey] --> this cause lint error
+      item[newKey] = item[oldKey]
     })
   }
   return data

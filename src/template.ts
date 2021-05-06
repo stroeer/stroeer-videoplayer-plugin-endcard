@@ -1,6 +1,6 @@
 import { IData } from '../types/types'
 
-const getCardTemplate = (index: number, obj: IData): string => {
+const getCard = (index: number, obj: IData): string => {
   const template = `
     <div class="plugin-endcard-card" data-role="plugin-endcard-card">
       <div class="plugin-endcard-thumbnail" style="background-image: url(${obj.image});"></div>
@@ -17,4 +17,4 @@ const getCardTemplate = (index: number, obj: IData): string => {
   return template
 }
 
-export default getCardTemplate
+export default getCard

@@ -11,4 +11,6 @@ See coverage with `yarn run test --coverage`.
 
 Run E2E-Tests via `cypress run` or interactive `cypress open`.
 
-Start local server with index.html via `npm start`
+Start local server with index.html via `yarn start`
+
+You can use `yarn start` and `yarn watch` in different terminals to see saved changes immediately.

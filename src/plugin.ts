@@ -2,7 +2,7 @@ import { version } from '../package.json'
 import noop from './noop'
 import logger from './logger'
 import { fetchAPI, transformData } from './api'
-import getCardTemplate from './template'
+import getCard from './template'
 import { IStroeerVideoplayer, IEndcardOptions } from '../types/types'
 
 class EndcardPlugin {
@@ -74,7 +74,7 @@ class EndcardPlugin {
         logger.log(transformedData)
 
         for (let i: number = 0; i < 6; i++) {
-          const cardTemplate = getCardTemplate(i, transformedData[i])
+          const cardTemplate = getCard(i, transformedData[i])
           this.endcardContainer.innerHTML += cardTemplate
         }
       })
@@ -94,7 +94,7 @@ class EndcardPlugin {
 
 const plugin = {
   pluginName: 'Endcard',
-  init: function (stroeervideoplayer: IStroeerVideoplayer, opts: IEndcardOptions = {}) {
+  init: (stroeervideoplayer: IStroeerVideoplayer, opts: IEndcardOptions = {}) => {
     logger.log('opts', opts)
 
     const endcardPlugin = new EndcardPlugin(stroeervideoplayer, opts)
@@ -111,7 +111,7 @@ const plugin = {
       endcardPlugin.show()
     })
   },
-  deinit: function () {
+  deinit: () => {
   },
   version: version
 }

@@ -1,4 +1,4 @@
-import noop from './noop'
+import noop from '../src/noop'
 
 it('should return false', () => {
   expect(noop()).toBe(false)

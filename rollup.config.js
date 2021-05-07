@@ -2,6 +2,7 @@ import typescript from '@rollup/plugin-typescript'
 import json from '@rollup/plugin-json'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import svg from 'rollup-plugin-svg'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 export default [{
   input: 'src/plugin.ts',
@@ -16,6 +17,7 @@ export default [{
     nodeResolve(),
     typescript(),
     json(),
-    svg()
+    svg(),
+    visualizer()
   ]
 }]

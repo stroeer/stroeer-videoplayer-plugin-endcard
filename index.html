@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Endcard Plugin</title>
+		
+		<style>
+			html, body {background-color: black;}
+			video {
+				max-width: 100%;
+				width: 100%;
+			}
+			.container {
+				margin: 0 auto;
+				max-width: 776px;
+			}
+			
+			.hidden {
+				display: none;
+			}
+			
+			.plugin-endcard-container {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+			}
+			
+			.plugin-endcard-card {
+				position: relative;
+				float: left;
+				width: 33.33%;
+				height: 33.33%;
+				overflow: hidden;
+			}
+
+			.plugin-endcard-card:first-of-type {
+				width: 66.66%;
+				height: 66.66%;
+			}
+			
+			.plugin-endcard-thumbnail {
+				width: 100%;
+		    height: 100%;
+		    background-repeat: no-repeat;
+		    background-size: cover;
+		    background-position: 50%;
+		    background-color: #000;
+			}
+			
+			.plugin-endcard-title {
+				position: absolute;
+				bottom: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<video id="myvideo" class="stroeervideoplayer" preload="metadata" controls playsinline data-endcard-url="https://videos.giga.de/suggestions/1363284707">
+				<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-1080p.mp4" type="video/mp4" data-label="1080p" />
+				<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-720p.mp4" type="video/mp4" data-label="720p" />
+				<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-240p.mp4" type="video/mp4" data-label="240p" />
+			</video>
+		</div>
+
+		<hr />
+		
+		<script src="node_modules/@stroeer/stroeer-videoplayer/dist/StroeerVideoplayer.umd.js"></script>
+		<link rel="stylesheet" href="node_modules/@stroeer/stroeer-videoplayer/dist/StroeerVideoplayer.css" />
+
+		<script src="node_modules/@stroeer/stroeer-videoplayer-default-ui/dist/StroeerVideoplayer-default-ui.umd.js"></script>
+		<link rel="stylesheet" href="node_modules/@stroeer/stroeer-videoplayer-default-ui/dist/StroeerVideoplayer-default-ui.css" />
+		
+		<script src="dist/StroeerVideoplayer-endcard-plugin.umd.js"></script>
+
+		<script>
+			StroeerVideoplayer.registerUI(StroeerVideoplayerDefaultUI);
+			StroeerVideoplayer.registerPlugin(StroeerVideoplayerEndcardPlugin)
+
+			const video = document.getElementById("myvideo");
+			video.addEventListener('error', function() {
+				console.log('error', this.error.code, this.error.message)
+			})
+			video.addEventListener('firstPlay', function() {
+				console.log('firstPlay')
+			})
+			video.addEventListener('contentVideoSeeked', function() {
+				console.log('contentVideoSeeked')
+			})
+			video.addEventListener('contentVideoPause', function() {
+				console.log('contentVideoPause')
+			})
+			video.addEventListener('contentVideoResume', function() {
+				console.log('contentVideoResume')
+			})
+			video.addEventListener('replay', function() {
+				console.log('replay')
+			})
+			video.addEventListener('contentVideoStart', function() {
+				console.log('contentVideoStart')
+			})
+			video.addEventListener('contentVideoEnded', function() {
+				console.log('contentVideoEnded')
+			})
+			video.addEventListener('contentVideoFirstQuartile', function() {
+				console.log('contentVideoFirstQuartile')
+			})
+			video.addEventListener('contentVideoMidpoint', function() {
+				console.log('contentVideoMidpoint')
+			})
+			video.addEventListener('contentVideoThirdQuartile', function() {
+				console.log('contentVideoThirdQuartile')
+			})
+
+			const myvideoplayer = new StroeerVideoplayer(video)
+			myvideoplayer.initPlugin('Endcard', {
+				dataKeyMap: {
+					// oldKey, newKey
+					preview_image: 'image'
+				},
+				OnLoadedCallback: () => {
+				 console.log('OnLoadedCallback triggered')
+			 	},
+			 	OnClickCallback: () => {
+					console.log('OnClickCallback triggered')
+				},
+				OnRevolverplayCallback: () => {
+				 console.log('OnRevolverplayCallback triggered')
+			 	},
+			 	OnRevolverplayPauseCallback: () => {
+					console.log('OnRevolverplayPauseCallback triggered')
+				},
+			})
+
+			console.log(myvideoplayer);
+		</script>
+		
+	</body>
+</html>

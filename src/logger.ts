@@ -4,7 +4,7 @@ if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined')
     debugMode = true
   }
 }
-const Logger = {
+const logger = {
   log: function (...args: any[]) {
     if (debugMode) {
       console.log.apply(console, args)
@@ -12,4 +12,4 @@ const Logger = {
   }
 }
 
-export default Logger
+export default logger

@@ -1055,6 +1055,7 @@ var drawChart = (function (exports) {
 
   const TreeMap = ({ root, onNodeHover, selectedNode, onNodeClick }) => {
       const { width, height, getModuleIds } = F(StaticContext);
+      console.time("layering");
       // this will make groups by height
       const nestedData = d(() => {
           const nestedDataMap = group(root.descendants(), (d) => d.height);
@@ -1065,6 +1066,7 @@ var drawChart = (function (exports) {
           nestedData.sort((a, b) => b.key - a.key);
           return nestedData;
       }, [root]);
+      console.timeEnd("layering");
       return (o$1("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", viewBox: `0 0 ${width} ${height}` }, { children: nestedData.map(({ key, values }) => {
               return (o$1("g", Object.assign({ className: "layer" }, { children: values.map((node) => {
                       return (o$1(Node, { node: node, onMouseOver: onNodeHover, selected: selectedNode === node, onClick: onNodeClick }, getModuleIds(node.data).nodeUid.id));
@@ -1164,11 +1166,10 @@ var drawChart = (function (exports) {
   const RENDRED = (o$1("span", { children: [o$1("b", { children: LABELS.renderedLength }, void 0), " is a byte size of individual file after transformations and treeshake."] }, void 0));
   const COMPRESSED = (o$1("span", { children: [o$1("b", { children: LABELS.gzipLength }, void 0), " and ", o$1("b", { children: LABELS.brotliLength }, void 0), " is a byte size of individual file after individual", " ", "transformations,", o$1("br", {}, void 0), " treeshake and compression."] }, void 0));
   const Tooltip = ({ node, visible, root, sizeProperty }) => {
-      const { availableSizeProperties, getModuleSize, importedByCache, data } = F(StaticContext);
+      const { availableSizeProperties, getModuleSize, data } = F(StaticContext);
       const ref = s();
       const [style, setStyle] = l({});
       const content = d(() => {
-          var _a;
           if (!node)
               return null;
           const mainSize = getModuleSize(node.data, sizeProperty);
@@ -1180,6 +1181,11 @@ var drawChart = (function (exports) {
               .reverse()
               .map((d) => d.data.name)
               .join("/");
+          let dataNode = null;
+          if (!isModuleTree(node.data)) {
+              const mainUid = data.nodeParts[node.data.uid].mainUid;
+              dataNode = data.nodeMetas[mainUid];
+          }
           return (o$1(y$1, { children: [o$1("div", { children: path }, void 0),
                   availableSizeProperties.map((sizeProp) => {
                       if (sizeProp === sizeProperty) {
@@ -1190,13 +1196,16 @@ var drawChart = (function (exports) {
                       }
                   }),
                   o$1("br", {}, void 0),
-                  !isModuleTree(node.data) && importedByCache.has(node.data.uid) && (o$1("div", { children: [o$1("div", { children: [o$1("b", { children: "Imported By" }, void 0), ":"] }, void 0),
-                          [...new Set((_a = importedByCache.get(node.data.uid)) === null || _a === void 0 ? void 0 : _a.map(({ id }) => id))].map((id) => (o$1("div", { children: id }, id)))] }, void 0)),
+                  dataNode && dataNode.importedBy.length > 0 && (o$1("div", { children: [o$1("div", { children: [o$1("b", { children: "Imported By" }, void 0), ":"] }, void 0),
+                          dataNode.importedBy.map(({ uid }) => {
+                              const id = data.nodeMetas[uid].id;
+                              return o$1("div", { children: id }, id);
+                          })] }, void 0)),
                   o$1("br", {}, void 0),
                   o$1("small", { children: data.options.sourcemap ? SOURCEMAP_RENDERED : RENDRED }, void 0),
                   (data.options.gzip || data.options.brotli) && (o$1(y$1, { children: [o$1("br", {}, void 0),
                           o$1("small", { children: COMPRESSED }, void 0)] }, void 0))] }, void 0));
-      }, [availableSizeProperties, data.options, getModuleSize, importedByCache, node, root.data, sizeProperty]);
+      }, [availableSizeProperties, data, getModuleSize, node, root.data, sizeProperty]);
       const updatePosition = (mouseCoords) => {
           const pos = {
               left: mouseCoords.x + Tooltip_marginX,
@@ -1254,6 +1263,7 @@ var drawChart = (function (exports) {
       const [sizeProperty, setSizeProperty] = l(availableSizeProperties[0]);
       const [selectedNode, setSelectedNode] = l(undefined);
       const { getModuleFilterMultiplier, setExcludeFilter, setIncludeFilter } = useFilter();
+      console.time("getNodeSizeMultiplier");
       const getNodeSizeMultiplier = d(() => {
           const rootSize = getModuleSize(rawHierarchy.data, sizeProperty);
           const selectedSize = selectedNode ? getModuleSize(selectedNode.data, sizeProperty) : 1;
@@ -1279,6 +1289,8 @@ var drawChart = (function (exports) {
               };
           }
       }, [getModuleSize, rawHierarchy.data, selectedNode, sizeProperty]);
+      console.timeEnd("getNodeSizeMultiplier");
+      console.time("root hierarchy compute");
       // root here always be the same as rawHierarchy even after layouting
       const root = d(() => {
           const rootWithSizesAndSorted = rawHierarchy
@@ -1287,12 +1299,13 @@ var drawChart = (function (exports) {
                   return 0;
               const ownSize = getModuleSize(node, sizeProperty);
               const zoomMultiplier = getNodeSizeMultiplier(node);
-              const filterMultiplier = getModuleFilterMultiplier(data.nodes[node.uid]);
+              const filterMultiplier = getModuleFilterMultiplier(data.nodeMetas[data.nodeParts[node.uid].mainUid]);
               return ownSize * zoomMultiplier * filterMultiplier;
           })
               .sort((a, b) => getModuleSize(a.data, sizeProperty) - getModuleSize(b.data, sizeProperty));
           return layout(rootWithSizesAndSorted);
-      }, [data.nodes, getModuleFilterMultiplier, getModuleSize, getNodeSizeMultiplier, layout, rawHierarchy, sizeProperty]);
+      }, [data, getModuleFilterMultiplier, getModuleSize, getNodeSizeMultiplier, layout, rawHierarchy, sizeProperty]);
+      console.timeEnd("root hierarchy compute");
       return (o$1(y$1, { children: [o$1(SideBar, { sizeProperty: sizeProperty, availableSizeProperties: availableSizeProperties, setSizeProperty: setSizeProperty, onExcludeChange: setExcludeFilter, onIncludeChange: setIncludeFilter }, void 0),
               o$1(Chart, { root: root, sizeProperty: sizeProperty, selectedNode: selectedNode, setSelectedNode: setSelectedNode }, void 0)] }, void 0));
   };
@@ -3177,8 +3190,8 @@ var drawChart = (function (exports) {
 
   const StaticContext = q({});
   const drawChart = (parentNode, data, width, height) => {
-      var _a, _b;
       const availableSizeProperties = getAvailableSizeOptions(data.options);
+      console.time("layout create");
       const layout = treemap()
           .size([width, height])
           .paddingOuter(PADDING)
@@ -3186,10 +3199,14 @@ var drawChart = (function (exports) {
           .paddingInner(PADDING)
           .round(true)
           .tile(treemapResquarify);
+      console.timeEnd("layout create");
+      console.time("rawHierarchy create");
       const rawHierarchy = hierarchy(data.tree);
+      console.timeEnd("rawHierarchy create");
       const nodeSizesCache = new Map();
       const nodeIdsCache = new Map();
       const getModuleSize = (node, sizeKey) => { var _a, _b; return (_b = (_a = nodeSizesCache.get(node)) === null || _a === void 0 ? void 0 : _a[sizeKey]) !== null && _b !== void 0 ? _b : 0; };
+      console.time("rawHierarchy eachAfter cache");
       rawHierarchy.eachAfter((node) => {
           var _a;
           const nodeData = node.data;
@@ -3197,7 +3214,7 @@ var drawChart = (function (exports) {
               nodeUid: generateUniqueId("node"),
               clipUid: generateUniqueId("clip"),
           });
-          const sizes = { renderedLength: 0 };
+          const sizes = { renderedLength: 0, gzipLength: 0, brotliLength: 0 };
           if (isModuleTree(nodeData)) {
               for (const sizeKey of availableSizeProperties) {
                   sizes[sizeKey] = nodeData.children.reduce((acc, child) => getModuleSize(child, sizeKey) + acc, 0);
@@ -3205,29 +3222,16 @@ var drawChart = (function (exports) {
           }
           else {
               for (const sizeKey of availableSizeProperties) {
-                  sizes[sizeKey] = (_a = data.nodes[nodeData.uid][sizeKey]) !== null && _a !== void 0 ? _a : 0;
+                  sizes[sizeKey] = (_a = data.nodeParts[nodeData.uid][sizeKey]) !== null && _a !== void 0 ? _a : 0;
               }
           }
           nodeSizesCache.set(nodeData, sizes);
       });
+      console.timeEnd("rawHierarchy eachAfter cache");
       const getModuleIds = (node) => nodeIdsCache.get(node);
+      console.time("color");
       const getModuleColor = createRainbowColor(rawHierarchy);
-      const importedByCache = new Map();
-      const importedCache = new Map();
-      for (const { source, target } of data.links) {
-          for (const sourceUid of Object.values(data.nodeParts[source])) {
-              if (!importedCache.has(sourceUid)) {
-                  importedCache.set(sourceUid, []);
-              }
-              for (const targetUid of Object.values(data.nodeParts[target])) {
-                  if (!importedByCache.has(targetUid)) {
-                      importedByCache.set(targetUid, []);
-                  }
-                  (_a = importedByCache.get(targetUid)) === null || _a === void 0 ? void 0 : _a.push(data.nodes[sourceUid]);
-                  (_b = importedCache.get(sourceUid)) === null || _b === void 0 ? void 0 : _b.push(data.nodes[targetUid]);
-              }
-          }
-      }
+      console.timeEnd("color");
       N(o$1(StaticContext.Provider, Object.assign({ value: {
               data,
               availableSizeProperties,
@@ -3238,8 +3242,6 @@ var drawChart = (function (exports) {
               getModuleColor,
               rawHierarchy,
               layout,
-              importedCache,
-              importedByCache,
           } }, { children: o$1(Main, {}, void 0) }), void 0), parentNode);
   };
 
@@ -3257,7 +3259,7 @@ var drawChart = (function (exports) {
   </script>
   <script>
     /*<!--*/
-    const data = {"version":2,"tree":{"name":"root","children":[{"name":"StroeerVideoplayer-endcard-plugin.umd.js","children":[{"uid":"d7de-1","name":"package.json"},{"name":"src","children":[{"uid":"d7de-3","name":"noop.ts"},{"uid":"d7de-5","name":"logger.ts"},{"uid":"d7de-9","name":"api.ts"},{"uid":"d7de-11","name":"template.ts"},{"uid":"d7de-13","name":"plugin.ts"}]},{"name":"node_modules/tslib/tslib.es6.js","uid":"d7de-7"}]}],"isRoot":true},"nodes":{"d7de-1":{"renderedLength":24,"id":"/package.json"},"d7de-3":{"renderedLength":51,"id":"/src/noop.ts"},"d7de-5":{"renderedLength":506,"id":"/src/logger.ts"},"d7de-7":{"renderedLength":3354,"id":"/node_modules/tslib/tslib.es6.js"},"d7de-9":{"renderedLength":1932,"id":"/src/api.ts"},"d7de-11":{"renderedLength":553,"id":"/src/template.ts"},"d7de-13":{"renderedLength":4339,"id":"/src/plugin.ts","isEntry":true}},"nodeParts":{"d7de-0":{"StroeerVideoplayer-endcard-plugin.umd.js":"d7de-1"},"d7de-2":{"StroeerVideoplayer-endcard-plugin.umd.js":"d7de-3"},"d7de-4":{"StroeerVideoplayer-endcard-plugin.umd.js":"d7de-5"},"d7de-6":{"StroeerVideoplayer-endcard-plugin.umd.js":"d7de-7"},"d7de-8":{"StroeerVideoplayer-endcard-plugin.umd.js":"d7de-9"},"d7de-10":{"StroeerVideoplayer-endcard-plugin.umd.js":"d7de-11"},"d7de-12":{"StroeerVideoplayer-endcard-plugin.umd.js":"d7de-13"}},"links":[{"source":"d7de-12","target":"d7de-0"},{"source":"d7de-12","target":"d7de-2"},{"source":"d7de-12","target":"d7de-4"},{"source":"d7de-12","target":"d7de-8"},{"source":"d7de-12","target":"d7de-10"},{"source":"d7de-8","target":"d7de-6"}],"env":{"rollup":"2.45.2"},"options":{"gzip":false,"brotli":false,"sourcemap":false}};
+    const data = {"version":2,"tree":{"name":"root","children":[{"name":"StroeerVideoplayer-endcard-plugin.umd.js","children":[{"uid":"6448-1","name":"package.json"},{"name":"src","children":[{"uid":"6448-3","name":"noop.ts"},{"uid":"6448-5","name":"logger.ts"},{"uid":"6448-9","name":"api.ts"},{"uid":"6448-11","name":"template.ts"},{"uid":"6448-13","name":"plugin.ts"}]},{"name":"node_modules/tslib/tslib.es6.js","uid":"6448-7"}]}],"isRoot":true},"nodeParts":{"6448-1":{"renderedLength":22,"gzipLength":0,"brotliLength":0,"mainUid":"6448-0"},"6448-3":{"renderedLength":45,"gzipLength":0,"brotliLength":0,"mainUid":"6448-2"},"6448-5":{"renderedLength":473,"gzipLength":0,"brotliLength":0,"mainUid":"6448-4"},"6448-7":{"renderedLength":3258,"gzipLength":0,"brotliLength":0,"mainUid":"6448-6"},"6448-9":{"renderedLength":1529,"gzipLength":0,"brotliLength":0,"mainUid":"6448-8"},"6448-11":{"renderedLength":1136,"gzipLength":0,"brotliLength":0,"mainUid":"6448-10"},"6448-13":{"renderedLength":6082,"gzipLength":0,"brotliLength":0,"mainUid":"6448-12"}},"nodeMetas":{"6448-0":{"id":"/package.json","moduleParts":{"StroeerVideoplayer-endcard-plugin.umd.js":"6448-1"},"imported":[],"importedBy":[{"uid":"6448-12"}]},"6448-2":{"id":"/src/noop.ts","moduleParts":{"StroeerVideoplayer-endcard-plugin.umd.js":"6448-3"},"imported":[],"importedBy":[{"uid":"6448-12"}]},"6448-4":{"id":"/src/logger.ts","moduleParts":{"StroeerVideoplayer-endcard-plugin.umd.js":"6448-5"},"imported":[],"importedBy":[{"uid":"6448-12"},{"uid":"6448-8"}]},"6448-6":{"id":"/node_modules/tslib/tslib.es6.js","moduleParts":{"StroeerVideoplayer-endcard-plugin.umd.js":"6448-7"},"imported":[],"importedBy":[{"uid":"6448-8"}]},"6448-8":{"id":"/src/api.ts","moduleParts":{"StroeerVideoplayer-endcard-plugin.umd.js":"6448-9"},"imported":[{"uid":"6448-6"},{"uid":"6448-4"}],"importedBy":[{"uid":"6448-12"}]},"6448-10":{"id":"/src/template.ts","moduleParts":{"StroeerVideoplayer-endcard-plugin.umd.js":"6448-11"},"imported":[],"importedBy":[{"uid":"6448-12"}]},"6448-12":{"id":"/src/plugin.ts","moduleParts":{"StroeerVideoplayer-endcard-plugin.umd.js":"6448-13"},"imported":[{"uid":"6448-0"},{"uid":"6448-2"},{"uid":"6448-4"},{"uid":"6448-8"},{"uid":"6448-10"}],"importedBy":[],"isEntry":true}},"env":{"rollup":"2.38.0"},"options":{"gzip":false,"brotli":false,"sourcemap":false}};
 
     const run = () => {
       const width = window.innerWidth;

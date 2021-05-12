@@ -56,9 +56,8 @@ class EndcardPlugin {
     const progress = (value: number): void => {
       const p = value / 100
       const dashoffset = circumference * (1 - p)
-      if (progressSvgCircle !== null) {
-        progressSvgCircle.style.strokeDashoffset = String(dashoffset)
-      }
+      if (progressSvgCircle == null) return
+      progressSvgCircle.style.strokeDashoffset = String(dashoffset)
     }
 
     const ticker = (): void => {
@@ -106,9 +105,8 @@ class EndcardPlugin {
       e.preventDefault()
       e.stopPropagation()
       this.onRevolverplayPauseCallback(this.videoElement)
-      if (this.intervalTicker !== null) {
-        clearInterval(this.intervalTicker)
-      }
+      if (this.intervalTicker == null) return
+      clearInterval(this.intervalTicker)
     })
   }
 
@@ -138,7 +136,6 @@ class EndcardPlugin {
   }
 
   show = (): void => {
-    if (!this.showEndcard) return
     this.uiEl.classList.add('hidden')
     this.endcardContainer.classList.remove('hidden')
     this.onLoadedCallback(this.videoElement)
@@ -160,6 +157,7 @@ const plugin = {
 
     // for development change "contentVideoEnded" to "loadedmetadata"
     videoEl.addEventListener('contentVideoEnded', () => {
+      if (!endcardPlugin.showEndcard) return
       endcardPlugin.addClickEvents()
       endcardPlugin.show()
       endcardPlugin.revolverplay()

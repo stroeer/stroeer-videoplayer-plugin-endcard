@@ -47,6 +47,8 @@ class EndcardPlugin {
   }
 
   revolverplay = (): void => {
+    if (this.revolverplayTime === 0) return
+
     const progressSvgCircle: HTMLElement | null =
       this.endcardContainer.querySelector('.plugin-endcard-progress-value')
     const radius = 54
@@ -111,7 +113,10 @@ class EndcardPlugin {
   }
 
   render = (): void => {
-    if (this.endcardUrl === null) return
+    if (this.endcardUrl === null) {
+      this.showEndcard = false
+      return
+    }
 
     fetchAPI<object>(this.endcardUrl)
       .then((data) => {
@@ -120,7 +125,7 @@ class EndcardPlugin {
 
         this.endcardContainer.innerHTML = ''
         for (let i: number = 0; i < 6; i++) {
-          const cardTemplate = getCard(i, this.transformedData[i])
+          const cardTemplate = getCard(i, this.transformedData[i], this.revolverplayTime)
           this.endcardContainer.innerHTML += cardTemplate
         }
       })

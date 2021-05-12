@@ -47,7 +47,8 @@ class EndcardPlugin {
   }
 
   revolverplay = (): void => {
-    const progressSvgCircle: HTMLElement | null = this.endcardContainer.querySelector('.plugin-endcard-progress-value')
+    const progressSvgCircle: HTMLElement | null =
+      this.endcardContainer.querySelector('.plugin-endcard-progress-value')
     const radius = 54
     const circumference = 2 * Math.PI * radius
     let remainingTime = this.revolverplayTime

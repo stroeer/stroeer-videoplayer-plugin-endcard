@@ -57,9 +57,9 @@ class EndcardPlugin {
 
     const progress = (value: number): void => {
       const p = value / 100
-      const dashoffset = circumference * (1 - p)
+      const dashOffset = circumference * (1 - p)
       if (progressSvgCircle == null) return
-      progressSvgCircle.style.strokeDashoffset = String(dashoffset)
+      progressSvgCircle.style.strokeDashoffset = String(dashOffset)
     }
 
     const ticker = (): void => {

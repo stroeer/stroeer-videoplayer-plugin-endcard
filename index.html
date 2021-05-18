@@ -11,13 +11,48 @@
 				max-width: 100%;
 				width: 100%;
 			}
+			
 			.container {
 				margin: 0 auto;
 				max-width: 776px;
 			}
 			
+			.plugin-endcard-play-icon {
+		    position: absolute;
+		    top: calc(50% - 32px);
+		    left: calc(50% - 32px);
+		    outline: none;
+		    display: block;
+		    background: 0 none;
+		    border: 0;
+		    width: 64px;
+		    height: 64px;
+		  }
+			
+			.plugin-endcard-progress-icon {
+		    background-color: rgba(#000, .8);
+		    border-radius: 50%;
+		    transform: rotate(-90deg);
+		    max-width: 100%;
+		  }
+
+		  .plugin-endcard-progress-meter,
+		  .plugin-endcard-progress-value {
+		    fill: none;
+		  }
+
+		  .plugin-endcard-progress-meter {
+		    stroke: #e6e6e6;
+		  }
+
+		  .plugin-endcard-progress-value {
+		    stroke: red;
+		    stroke-linecap: round;
+		    transition: all 1s ease;
+		  }
+			
 			.hidden {
-				display: none;
+				display: none !important;
 			}
 			
 			.plugin-endcard-container {
@@ -54,11 +89,17 @@
 				position: absolute;
 				bottom: 0;
 			}
+			
+			.plugin-endcard-pause {
+				position: absolute;
+		    top: 32px;
+		    right: 32px;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
-			<video id="myvideo" class="stroeervideoplayer" preload="metadata" controls playsinline data-endcard-url="https://videos.giga.de/suggestions/1363284707">
+			<video id="myvideo" class="stroeervideoplayer" preload="metadata" controls playsinline data-endcard-url="http://localhost:5000/">
 				<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-1080p.mp4" type="video/mp4" data-label="1080p" />
 				<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-720p.mp4" type="video/mp4" data-label="720p" />
 				<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-240p.mp4" type="video/mp4" data-label="240p" />
@@ -116,20 +157,21 @@
 
 			const myvideoplayer = new StroeerVideoplayer(video)
 			myvideoplayer.initPlugin('Endcard', {
+				revolverplayTime: 7,
 				dataKeyMap: {
 					// oldKey, newKey
-					preview_image: 'image'
+					preview_image: 'image',
 				},
-				OnLoadedCallback: () => {
+				onLoadedCallback: () => {
 				 console.log('OnLoadedCallback triggered')
 			 	},
-			 	OnClickCallback: () => {
+			 	onClickCallback: () => {
 					console.log('OnClickCallback triggered')
 				},
-				OnRevolverplayCallback: () => {
+				onRevolverplayCallback: () => {
 				 console.log('OnRevolverplayCallback triggered')
 			 	},
-			 	OnRevolverplayPauseCallback: () => {
+			 	onRevolverplayPauseCallback: () => {
 					console.log('OnRevolverplayPauseCallback triggered')
 				},
 			})

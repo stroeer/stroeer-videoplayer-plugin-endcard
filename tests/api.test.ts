@@ -3,7 +3,7 @@ import { fetchAPI, transformData } from '../src/api'
 let setOk = true
 const data = [
   {
-    embed_url: 'https://videos.giga.de/embed/862772935',
+    endpoint: 'https://videos.giga.de/embed/862772935',
     title: 'Die 9 besten Filmtwists und Mindfuck-Filme',
     duration: 596,
     score: 0,
@@ -11,7 +11,7 @@ const data = [
     prod_date: null
   },
   {
-    embed_url: 'https://videos.giga.de/embed/1344483288',
+    endpoint: 'https://videos.giga.de/embed/1344483288',
     title: '11 Spiele, die vom Index geflogen sind',
     duration: 563,
     score: 0,
@@ -44,7 +44,7 @@ test('data should be transformed', () => {
   }
   const expectedData = [
     {
-      embed_url: 'https://videos.giga.de/embed/862772935',
+      endpoint: 'https://videos.giga.de/embed/862772935',
       title: 'Die 9 besten Filmtwists und Mindfuck-Filme',
       text: 'Die 9 besten Filmtwists und Mindfuck-Filme',
       duration: 596,
@@ -54,7 +54,7 @@ test('data should be transformed', () => {
       prod_date: null
     },
     {
-      embed_url: 'https://videos.giga.de/embed/1344483288',
+      endpoint: 'https://videos.giga.de/embed/1344483288',
       title: '11 Spiele, die vom Index geflogen sind',
       text: '11 Spiele, die vom Index geflogen sind',
       duration: 563,

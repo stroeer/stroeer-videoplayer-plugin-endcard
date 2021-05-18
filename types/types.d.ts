@@ -1,6 +1,8 @@
 export interface IData {
   image: string
   title: string
+  sources: object[]
+  endpoint: string
   // add more
 }
 
@@ -11,12 +13,16 @@ export interface IStroeerVideoplayer {
   getUIName: Function
   initUI: Function
   deinitUI: Function
+  setSrc: Function
+  play: Function
+  load: Function
 }
 
 export interface IEndcardOptions {
-  OnLoadedCallback?: Function
-  OnClickCallback?: Function
-  OnRevolverplayCallback?: Function
-  OnRevolverplayPauseCallback?: Function
+  onLoadedCallback?: Function
+  onClickCallback?: Function
+  onRevolverplayCallback?: Function
+  onRevolverplayPauseCallback?: Function
   dataKeyMap?: Object
+  revolverplayTime?: number
 }

@@ -9,7 +9,7 @@ class EndcardPlugin {
   videoplayer: IStroeerVideoplayer
   videoElement: HTMLVideoElement
   endcardContainer: HTMLDivElement
-  endcardUrl: string | null
+  endpoint: string | null
   onLoadedCallback: Function
   onClickCallback: Function
   onRevolverplayCallback: Function
@@ -25,7 +25,7 @@ class EndcardPlugin {
     this.videoplayer = stroeervideoplayer
     this.videoElement = stroeervideoplayer.getVideoEl()
 
-    this.endcardUrl = this.videoElement.getAttribute('data-endcard-url')
+    this.endpoint = this.videoElement.getAttribute('data-endcard-url')
     this.dataKeyMap = opts.dataKeyMap !== undefined ? opts.dataKeyMap : noop
     this.transformedData = []
     this.showEndcard = true
@@ -58,7 +58,7 @@ class EndcardPlugin {
     const progress = (value: number): void => {
       const p = value / 100
       const dashOffset = circumference * (1 - p)
-      if (progressSvgCircle == null) return
+      if (progressSvgCircle === null) return
       progressSvgCircle.style.strokeDashoffset = String(dashOffset)
     }
 
@@ -79,7 +79,7 @@ class EndcardPlugin {
       clearInterval(this.intervalTicker)
     }
     const videoSources = this.transformedData[idx].sources
-    this.endcardUrl = this.transformedData[idx].endcard_url
+    this.endpoint = this.transformedData[idx].endpoint
     this.videoplayer.setSrc(videoSources)
     this.videoplayer.load()
     this.videoplayer.play()
@@ -113,12 +113,12 @@ class EndcardPlugin {
   }
 
   render = (): void => {
-    if (this.endcardUrl === null) {
+    if (this.endpoint === null) {
       this.showEndcard = false
       return
     }
 
-    fetchAPI<object>(this.endcardUrl)
+    fetchAPI<object>(this.endpoint)
       .then((data) => {
         this.transformedData = transformData(data, this.dataKeyMap)
         logger.log(this.transformedData)

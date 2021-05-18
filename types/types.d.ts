@@ -2,7 +2,7 @@ export interface IData {
   image: string
   title: string
   sources: object[]
-  endcard_url: string
+  endpoint: string
   // add more
 }
 

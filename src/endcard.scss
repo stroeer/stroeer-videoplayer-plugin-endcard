@@ -44,12 +44,6 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   font-family: initial;
   cursor: pointer;
   overflow: hidden;
-
-  &:hover {
-    .plugin-endcard-overlay {
-      opacity: 1;
-    }
-  }
 }
 
 .plugin-endcard-tile:nth-of-type(1) {
@@ -153,11 +147,16 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
     border-bottom: $endcard-plugin-tile-border;
   }
 
-  .plugin-endcard-overlay {
-    transition: all 0.4s;
-
-    .plugin-endcard-tile:not(:nth-of-type(1)) & {
+  .plugin-endcard-tile:not(:nth-of-type(1)) {
+    .plugin-endcard-overlay {
+      transition: all 0.4s;
       opacity: 0;
+    }
+
+    &:hover {
+      .plugin-endcard-overlay {
+        opacity: 1;
+      }
     }
   }
 

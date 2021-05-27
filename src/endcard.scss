@@ -9,6 +9,7 @@ $endcard-plugin-title-bg: linear-gradient(
 $endcard-plugin-spacing-large: 16px !default;
 $endcard-plugin-spacing-small: 12px !default;
 $endcard-plugin-font-size-small: 12px !default;
+$endcard-plugin-font-size-smaller: 10px !default;
 $endcard-plugin-font-size-medium: 14px !default;
 $endcard-plugin-font-size-large: 16px !default;
 $endcard-plugin-text-color: #fff !default;
@@ -25,7 +26,6 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   bottom: 0;
   width: 100%;
   height: 100%;
-  font-family: inherit;
 }
 
 .plugin-endcard-overlay {
@@ -41,7 +41,6 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   width: 33.33%;
   height: 33.33%;
   box-sizing: border-box;
-  font-family: initial;
   cursor: pointer;
   overflow: hidden;
 }
@@ -50,7 +49,10 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   display: block;
   width: 100%;
   height: 100%;
+}
 
+.plugin-endcard-tile:nth-of-type(1),
+.plugin-endcard-tile:nth-of-type(4) {
   &::before {
     content: "";
     position: absolute;
@@ -102,6 +104,17 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   }
 }
 
+.plugin-endcard-replay-title {
+  margin: 0;
+  padding-top: $endcard-plugin-spacing-small;
+  text-align: center;
+  font-size: $endcard-plugin-font-size-smaller;
+  color: $endcard-plugin-text-color;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
 .plugin-endcard-button-pause {
   position: absolute;
   top: $endcard-plugin-spacing-large;
@@ -129,6 +142,11 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   margin: 0 auto 16px;
 }
 
+.plugin-endcard-replay-icon {
+  display: block;
+  margin: 0 auto;
+}
+
 .plugin-endcard-progress-value {
   stroke: $endcard-plugin-highlight-color;
   stroke-linecap: round;
@@ -147,7 +165,24 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
     border-bottom: $endcard-plugin-tile-border;
   }
 
-  .plugin-endcard-tile:not(:nth-of-type(1)) {
+  .plugin-endcard-tile:nth-of-type(4) {
+    .plugin-endcard-overlay {
+      top: calc(50% - 22px);
+    }
+  }
+
+  .plugin-endcard-tile:nth-of-type(1),
+  .plugin-endcard-tile:nth-of-type(4) {
+    &::before {
+      transition: all 0.4s;
+      background-color: $endcard-plugin-tile-overlay-bg-hover;
+    }
+  }
+
+  .plugin-endcard-tile:nth-of-type(2),
+  .plugin-endcard-tile:nth-of-type(3),
+  .plugin-endcard-tile:nth-of-type(5),
+  .plugin-endcard-tile:nth-of-type(6) {
     .plugin-endcard-overlay {
       transition: all 0.4s;
       opacity: 0;

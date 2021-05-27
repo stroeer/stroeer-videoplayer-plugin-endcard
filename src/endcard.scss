@@ -1,0 +1,174 @@
+$endcard-plugin-highlight-color: #424242 !default;
+$endcard-plugin-bg-color: #000 !default;
+$endcard-plugin-tile-border: 2px solid #fff !default;
+$endcard-plugin-title-bg: linear-gradient(
+  180deg,
+  rgba(0, 0, 0, 0) 0%,
+  rgba(0, 0, 0, 0.8) 100%
+) !default;
+$endcard-plugin-spacing-large: 16px !default;
+$endcard-plugin-spacing-small: 12px !default;
+$endcard-plugin-font-size-small: 12px !default;
+$endcard-plugin-font-size-medium: 14px !default;
+$endcard-plugin-font-size-large: 16px !default;
+$endcard-plugin-text-color: #fff !default;
+$endcard-plugin-button-pause-bg-color: rgba(255, 255, 255, 0.4) !default;
+$endcard-plugin-button-pause-bg-color-hover: rgba(255, 255, 255, 0.2) !default;
+$endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
+
+.plugin-endcard-container {
+  background-color: $endcard-plugin-bg-color;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  font-family: inherit;
+}
+
+.plugin-endcard-overlay {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.plugin-endcard-tile {
+  display: none;
+  position: relative;
+  float: left;
+  width: 33.33%;
+  height: 33.33%;
+  box-sizing: border-box;
+  font-family: initial;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.plugin-endcard-tile:nth-of-type(1) {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: $endcard-plugin-tile-overlay-bg;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.plugin-endcard-tile:nth-of-type(2),
+.plugin-endcard-tile:nth-of-type(3) {
+  border-bottom: $endcard-plugin-tile-border;
+}
+
+.plugin-endcard-tile:nth-of-type(4),
+.plugin-endcard-tile:nth-of-type(5) {
+  border-right: $endcard-plugin-tile-border;
+}
+
+.plugin-endcard-thumbnail {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  background-color: #000;
+}
+
+.plugin-endcard-title-pre {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: normal;
+  font-size: $endcard-plugin-font-size-medium;
+}
+
+.plugin-endcard-title {
+  margin: 0;
+  padding: $endcard-plugin-spacing-small $endcard-plugin-spacing-large;
+  width: 100%;
+  box-sizing: border-box;
+  color: $endcard-plugin-text-color;
+  font-weight: bold;
+  font-size: $endcard-plugin-font-size-medium;
+  background: $endcard-plugin-title-bg;
+
+  .plugin-endcard-tile:nth-of-type(1) & {
+    font-size: $endcard-plugin-font-size-large;
+    padding: $endcard-plugin-spacing-large;
+  }
+}
+
+.plugin-endcard-button-pause {
+  position: absolute;
+  top: $endcard-plugin-spacing-large;
+  right: $endcard-plugin-spacing-large;
+  background-color: $endcard-plugin-button-pause-bg-color;
+  color: $endcard-plugin-text-color;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: $endcard-plugin-font-size-small;
+  letter-spacing: 2px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.plugin-endcard-revolverplay-icon {
+  display: block;
+  margin: 0 auto;
+}
+
+.plugin-endcard-play-icon {
+  display: block;
+  margin: 0 auto 16px;
+}
+
+.plugin-endcard-progress-value {
+  stroke: $endcard-plugin-highlight-color;
+  stroke-linecap: round;
+  transition: all 1s ease;
+}
+
+@media only screen and (min-width: 769px) {
+  .plugin-endcard-tile {
+    display: block;
+  }
+
+  .plugin-endcard-tile:nth-of-type(1) {
+    width: 66.66%;
+    height: 66.66%;
+    border-right: $endcard-plugin-tile-border;
+    border-bottom: $endcard-plugin-tile-border;
+  }
+
+  .plugin-endcard-tile:not(:nth-of-type(1)) {
+    .plugin-endcard-overlay {
+      transition: all 0.4s;
+      opacity: 0;
+    }
+
+    &:hover {
+      .plugin-endcard-overlay {
+        opacity: 1;
+      }
+    }
+  }
+
+  .plugin-endcard-revolverplay-icon {
+    margin-bottom: $endcard-plugin-spacing-large;
+  }
+
+  .plugin-endcard-button-pause {
+    transition: all 0.4s;
+
+    &:hover {
+      background-color: $endcard-plugin-button-pause-bg-color-hover;
+    }
+  }
+}

@@ -2,12 +2,14 @@ import { version } from '../package.json'
 import noop from './noop'
 import logger from './logger'
 import { fetchAPI, transformData } from './api'
-import getCard from './template'
+import getTile from './template'
 import { IData, IStroeerVideoplayer, IEndcardOptions } from '../types/types'
+import './endcard.scss'
 
 class EndcardPlugin {
   videoplayer: IStroeerVideoplayer
   videoElement: HTMLVideoElement
+  isDesktop: boolean
   endcardContainer: HTMLDivElement
   endpoint: string | null
   onLoadedCallback: Function
@@ -31,6 +33,7 @@ class EndcardPlugin {
     this.showEndcard = true
     this.revolverplayTime = opts.revolverplayTime !== undefined ? opts.revolverplayTime : 5
     this.intervalTicker = null
+    this.isDesktop = false
 
     this.onLoadedCallback = opts.onLoadedCallback !== undefined ? opts.onLoadedCallback : noop
     this.onClickCallback = opts.onClickCallback !== undefined ? opts.onClickCallback : noop
@@ -46,12 +49,33 @@ class EndcardPlugin {
     return this
   }
 
+  addMediaQueryListener = (): void => {
+    const controlbar: HTMLDivElement | null = this.uiEl.querySelector('.controlbar')
+    const tileOverlay: HTMLDivElement | null =
+      this.endcardContainer.querySelector('[data-role="plugin-endcard-overlay"]')
+    if (controlbar === null || tileOverlay === null) return
+
+    const mediaQuery = window.matchMedia('(min-width: 769px)')
+    const handleMobileChange = (e: MediaQueryListEvent | MediaQueryList): void => {
+      this.isDesktop = e.matches
+
+      if (this.isDesktop) {
+        tileOverlay.removeAttribute('style')
+      } else {
+        tileOverlay.style.bottom = String(controlbar.offsetHeight) + 'px'
+      }
+    }
+
+    handleMobileChange(mediaQuery)
+    mediaQuery.addEventListener('change', handleMobileChange)
+  }
+
   revolverplay = (): void => {
     if (this.revolverplayTime === 0) return
 
     const progressSvgCircle: HTMLElement | null =
-      this.endcardContainer.querySelector('.plugin-endcard-progress-value')
-    const radius = 54
+      this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')
+    const radius = 30.667
     const circumference = 2 * Math.PI * radius
     let remainingTime = this.revolverplayTime
 
@@ -87,7 +111,7 @@ class EndcardPlugin {
   }
 
   addClickEvents = (): void => {
-    const cards = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-card"]')
+    const cards = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
     const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
 
     cards.forEach(card => {
@@ -95,7 +119,7 @@ class EndcardPlugin {
         e.preventDefault()
         this.onClickCallback(this.videoElement)
 
-        const el = (e.target as Element).closest('[data-role="plugin-endcard-card"]')
+        const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
         const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
         if (idx === null) return
         this.play(parseInt(idx))
@@ -125,7 +149,7 @@ class EndcardPlugin {
 
         this.endcardContainer.innerHTML = ''
         for (let i: number = 0; i < 6; i++) {
-          const cardTemplate = getCard(i, this.transformedData[i], this.revolverplayTime)
+          const cardTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
           this.endcardContainer.innerHTML += cardTemplate
         }
       })
@@ -136,12 +160,18 @@ class EndcardPlugin {
   }
 
   hide = (): void => {
-    this.uiEl.classList.remove('hidden')
+    // TODO: this should be done in UI plugin, here because to show endcard features
+    if (this.isDesktop) {
+      this.uiEl.classList.remove('hidden')
+    }
     this.endcardContainer.classList.add('hidden')
   }
 
   show = (): void => {
-    this.uiEl.classList.add('hidden')
+    // TODO: this should be done in UI plugin, here because to show endcard features
+    if (this.isDesktop) {
+      this.uiEl.classList.add('hidden')
+    }
     this.endcardContainer.classList.remove('hidden')
     this.onLoadedCallback(this.videoElement)
   }
@@ -163,6 +193,7 @@ const plugin = {
     // for development change "contentVideoEnded" to "loadedmetadata"
     videoEl.addEventListener('contentVideoEnded', () => {
       if (!endcardPlugin.showEndcard) return
+      endcardPlugin.addMediaQueryListener()
       endcardPlugin.addClickEvents()
       endcardPlugin.show()
       endcardPlugin.revolverplay()

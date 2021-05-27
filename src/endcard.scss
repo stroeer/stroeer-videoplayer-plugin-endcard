@@ -171,14 +171,6 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
     }
   }
 
-  .plugin-endcard-tile:nth-of-type(1),
-  .plugin-endcard-tile:nth-of-type(4) {
-    &::before {
-      transition: all 0.4s;
-      background-color: $endcard-plugin-tile-overlay-bg-hover;
-    }
-  }
-
   .plugin-endcard-tile:nth-of-type(2),
   .plugin-endcard-tile:nth-of-type(3),
   .plugin-endcard-tile:nth-of-type(5),

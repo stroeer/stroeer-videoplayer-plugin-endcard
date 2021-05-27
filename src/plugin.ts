@@ -169,6 +169,7 @@ class EndcardPlugin {
         this.endcardContainer.innerHTML = ''
         for (let i: number = 0; i < 5; i++) {
           const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
+          // TODO: maybe there will be a getPosterImage function in videplayer in future
           const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'))
           if (i === 3) {
             this.endcardContainer.innerHTML += replayTemplate
@@ -208,12 +209,10 @@ const plugin = {
     const endcardPlugin = new EndcardPlugin(stroeervideoplayer, opts)
     const videoEl = stroeervideoplayer.getVideoEl()
 
-    // for development change "contentVideoFirstQuartile" to "loadedmetadata"
     videoEl.addEventListener('contentVideoFirstQuartile', () => {
       endcardPlugin.render()
     })
 
-    // for development change "contentVideoEnded" to "loadedmetadata"
     videoEl.addEventListener('contentVideoEnded', () => {
       if (!endcardPlugin.showEndcard) return
       endcardPlugin.addMediaQueryListener()

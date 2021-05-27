@@ -24,8 +24,6 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .plugin-endcard-overlay {
@@ -166,6 +164,8 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   }
 
   .plugin-endcard-tile:nth-of-type(4) {
+    clear: left;
+
     .plugin-endcard-overlay {
       top: calc(50% - 22px);
     }

@@ -67,7 +67,11 @@ class EndcardPlugin {
     }
 
     handleMobileChange(mediaQuery)
-    mediaQuery.addEventListener('change', handleMobileChange)
+    if (mediaQuery.addEventListener === undefined) {
+      mediaQuery.addListener(handleMobileChange)
+    } else {
+      mediaQuery.addEventListener('change', handleMobileChange)
+    }
   }
 
   revolverplay = (): void => {

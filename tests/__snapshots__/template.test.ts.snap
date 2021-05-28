@@ -1,0 +1,632 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Replay tile markup is rendered as expected 1`] = `
+<div
+  id="testContainer"
+>
+  
+    
+  <div
+    class="plugin-endcard-tile"
+    data-role="plugin-endcard-tile-replay"
+  >
+    
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://videos.giga.de/files/1307753225/720p.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+    >
+      
+        
+      <svg
+        class="plugin-endcard-replay-icon"
+        fill="none"
+        height="21"
+        viewBox="0 0 20 16"
+        width="26"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+          
+        <path
+          d="M19 16H1C0.447715 16 0 15.5523 0 15V10C0 9.44772 0.447715 9 1 9C1.55228 9 2 9.44772 2 10V14H18V5H8V8L3 4L8 0V3H19C19.553 3 20 3.447 20 4V15C20 15.553 19.553 16 19 16Z"
+          fill="white"
+        />
+        
+        
+      </svg>
+      
+        
+      <p
+        class="plugin-endcard-replay-title"
+      >
+        Video wiederholen
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+  
+</div>
+`;
+
+exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
+<div
+  id="testContainer"
+>
+  
+    
+  <div
+    class="plugin-endcard-tile"
+    data-idx="0"
+    data-role="plugin-endcard-tile"
+  >
+    
+      
+    <button
+      class="plugin-endcard-button-pause"
+      data-role="plugin-endcard-pause"
+    >
+      Anhalten
+    </button>
+      
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://videos.giga.de/files/1307753225/480p.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+      data-role="plugin-endcard-overlay"
+    >
+      
+        
+          
+      <svg
+        class="plugin-endcard-revolverplay-icon"
+        fill="none"
+        height="75"
+        width="103"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+            
+        <g
+          filter="url(#filter0_d)"
+        >
+          
+              
+          <path
+            d="M62.073 37.89l-20-13.333A1.334 1.334 0 0040 25.667v26.666a1.334 1.334 0 002.073 1.11l20-13.334a1.335 1.335 0 000-2.218z"
+            fill="#fff"
+          />
+          
+            
+        </g>
+        
+            
+        <circle
+          class="plugin-endcard-progress-meter"
+          cx="48"
+          cy="39"
+          fill="none"
+          r="30.667"
+          stroke="#fff"
+          stroke-width="2.667"
+        />
+        
+            
+        <circle
+          class="plugin-endcard-progress-value"
+          cx="48"
+          cy="39"
+          data-role="plugin-endcard-progress-value"
+          fill="none"
+          r="30.667"
+          stroke="#fff"
+          stroke-dasharray="192.686"
+          stroke-dashoffset="192.686"
+          stroke-width="2.667"
+          transform="rotate(-90 48 39)"
+        />
+        
+            
+        <defs>
+          
+              
+          <filter
+            color-interpolation-filters="sRGB"
+            filterUnits="userSpaceOnUse"
+            height="112"
+            id="filter0_d"
+            width="112"
+            x="-5.333"
+            y="-1"
+          >
+            
+                
+            <feflood
+              flood-opacity="0"
+              result="BackgroundImageFix"
+            />
+            
+                
+            <fecolormatrix
+              in="SourceAlpha"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            />
+            
+                
+            <feoffset
+              dy="16"
+            />
+            <fegaussianblur
+              stdDeviation="20"
+            />
+            
+                
+            <fecolormatrix
+              values="0 0 0 0 0.490196 0 0 0 0 0.596078 0 0 0 0 0.698039 0 0 0 0.2 0"
+            />
+            
+                
+            <feblend
+              in2="BackgroundImageFix"
+              mode="multiply"
+              result="effect1_dropShadow"
+            />
+            
+                
+            <feblend
+              in="SourceGraphic"
+              in2="effect1_dropShadow"
+              result="shape"
+            />
+            
+              
+          </filter>
+          
+            
+        </defs>
+        
+          
+      </svg>
+       
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+        <span
+          class="plugin-endcard-title-pre"
+        >
+          Nächstes Video
+        </span>
+        
+          Title of tile number one
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+    
+  <div
+    class="plugin-endcard-tile"
+    data-idx="1"
+    data-role="plugin-endcard-tile"
+  >
+    
+        
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://videos.giga.de/files/1307753225/720p.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+      data-role="plugin-endcard-overlay"
+    >
+      
+        
+        
+      <svg
+        class="plugin-endcard-play-icon"
+        fill="none"
+        height="22"
+        viewBox="0 0 17 22"
+        width="17"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+          
+        <path
+          d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z"
+          fill="white"
+        />
+        
+        
+      </svg>
+      
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+          Title of tile number two
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+    
+  <div
+    class="plugin-endcard-tile"
+    data-idx="2"
+    data-role="plugin-endcard-tile"
+  >
+    
+        
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://videos.giga.de/files/1307753225/1080p.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+      data-role="plugin-endcard-overlay"
+    >
+      
+        
+        
+      <svg
+        class="plugin-endcard-play-icon"
+        fill="none"
+        height="22"
+        viewBox="0 0 17 22"
+        width="17"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+          
+        <path
+          d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z"
+          fill="white"
+        />
+        
+        
+      </svg>
+      
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+          Title of tile number three
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+</div>
+`;
+
+exports[`Tile markup is rendered as expected when revolverplay is not active 1`] = `
+<div
+  id="testContainer"
+>
+  
+    
+  <div
+    class="plugin-endcard-tile"
+    data-idx="0"
+    data-role="plugin-endcard-tile"
+  >
+    
+        
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://videos.giga.de/files/1307753225/480p.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+      data-role="plugin-endcard-overlay"
+    >
+      
+        
+          
+      <svg
+        class="plugin-endcard-revolverplay-icon"
+        fill="none"
+        height="75"
+        width="103"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+            
+        <g
+          filter="url(#filter0_d)"
+        >
+          
+              
+          <path
+            d="M62.073 37.89l-20-13.333A1.334 1.334 0 0040 25.667v26.666a1.334 1.334 0 002.073 1.11l20-13.334a1.335 1.335 0 000-2.218z"
+            fill="#fff"
+          />
+          
+            
+        </g>
+        
+            
+        <circle
+          class="plugin-endcard-progress-meter"
+          cx="48"
+          cy="39"
+          fill="none"
+          r="30.667"
+          stroke="#fff"
+          stroke-width="2.667"
+        />
+        
+            
+        <circle
+          class="plugin-endcard-progress-value"
+          cx="48"
+          cy="39"
+          data-role="plugin-endcard-progress-value"
+          fill="none"
+          r="30.667"
+          stroke="#fff"
+          stroke-dasharray="192.686"
+          stroke-dashoffset="192.686"
+          stroke-width="2.667"
+          transform="rotate(-90 48 39)"
+        />
+        
+            
+        <defs>
+          
+              
+          <filter
+            color-interpolation-filters="sRGB"
+            filterUnits="userSpaceOnUse"
+            height="112"
+            id="filter0_d"
+            width="112"
+            x="-5.333"
+            y="-1"
+          >
+            
+                
+            <feflood
+              flood-opacity="0"
+              result="BackgroundImageFix"
+            />
+            
+                
+            <fecolormatrix
+              in="SourceAlpha"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            />
+            
+                
+            <feoffset
+              dy="16"
+            />
+            <fegaussianblur
+              stdDeviation="20"
+            />
+            
+                
+            <fecolormatrix
+              values="0 0 0 0 0.490196 0 0 0 0 0.596078 0 0 0 0 0.698039 0 0 0 0.2 0"
+            />
+            
+                
+            <feblend
+              in2="BackgroundImageFix"
+              mode="multiply"
+              result="effect1_dropShadow"
+            />
+            
+                
+            <feblend
+              in="SourceGraphic"
+              in2="effect1_dropShadow"
+              result="shape"
+            />
+            
+              
+          </filter>
+          
+            
+        </defs>
+        
+          
+      </svg>
+       
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+        <span
+          class="plugin-endcard-title-pre"
+        >
+          Nächstes Video
+        </span>
+        
+          Title of tile number one
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+    
+  <div
+    class="plugin-endcard-tile"
+    data-idx="1"
+    data-role="plugin-endcard-tile"
+  >
+    
+        
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://videos.giga.de/files/1307753225/720p.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+      data-role="plugin-endcard-overlay"
+    >
+      
+        
+        
+      <svg
+        class="plugin-endcard-play-icon"
+        fill="none"
+        height="22"
+        viewBox="0 0 17 22"
+        width="17"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+          
+        <path
+          d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z"
+          fill="white"
+        />
+        
+        
+      </svg>
+      
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+          Title of tile number two
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+    
+  <div
+    class="plugin-endcard-tile"
+    data-idx="2"
+    data-role="plugin-endcard-tile"
+  >
+    
+        
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://videos.giga.de/files/1307753225/1080p.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+      data-role="plugin-endcard-overlay"
+    >
+      
+        
+        
+      <svg
+        class="plugin-endcard-play-icon"
+        fill="none"
+        height="22"
+        viewBox="0 0 17 22"
+        width="17"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+          
+        <path
+          d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z"
+          fill="white"
+        />
+        
+        
+      </svg>
+      
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+          Title of tile number three
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+</div>
+`;

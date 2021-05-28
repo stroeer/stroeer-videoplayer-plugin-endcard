@@ -252,9 +252,9 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       <svg
         class="plugin-endcard-play-icon"
         fill="none"
-        height="22"
+        height="29"
         viewBox="0 0 17 22"
-        width="17"
+        width="22"
         xmlns="http://www.w3.org/2000/svg"
       >
         
@@ -311,9 +311,9 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       <svg
         class="plugin-endcard-play-icon"
         fill="none"
-        height="22"
+        height="29"
         viewBox="0 0 17 22"
-        width="17"
+        width="22"
         xmlns="http://www.w3.org/2000/svg"
       >
         
@@ -535,9 +535,9 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       <svg
         class="plugin-endcard-play-icon"
         fill="none"
-        height="22"
+        height="29"
         viewBox="0 0 17 22"
-        width="17"
+        width="22"
         xmlns="http://www.w3.org/2000/svg"
       >
         
@@ -594,9 +594,9 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       <svg
         class="plugin-endcard-play-icon"
         fill="none"
-        height="22"
+        height="29"
         viewBox="0 0 17 22"
-        width="17"
+        width="22"
         xmlns="http://www.w3.org/2000/svg"
       >
         

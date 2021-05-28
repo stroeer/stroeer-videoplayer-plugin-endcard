@@ -137,7 +137,7 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
 
 .plugin-endcard-play-icon {
   display: block;
-  margin: 0 auto 16px;
+  margin: 0 auto $endcard-plugin-spacing-small;
 }
 
 .plugin-endcard-replay-icon {
@@ -167,7 +167,7 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
     clear: left;
 
     .plugin-endcard-overlay {
-      top: calc(50% - 22px);
+      bottom: calc(50% - ((21px + #{$endcard-plugin-font-size-smaller} + #{$endcard-plugin-spacing-small}) / 2));
     }
   }
 

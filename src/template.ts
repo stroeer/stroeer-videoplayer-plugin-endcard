@@ -29,7 +29,7 @@ const getTile = (index: number, obj: IData, revolverplayTime: number): string =>
           </svg> 
         `
         : `
-        <svg class="plugin-endcard-play-icon" width="17" height="22" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="plugin-endcard-play-icon" width="22" height="29" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z" fill="white"/>
         </svg>
         `}

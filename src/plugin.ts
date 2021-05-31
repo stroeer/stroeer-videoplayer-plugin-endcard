@@ -2,7 +2,7 @@ import { version } from '../package.json'
 import noop from './noop'
 import logger from './logger'
 import { fetchAPI, transformData } from './api'
-import getTile from './template'
+import { getTile, getTileReplay } from './template'
 import { IData, IStroeerVideoplayer, IEndcardOptions } from '../types/types'
 import './endcard.scss'
 
@@ -67,7 +67,11 @@ class EndcardPlugin {
     }
 
     handleMobileChange(mediaQuery)
-    mediaQuery.addEventListener('change', handleMobileChange)
+    if (mediaQuery.addEventListener === undefined) {
+      mediaQuery.addListener(handleMobileChange)
+    } else {
+      mediaQuery.addEventListener('change', handleMobileChange)
+    }
   }
 
   revolverplay = (): void => {
@@ -98,11 +102,21 @@ class EndcardPlugin {
     this.intervalTicker = setInterval(ticker, 1000)
   }
 
-  play = (idx: number): void => {
+  clearRevolverplay = (): void => {
     if (this.intervalTicker !== null) {
       clearInterval(this.intervalTicker)
     }
+  }
+
+  replay = (): void => {
+    this.clearRevolverplay()
+    this.videoplayer.play()
+    this.hide()
+  }
+
+  play = (idx: number): void => {
     const videoSources = this.transformedData[idx].sources
+    this.clearRevolverplay()
     this.endpoint = this.transformedData[idx].endpoint
     this.videoplayer.setSrc(videoSources)
     this.videoplayer.load()
@@ -111,11 +125,12 @@ class EndcardPlugin {
   }
 
   addClickEvents = (): void => {
-    const cards = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
+    const tiles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
     const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
+    const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
 
-    cards.forEach(card => {
-      card.addEventListener('click', (e) => {
+    tiles.forEach(tile => {
+      tile.addEventListener('click', (e) => {
         e.preventDefault()
         this.onClickCallback(this.videoElement)
 
@@ -126,14 +141,22 @@ class EndcardPlugin {
       })
     })
 
-    if (pauseButton === null) return
-    pauseButton.addEventListener('click', (e) => {
-      e.preventDefault()
-      e.stopPropagation()
-      this.onRevolverplayPauseCallback(this.videoElement)
-      if (this.intervalTicker == null) return
-      clearInterval(this.intervalTicker)
-    })
+    if (replayTile !== null) {
+      replayTile.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        this.replay()
+      })
+    }
+
+    if (pauseButton !== null) {
+      pauseButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        this.onRevolverplayPauseCallback(this.videoElement)
+        this.clearRevolverplay()
+      })
+    }
   }
 
   render = (): void => {
@@ -148,9 +171,14 @@ class EndcardPlugin {
         logger.log(this.transformedData)
 
         this.endcardContainer.innerHTML = ''
-        for (let i: number = 0; i < 6; i++) {
-          const cardTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
-          this.endcardContainer.innerHTML += cardTemplate
+        for (let i: number = 0; i < 5; i++) {
+          const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
+          // TODO: maybe there will be a getPosterImage function in videplayer in future
+          const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'))
+          if (i === 3) {
+            this.endcardContainer.innerHTML += replayTemplate
+          }
+          this.endcardContainer.innerHTML += tileTemplate
         }
       })
       .catch(err => {
@@ -185,12 +213,10 @@ const plugin = {
     const endcardPlugin = new EndcardPlugin(stroeervideoplayer, opts)
     const videoEl = stroeervideoplayer.getVideoEl()
 
-    // for development change "contentVideoFirstQuartile" to "loadedmetadata"
     videoEl.addEventListener('contentVideoFirstQuartile', () => {
       endcardPlugin.render()
     })
 
-    // for development change "contentVideoEnded" to "loadedmetadata"
     videoEl.addEventListener('contentVideoEnded', () => {
       if (!endcardPlugin.showEndcard) return
       endcardPlugin.addMediaQueryListener()

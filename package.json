@@ -1,5 +1,5 @@
 {
- "version": "0.2.0",
+ "version": "0.3.0",
  "name": "@stroeer/stroeer-videoplayer-plugin-endcard",
  "description": "Ströer Videoplayer Endcard Plugin",
  "main": "dist/StroeerVideoplayer-endcard-plugin.umd.js",
@@ -15,7 +15,8 @@
   "lint": "eslint src/*.ts src/**/*.ts",
   "test": "jest tests",
   "test:coverage": "jest tests --coverage",
-  "test:badges": "jest tests --coverage && jest-coverage-badges"
+  "test:badges": "jest tests --coverage && jest-coverage-badges",
+  "test-update": "jest --updateSnapshot"
  },
  "repository": {
   "type": "git",

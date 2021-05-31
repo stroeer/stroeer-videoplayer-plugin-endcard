@@ -29,7 +29,7 @@ const getTile = (index: number, obj: IData, revolverplayTime: number): string =>
           </svg> 
         `
         : `
-        <svg class="plugin-endcard-play-icon" width="17" height="22" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="plugin-endcard-play-icon" width="22" height="29" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z" fill="white"/>
         </svg>
         `}
@@ -45,4 +45,22 @@ const getTile = (index: number, obj: IData, revolverplayTime: number): string =>
   return template
 }
 
-export default getTile
+const getTileReplay = (imageUrl: string): string => {
+  const template = `
+    <div class="plugin-endcard-tile" data-role="plugin-endcard-tile-replay">
+      <div class="plugin-endcard-thumbnail" style="background-image: url(${imageUrl});"></div>
+      <div class="plugin-endcard-overlay">
+        <svg class="plugin-endcard-replay-icon" width="26" height="21" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 16H1C0.447715 16 0 15.5523 0 15V10C0 9.44772 0.447715 9 1 9C1.55228 9 2 9.44772 2 10V14H18V5H8V8L3 4L8 0V3H19C19.553 3 20 3.447 20 4V15C20 15.553 19.553 16 19 16Z" fill="white"/>
+        </svg>
+        <p class="plugin-endcard-replay-title">Video wiederholen</p>
+      </div>
+    </div>
+  `
+  return template
+}
+
+export {
+  getTile,
+  getTileReplay
+}

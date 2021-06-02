@@ -7,7 +7,7 @@ exports[`Replay tile markup is rendered as expected 1`] = `
   
     
   <div
-    class="plugin-endcard-tile"
+    class="plugin-endcard-tile-replay "
     data-role="plugin-endcard-tile-replay"
   >
     
@@ -20,6 +20,7 @@ exports[`Replay tile markup is rendered as expected 1`] = `
       
     <div
       class="plugin-endcard-overlay"
+      data-role="plugin-endcard-overlay"
     >
       
         
@@ -65,7 +66,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
   
     
   <div
-    class="plugin-endcard-tile"
+    class="plugin-endcard-tile plugin-endcard-tile-0"
     data-idx="0"
     data-role="plugin-endcard-tile"
   >
@@ -229,7 +230,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
   
     
   <div
-    class="plugin-endcard-tile"
+    class="plugin-endcard-tile plugin-endcard-tile-1"
     data-idx="1"
     data-role="plugin-endcard-tile"
   >
@@ -288,7 +289,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
   
     
   <div
-    class="plugin-endcard-tile"
+    class="plugin-endcard-tile plugin-endcard-tile-2"
     data-idx="2"
     data-role="plugin-endcard-tile"
   >
@@ -355,7 +356,7 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
   
     
   <div
-    class="plugin-endcard-tile"
+    class="plugin-endcard-tile plugin-endcard-tile-0"
     data-idx="0"
     data-role="plugin-endcard-tile"
   >
@@ -512,7 +513,7 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
   
     
   <div
-    class="plugin-endcard-tile"
+    class="plugin-endcard-tile plugin-endcard-tile-1"
     data-idx="1"
     data-role="plugin-endcard-tile"
   >
@@ -571,7 +572,7 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
   
     
   <div
-    class="plugin-endcard-tile"
+    class="plugin-endcard-tile plugin-endcard-tile-2"
     data-idx="2"
     data-role="plugin-endcard-tile"
   >

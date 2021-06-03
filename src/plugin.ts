@@ -30,7 +30,7 @@ class EndcardPlugin {
     this.endpoint = this.videoElement.getAttribute('data-endcard-url')
     this.dataKeyMap = opts.dataKeyMap !== undefined ? opts.dataKeyMap : noop
     this.transformedData = []
-    this.showEndcard = true
+    this.showEndcard = opts.showEndcard !== undefined ? opts.showEndcard : true
     this.revolverplayTime = opts.revolverplayTime !== undefined ? opts.revolverplayTime : 5
     this.intervalTicker = null
     this.isDesktop = false
@@ -75,7 +75,7 @@ class EndcardPlugin {
   }
 
   revolverplay = (): void => {
-    if (this.revolverplayTime === 0) return
+    if (this.revolverplayTime === 0 || !this.showEndcard) return
 
     const progressSvgCircle: HTMLElement | null =
       this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')
@@ -159,9 +159,16 @@ class EndcardPlugin {
     }
   }
 
+  renderFallback = (): void => {
+    const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
+    this.endcardContainer.innerHTML = ''
+    this.endcardContainer.innerHTML += replayTemplate
+  }
+
   render = (): void => {
-    if (this.endpoint === null) {
+    if (this.endpoint === null || !this.showEndcard) {
       this.showEndcard = false
+      this.renderFallback()
       return
     }
 
@@ -184,12 +191,13 @@ class EndcardPlugin {
       .catch(err => {
         logger.log('Something went wrong with fetching api!', err)
         this.showEndcard = false
+        this.renderFallback()
       })
   }
 
   hide = (): void => {
     // TODO: this should be done in UI plugin, here because to show endcard features
-    if (this.isDesktop) {
+    if (this.isDesktop || !this.showEndcard) {
       this.uiEl.classList.remove('hidden')
     }
     this.endcardContainer.classList.add('hidden')
@@ -197,7 +205,7 @@ class EndcardPlugin {
 
   show = (): void => {
     // TODO: this should be done in UI plugin, here because to show endcard features
-    if (this.isDesktop) {
+    if (this.isDesktop || !this.showEndcard) {
       this.uiEl.classList.add('hidden')
     }
     this.endcardContainer.classList.remove('hidden')
@@ -218,7 +226,6 @@ const plugin = {
     })
 
     videoEl.addEventListener('contentVideoEnded', () => {
-      if (!endcardPlugin.showEndcard) return
       endcardPlugin.addMediaQueryListener()
       endcardPlugin.addClickEvents()
       endcardPlugin.show()

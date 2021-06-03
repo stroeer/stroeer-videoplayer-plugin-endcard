@@ -32,7 +32,8 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   bottom: 0;
 }
 
-.plugin-endcard-tile {
+.plugin-endcard-tile,
+.plugin-endcard-tile-replay {
   display: none;
   position: relative;
   float: left;
@@ -43,14 +44,15 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   overflow: hidden;
 }
 
-.plugin-endcard-tile:nth-of-type(1) {
+.plugin-endcard-tile-single,
+.plugin-endcard-tile-0 {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.plugin-endcard-tile:nth-of-type(1),
-.plugin-endcard-tile:nth-of-type(4) {
+.plugin-endcard-tile-0,
+.plugin-endcard-tile-replay {
   &::before {
     content: "";
     position: absolute;
@@ -60,14 +62,18 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   }
 }
 
-.plugin-endcard-tile:nth-of-type(2),
-.plugin-endcard-tile:nth-of-type(3) {
+.plugin-endcard-tile-1,
+.plugin-endcard-tile-2 {
   border-bottom: $endcard-plugin-tile-border;
 }
 
-.plugin-endcard-tile:nth-of-type(4),
-.plugin-endcard-tile:nth-of-type(5) {
+.plugin-endcard-tile-replay,
+.plugin-endcard-tile-3 {
   border-right: $endcard-plugin-tile-border;
+}
+
+.plugin-endcard-tile-single {
+  border-right: none;
 }
 
 .plugin-endcard-thumbnail {
@@ -96,7 +102,7 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
   font-size: $endcard-plugin-font-size-medium;
   background: $endcard-plugin-title-bg;
 
-  .plugin-endcard-tile:nth-of-type(1) & {
+  .plugin-endcard-tile-0 & {
     font-size: $endcard-plugin-font-size-large;
     padding: $endcard-plugin-spacing-large;
   }
@@ -156,14 +162,22 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
     display: block;
   }
 
-  .plugin-endcard-tile:nth-of-type(1) {
+  .plugin-endcard-tile-0 {
     width: 66.66%;
     height: 66.66%;
     border-right: $endcard-plugin-tile-border;
     border-bottom: $endcard-plugin-tile-border;
   }
 
-  .plugin-endcard-tile:nth-of-type(4) {
+  .plugin-endcard-tile-single {
+    width: 100%;
+    height: 100%;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .plugin-endcard-tile-replay {
+    display: block;
     clear: left;
 
     .plugin-endcard-overlay {
@@ -171,10 +185,10 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
     }
   }
 
-  .plugin-endcard-tile:nth-of-type(2),
-  .plugin-endcard-tile:nth-of-type(3),
-  .plugin-endcard-tile:nth-of-type(5),
-  .plugin-endcard-tile:nth-of-type(6) {
+  .plugin-endcard-tile-1,
+  .plugin-endcard-tile-2,
+  .plugin-endcard-tile-3,
+  .plugin-endcard-tile-4 {
     .plugin-endcard-overlay {
       transition: all 0.4s;
       opacity: 0;

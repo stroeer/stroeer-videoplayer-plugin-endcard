@@ -159,7 +159,7 @@ class EndcardPlugin {
     }
   }
 
-  renderDefault = (): void => {
+  renderFallback = (): void => {
     const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
     this.endcardContainer.innerHTML = ''
     this.endcardContainer.innerHTML += replayTemplate
@@ -168,7 +168,7 @@ class EndcardPlugin {
   render = (): void => {
     if (this.endpoint === null || !this.showEndcard) {
       this.showEndcard = false
-      this.renderDefault()
+      this.renderFallback()
       return
     }
 
@@ -191,7 +191,7 @@ class EndcardPlugin {
       .catch(err => {
         logger.log('Something went wrong with fetching api!', err)
         this.showEndcard = false
-        this.renderDefault()
+        this.renderFallback()
       })
   }
 

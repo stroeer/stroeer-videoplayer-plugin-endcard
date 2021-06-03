@@ -45,9 +45,9 @@ const getTile = (index: number, obj: IData, revolverplayTime: number): string =>
   return template
 }
 
-const getTileReplay = (imageUrl: string, classes?: string): string => {
+const getTileReplay = (imageUrl: string, classes: string = ''): string => {
   const template = `
-    <div class="plugin-endcard-tile-replay ${classes !== undefined ? classes : ''}" data-role="plugin-endcard-tile-replay">
+    <div class="plugin-endcard-tile-replay ${classes}" data-role="plugin-endcard-tile-replay">
       <div class="plugin-endcard-thumbnail" style="background-image: url(${imageUrl});"></div>
       <div class="plugin-endcard-overlay" data-role="plugin-endcard-overlay">
         <svg class="plugin-endcard-replay-icon" width="26" height="21" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">

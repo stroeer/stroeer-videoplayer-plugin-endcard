@@ -1,10 +1,8 @@
-import { version } from '../package.json'
 import noop from './noop'
 import logger from './logger'
 import { fetchAPI, transformData } from './api'
 import { getTile, getTileReplay } from './template'
 import { IData, IStroeerVideoplayer, IEndcardOptions } from '../types/types'
-import './endcard.scss'
 
 class EndcardPlugin {
   videoplayer: IStroeerVideoplayer
@@ -47,6 +45,14 @@ class EndcardPlugin {
     this.videoElement.after(this.endcardContainer)
 
     return this
+  }
+
+  setEndpoint = (endpoint: string): void => {
+    this.endpoint = endpoint
+  }
+
+  getEndpoint = (): string | null => {
+    return this.endpoint
   }
 
   addMediaQueryListener = (): void => {
@@ -115,10 +121,9 @@ class EndcardPlugin {
   }
 
   play = (idx: number): void => {
-    const videoSources = this.transformedData[idx].sources
     this.clearRevolverplay()
-    this.endpoint = this.transformedData[idx].endpoint
-    this.videoplayer.setSrc(videoSources)
+    this.setEndpoint(this.transformedData[idx].endpoint)
+    this.videoplayer.setSrc(this.transformedData[idx].sources)
     this.videoplayer.load()
     this.videoplayer.play()
     this.hide()
@@ -166,13 +171,14 @@ class EndcardPlugin {
   }
 
   render = (): void => {
-    if (this.endpoint === null || !this.showEndcard) {
+    const endpoint = this.getEndpoint()
+    if (endpoint === null || !this.showEndcard) {
       this.showEndcard = false
       this.renderFallback()
       return
     }
 
-    fetchAPI<object>(this.endpoint)
+    fetchAPI<object>(endpoint)
       .then((data) => {
         this.transformedData = transformData(data, this.dataKeyMap)
         logger.log(this.transformedData)
@@ -213,28 +219,4 @@ class EndcardPlugin {
   }
 }
 
-const plugin = {
-  pluginName: 'Endcard',
-  init: (stroeervideoplayer: IStroeerVideoplayer, opts: IEndcardOptions = {}) => {
-    logger.log('opts', opts)
-
-    const endcardPlugin = new EndcardPlugin(stroeervideoplayer, opts)
-    const videoEl = stroeervideoplayer.getVideoEl()
-
-    videoEl.addEventListener('contentVideoFirstQuartile', () => {
-      endcardPlugin.render()
-    })
-
-    videoEl.addEventListener('contentVideoEnded', () => {
-      endcardPlugin.addMediaQueryListener()
-      endcardPlugin.addClickEvents()
-      endcardPlugin.show()
-      endcardPlugin.revolverplay()
-    })
-  },
-  deinit: () => {
-  },
-  version: version
-}
-
-export default plugin
+export default EndcardPlugin

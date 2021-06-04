@@ -8,11 +8,7 @@ export interface IData {
 
 export interface IStroeerVideoplayer {
   getUIEl: Function
-  getRootEl: Function
   getVideoEl: Function
-  getUIName: Function
-  initUI: Function
-  deinitUI: Function
   setSrc: Function
   play: Function
   load: Function

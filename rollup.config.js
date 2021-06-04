@@ -6,7 +6,7 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import scss from 'rollup-plugin-scss'
 
 export default [{
-  input: 'src/plugin.ts',
+  input: 'src/index.ts',
   output: {
     file: 'dist/stroeerVideoplayer-endcard-plugin.umd.js',
     exports: 'default',

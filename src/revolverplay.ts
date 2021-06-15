@@ -17,11 +17,8 @@ const ticker = (time: number, remainingTime: number, el: HTMLElement, cb: Functi
   if (remainingTime < 0) {
     cb()
   }
-  remainingTime--
 }
 
 export {
-  getCircleProgress,
-  updateCircleStyle,
   ticker
 }

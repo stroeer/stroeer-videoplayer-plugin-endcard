@@ -1,24 +1,14 @@
-import { getCircleProgress, updateCircleStyle, ticker } from '../src/revolverplay'
+import { ticker } from '../src/revolverplay'
 
-test('getCircleProgress should return correct value', function() {
-  expect(getCircleProgress(7)).toEqual(179.19839274820703)
-  expect(getCircleProgress(6)).toEqual(181.1252571863598)
-})
-
-test('updateCircleStyle should set correct style', function() {
-  const el = document.createElement('line')
-  
-  updateCircleStyle(el, 4)
-  expect(el.style.strokeDashoffset).toEqual('4')
-})
-
-test('ticker should call callback if remainingtime < 0', function() {
-  const el = document.createElement('div')
+test('ticker should work correctly', function() {
+  const line = document.createElement('line')
   const func1 = jest.fn()
 
-  ticker(7, 2, el, func1)
+  ticker(7, 2, line, func1)
+  expect(line.style.strokeDashoffset).toEqual('55.053269661507535')
   expect(func1).not.toHaveBeenCalled()
 
-  ticker(5, -1, el, func1)
+  ticker(5, -1, line, func1)
+  expect(line.style.strokeDashoffset).toEqual('-38.53728876305527')
   expect(func1).toHaveBeenCalled()
 })

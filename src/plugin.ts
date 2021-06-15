@@ -3,6 +3,7 @@ import logger from './logger'
 import { fetchAPI, transformData } from './api'
 import { getTile, getTileReplay } from './template'
 import { IData, IStroeerVideoplayer, IEndcardOptions } from '../types/types'
+import { ticker } from './revolverplay'
 
 class EndcardPlugin {
   videoplayer: IStroeerVideoplayer
@@ -83,29 +84,18 @@ class EndcardPlugin {
   revolverplay = (): void => {
     if (this.revolverplayTime === 0 || !this.showEndcard) return
 
-    const progressSvgCircle: HTMLElement | null =
-      this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')
-    const radius = 30.667
-    const circumference = 2 * Math.PI * radius
+    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+    const progressSvgCircle = this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')! as HTMLElement
     let remainingTime = this.revolverplayTime
-
-    const progress = (value: number): void => {
-      const p = value / 100
-      const dashOffset = circumference * (1 - p)
-      if (progressSvgCircle === null) return
-      progressSvgCircle.style.strokeDashoffset = String(dashOffset)
-    }
-
-    const ticker = (): void => {
-      progress(((this.revolverplayTime - remainingTime) / this.revolverplayTime) * 100)
-      remainingTime--
-      if (remainingTime < -1) {
+    const revolverplayTicker = (): void => {
+      ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
         this.play(0)
-      }
+      })
+      remainingTime--
     }
 
-    ticker()
-    this.intervalTicker = setInterval(ticker, 1000)
+    revolverplayTicker()
+    this.intervalTicker = setInterval(revolverplayTicker, 1000)
   }
 
   clearRevolverplay = (): void => {

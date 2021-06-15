@@ -12,13 +12,13 @@ test('updateCircleStyle should set correct style', function() {
   expect(el.style.strokeDashoffset).toEqual('4')
 })
 
-test('ticker should call callback below value 0', function() {
+test('ticker should call callback if remainingtime < 0', function() {
   const el = document.createElement('div')
   const func1 = jest.fn()
 
-  ticker(0, el, func1)
+  ticker(7, 2, el, func1)
   expect(func1).not.toHaveBeenCalled()
 
-  ticker(-1, el, func1)
+  ticker(5, -1, el, func1)
   expect(func1).toHaveBeenCalled()
 })

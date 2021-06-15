@@ -10,8 +10,7 @@ const updateCircleStyle = (el: HTMLElement, value: number): void => {
   el.style.strokeDashoffset = String(value)
 }
 
-const ticker = (time: number, el: HTMLElement, cb: Function): void => {
-  let remainingTime = time
+const ticker = (time: number, remainingTime: number, el: HTMLElement, cb: Function): void => {
   const value = ((time - remainingTime) / time) * 100
 
   updateCircleStyle(el, getCircleProgress(value))

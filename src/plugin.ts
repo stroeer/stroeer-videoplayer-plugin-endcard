@@ -86,14 +86,16 @@ class EndcardPlugin {
 
     /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
     const progressSvgCircle = this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')! as HTMLElement
-    const revolverTicker = (): void => {
-      ticker(this.revolverplayTime, progressSvgCircle, () => {
+    let remainingTime = this.revolverplayTime
+    const revolverplayTicker = (): void => {
+      ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
         this.play(0)
       })
+      remainingTime--
     }
 
-    revolverTicker()
-    this.intervalTicker = setInterval(revolverTicker, 1000)
+    revolverplayTicker()
+    this.intervalTicker = setInterval(revolverplayTicker, 1000)
   }
 
   clearRevolverplay = (): void => {

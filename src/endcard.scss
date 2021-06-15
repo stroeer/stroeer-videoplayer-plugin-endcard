@@ -16,6 +16,7 @@ $endcard-plugin-text-color: #fff !default;
 $endcard-plugin-button-pause-bg-color: rgba(255, 255, 255, 0.4) !default;
 $endcard-plugin-button-pause-bg-color-hover: rgba(255, 255, 255, 0.2) !default;
 $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
+$endcard-plugin-controlbar-height-mobile: 64px !default;
 
 .plugin-endcard-container {
   background-color: $endcard-plugin-bg-color;
@@ -29,7 +30,7 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
 .plugin-endcard-overlay {
   position: absolute;
   width: 100%;
-  bottom: 0;
+  bottom: $endcard-plugin-controlbar-height-mobile;
 }
 
 .plugin-endcard-tile,
@@ -160,6 +161,10 @@ $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
 @media only screen and (min-width: 769px) {
   .plugin-endcard-tile {
     display: block;
+  }
+
+  .plugin-endcard-overlay {
+    bottom: 0;
   }
 
   .plugin-endcard-tile-0 {

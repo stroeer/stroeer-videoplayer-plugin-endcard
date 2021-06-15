@@ -32,7 +32,8 @@ class EndcardPlugin {
     this.showEndcard = opts.showEndcard !== undefined ? opts.showEndcard : true
     this.revolverplayTime = opts.revolverplayTime !== undefined ? opts.revolverplayTime : 5
     this.intervalTicker = null
-    this.isDesktop = false
+    // TODO: isDesktop can be removed if UI plugin bug is fixed
+    this.isDesktop = window.screen.width > 768
 
     this.onLoadedCallback = opts.onLoadedCallback !== undefined ? opts.onLoadedCallback : noop
     this.onClickCallback = opts.onClickCallback !== undefined ? opts.onClickCallback : noop
@@ -54,31 +55,6 @@ class EndcardPlugin {
 
   getEndpoint = (): string | null => {
     return this.endpoint
-  }
-
-  addMediaQueryListener = (): void => {
-    const controlbar: HTMLDivElement | null = this.uiEl.querySelector('.controlbar')
-    const tileOverlay: HTMLDivElement | null =
-      this.endcardContainer.querySelector('[data-role="plugin-endcard-overlay"]')
-    if (controlbar === null || tileOverlay === null) return
-
-    const mediaQuery = window.matchMedia('(min-width: 769px)')
-    const handleMobileChange = (e: MediaQueryListEvent | MediaQueryList): void => {
-      this.isDesktop = e.matches
-
-      if (this.isDesktop) {
-        tileOverlay.removeAttribute('style')
-      } else {
-        tileOverlay.style.bottom = String(controlbar.offsetHeight) + 'px'
-      }
-    }
-
-    handleMobileChange(mediaQuery)
-    if (mediaQuery.addEventListener === undefined) {
-      mediaQuery.addListener(handleMobileChange)
-    } else {
-      mediaQuery.addEventListener('change', handleMobileChange)
-    }
   }
 
   revolverplay = (): void => {
@@ -192,7 +168,8 @@ class EndcardPlugin {
   }
 
   hide = (): void => {
-    // TODO: this should be done in UI plugin, here because to show endcard features
+    // TODO: UI switch should be done in UI plugin, here because to show endcard features
+    // so isDesktop can be removed if UI plugin bug is fixed
     if (this.isDesktop || !this.showEndcard) {
       this.uiEl.classList.remove('hidden')
     }
@@ -200,7 +177,8 @@ class EndcardPlugin {
   }
 
   show = (): void => {
-    // TODO: this should be done in UI plugin, here because to show endcard features
+    // TODO: UI switch should be done in UI plugin, here because to show endcard features
+    // so isDesktop can be removed if UI plugin bug is fixed
     if (this.isDesktop || !this.showEndcard) {
       this.uiEl.classList.add('hidden')
     }

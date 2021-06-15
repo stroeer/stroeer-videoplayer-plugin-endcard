@@ -17,7 +17,6 @@ const plugin = {
     })
 
     videoEl.addEventListener('contentVideoEnded', () => {
-      endcardPlugin.addMediaQueryListener()
       endcardPlugin.addClickEvents()
       endcardPlugin.show()
       endcardPlugin.revolverplay()

@@ -103,12 +103,12 @@ class EndcardPlugin {
     tiles.forEach(tile => {
       tile.addEventListener('click', (e) => {
         e.preventDefault()
-        this.onClickCallback(this.videoElement)
 
         const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
         const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
         if (idx === null) return
         this.play(parseInt(idx))
+        this.onClickCallback(this.videoElement)
       })
     })
 

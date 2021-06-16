@@ -1,6 +1,6 @@
 import { ticker } from '../src/revolverplay'
 
-test('ticker should work correctly', function() {
+test('ticker should work correctly', () => {
   const line = document.createElement('line')
   const func1 = jest.fn()
 

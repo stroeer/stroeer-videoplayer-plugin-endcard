@@ -49,14 +49,6 @@ class EndcardPlugin {
     return this
   }
 
-  setEndpoint = (endpoint: string): void => {
-    this.endpoint = endpoint
-  }
-
-  getEndpoint = (): string | null => {
-    return this.endpoint
-  }
-
   revolverplay = (): void => {
     if (this.revolverplayTime === 0 || !this.showEndcard) return
 
@@ -88,7 +80,7 @@ class EndcardPlugin {
 
   play = (idx: number): void => {
     this.clearRevolverplay()
-    this.setEndpoint(this.transformedData[idx].endpoint)
+    this.endpoint = this.transformedData[idx].endpoint
     this.videoplayer.setSrc(this.transformedData[idx].sources)
     this.videoplayer.load()
     this.videoplayer.play()
@@ -137,7 +129,7 @@ class EndcardPlugin {
   }
 
   render = (): void => {
-    const endpoint = this.getEndpoint()
+    const endpoint = this.endpoint
     if (endpoint === null || !this.showEndcard) {
       this.showEndcard = false
       this.renderFallback()
@@ -170,7 +162,7 @@ class EndcardPlugin {
   hide = (): void => {
     // TODO: UI switch should be done in UI plugin, here because to show endcard features
     // so isDesktop can be removed if UI plugin bug is fixed
-    if (this.isDesktop || !this.showEndcard) {
+    if (this.isDesktop || this.uiEl.classList.contains('hidden')) {
       this.uiEl.classList.remove('hidden')
     }
     this.endcardContainer.classList.add('hidden')

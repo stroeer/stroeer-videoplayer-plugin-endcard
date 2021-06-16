@@ -1,5 +1,6 @@
 import EndcardPlugin from '../src/plugin'
 import * as revolverplay from '../src/revolverplay'
+import testData from './data.json'
 
 const videoEl = document.createElement('video')
 videoEl.setAttribute('data-endcard-url', 'http://localhost:5000/')
@@ -27,6 +28,8 @@ class StroeerVideoplayer {
 const svp = new StroeerVideoplayer()
 const plugin = new EndcardPlugin(svp)
 
+plugin.transformedData = testData
+
 const createDom = () => {
   const tile1 = document.createElement('div')
   tile1.setAttribute('data-role', 'plugin-endcard-tile')
@@ -50,33 +53,6 @@ const mockTicker = jest
   .mockImplementation(() => '')
 
 test('play should call correct functions', () => {
-  plugin.transformedData = [
-    {
-        sources: [
-          {
-            quality: '1080',
-            label: '1080p',
-            src: 'https://dlc2.t-online.de/s/2021/05/07/20027894-1080p.mp4',
-            type: 'video/mp4'
-          },
-          {
-            quality: '720',
-            label: '720p',
-            src: 'https://dlc2.t-online.de/s/2021/05/07/20027894-720p.mp4',
-            type: 'video/mp4'
-          },
-          {
-            quality: '240',
-            label: '240p',
-            src: 'https://dlc2.t-online.de/s/2021/05/07/20027894-240p.mp4',
-            type: 'video/mp4'
-          }
-        ],
-        "endpoint": "http://localhost:5000/1",
-        "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-        "image": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
-      }
-  ]
   plugin.clearRevolverplay = jest.fn()
   plugin.hide = jest.fn()
 
@@ -140,4 +116,56 @@ test('show should show endcard, hide UI controlbar and call callback', () => {
   expect(plugin.endcardContainer.classList).not.toContain('hidden')
   expect(plugin.uiEl.classList).toContain('hidden')
   expect(plugin.onLoadedCallback).toHaveBeenCalledTimes(1)
+})
+
+// important for async functions --> waits until pending Promises are resolve
+// https://stackoverflow.com/questions/44741102/how-to-make-jest-wait-for-all-asynchronous-code-to-finish-execution-before-expec
+const flushPromises = () => new Promise(setImmediate) 
+
+describe('testing render with working fetch API', () => {
+  // Applies only to tests in this describe block
+  beforeEach(function () {
+    global.fetch = jest.fn().mockImplementation(async () => {
+      const p = new Promise((resolve) => {
+        resolve({
+          ok: true,
+          Id: '123',
+          json: function () {
+            return plugin.transformedData
+          }
+        })
+      })
+
+      return p
+    })
+  })
+
+  test('render should call renderFallback in case default endcard should not be shown', async () => {    
+    plugin.renderFallback = jest.fn()
+    plugin.showEndcard = false
+    plugin.render()
+    expect(plugin.renderFallback).toHaveBeenCalledTimes(1)
+  })
+  
+  test('render should fill endcardContainer with HTML', async () => {   
+    plugin.showEndcard = true
+    plugin.endcardContainer.innerHTML = ''
+    plugin.render()
+    await flushPromises()
+    expect(plugin.endcardContainer.innerHTML).not.toEqual('')
+  })
+})
+
+describe('testing render with failing fetch API', () => {
+  // Applies only to tests in this describe block
+  beforeEach(function () {
+    global.fetch = jest.fn().mockImplementation(async () => Promise.reject("API is down"))
+  })
+  
+  test('render should call renderFallback', async () => {
+    plugin.showEndcard = true  
+    plugin.render()
+    await flushPromises()
+    expect(plugin.renderFallback).toHaveBeenCalledTimes(1)
+  })
 })

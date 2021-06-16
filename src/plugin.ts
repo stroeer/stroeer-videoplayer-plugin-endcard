@@ -129,14 +129,13 @@ class EndcardPlugin {
   }
 
   render = (): void => {
-    const endpoint = this.endpoint
-    if (endpoint === null || !this.showEndcard) {
+    if (this.endpoint === null || !this.showEndcard) {
       this.showEndcard = false
       this.renderFallback()
       return
     }
 
-    fetchAPI<object>(endpoint)
+    fetchAPI<object>(this.endpoint)
       .then((data) => {
         this.transformedData = transformData(data, this.dataKeyMap)
         logger.log(this.transformedData)

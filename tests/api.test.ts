@@ -68,7 +68,7 @@ test('data should be transformed', () => {
   expect(transformedData).toStrictEqual(expectedData)
 })
 
-test('api fetch should work', async function () {
+test('api fetch should work', async () => {
   const response = await fetchAPI('https://videos.giga.de/suggestions/1363284707')
 
   expect(fetch).toHaveBeenCalledTimes(1)
@@ -78,7 +78,7 @@ test('api fetch should work', async function () {
   expect(typeof response).toBe('object')
 })
 
-test('api fetch should throw error', async function () {
+test('api fetch should throw error', async () => {
   setOk = false
   try {
     await fetchAPI('https://videos.giga.de/suggestions/1363284707')

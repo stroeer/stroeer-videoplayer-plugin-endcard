@@ -22,12 +22,28 @@ class StroeerVideoplayer {
 const svp = new StroeerVideoplayer()
 const plugin = new EndcardPlugin(svp)
 
+const createDom = () => {
+  const tile1 = document.createElement('div')
+  tile1.setAttribute('data-role', 'plugin-endcard-tile')
+  tile1.setAttribute('data-idx', '2')
+  const tile2 = document.createElement('div')
+  tile2.setAttribute('data-role', 'plugin-endcard-tile')
+  plugin.endcardContainer.appendChild(tile1)
+  plugin.endcardContainer.appendChild(tile2)
+  const replayTile = document.createElement('div')
+  replayTile.setAttribute('data-role', 'plugin-endcard-tile-replay')
+  plugin.endcardContainer.appendChild(replayTile)
+  const button = document.createElement('button')
+  button.setAttribute('data-role', 'plugin-endcard-pause')
+  plugin.endcardContainer.appendChild(button)
+  document.body.appendChild(plugin.endcardContainer)
+}
 
 const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
   .mockImplementation(() => '')
 
-test('replay should call correct functions', function() {
+test('replay should call correct functions', () => {
   plugin.clearRevolverplay = jest.fn()
   plugin.hide = jest.fn()
   
@@ -37,8 +53,32 @@ test('replay should call correct functions', function() {
   expect(plugin.hide).toHaveBeenCalledTimes(1)
 })
 
-test('revolverplay should call correct functions', function() {
+test('revolverplay should call correct functions', () => {
   plugin.revolverplay()
   expect(mockTicker).toHaveBeenCalledTimes(1)
   mockTicker.mockRestore()
+})
+
+test('click events should call correct functions', () => {
+  createDom()
+  const tiles = document.querySelectorAll('[data-role="plugin-endcard-tile"]') as NodeListOf<HTMLElement>
+	const replayTile = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
+  const pauseButton = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
+	plugin.replay = jest.fn()
+  plugin.play = jest.fn()
+  plugin.clearRevolverplay = jest.fn()
+  plugin.onClickCallback = jest.fn()
+  plugin.onRevolverplayPauseCallback = jest.fn()
+  plugin.addClickEvents()
+  tiles.forEach(tile => {
+    tile.click()
+  })
+	replayTile.click()
+  pauseButton.click()
+	
+	expect(plugin.replay).toHaveBeenCalledTimes(1)
+  expect(plugin.play).toHaveBeenCalledTimes(1)
+  expect(plugin.onClickCallback).toHaveBeenCalledTimes(1)
+  expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
+  expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
 })

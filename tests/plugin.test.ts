@@ -22,21 +22,22 @@ class StroeerVideoplayer {
 const svp = new StroeerVideoplayer()
 const plugin = new EndcardPlugin(svp)
 
-// create DOM
-const tile1 = document.createElement('div')
-tile1.setAttribute('data-role', 'plugin-endcard-tile')
-tile1.setAttribute('data-idx', '2')
-const tile2 = document.createElement('div')
-tile2.setAttribute('data-role', 'plugin-endcard-tile')
-plugin.endcardContainer.appendChild(tile1)
-plugin.endcardContainer.appendChild(tile2)
-const replayTile = document.createElement('div')
-replayTile.setAttribute('data-role', 'plugin-endcard-tile-replay')
-plugin.endcardContainer.appendChild(replayTile)
-const button = document.createElement('button')
-button.setAttribute('data-role', 'plugin-endcard-pause')
-plugin.endcardContainer.appendChild(button)
-document.body.appendChild(plugin.endcardContainer)
+const createDom = () => {
+  const tile1 = document.createElement('div')
+  tile1.setAttribute('data-role', 'plugin-endcard-tile')
+  tile1.setAttribute('data-idx', '2')
+  const tile2 = document.createElement('div')
+  tile2.setAttribute('data-role', 'plugin-endcard-tile')
+  plugin.endcardContainer.appendChild(tile1)
+  plugin.endcardContainer.appendChild(tile2)
+  const replayTile = document.createElement('div')
+  replayTile.setAttribute('data-role', 'plugin-endcard-tile-replay')
+  plugin.endcardContainer.appendChild(replayTile)
+  const button = document.createElement('button')
+  button.setAttribute('data-role', 'plugin-endcard-pause')
+  plugin.endcardContainer.appendChild(button)
+  document.body.appendChild(plugin.endcardContainer)
+}
 
 const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
@@ -58,8 +59,9 @@ test('revolverplay should call correct functions', () => {
   mockTicker.mockRestore()
 })
 
-test('click events should call correct functions', () => {  
-  const tiles: NodeListOf<HTMLElement> = document.querySelectorAll('[data-role="plugin-endcard-tile"]')
+test('click events should call correct functions', () => {
+  createDom()
+  const tiles = document.querySelectorAll('[data-role="plugin-endcard-tile"]') as NodeListOf<HTMLElement>
 	const replayTile = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
   const pauseButton = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
 	plugin.replay = jest.fn()

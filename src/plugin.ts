@@ -58,6 +58,7 @@ class EndcardPlugin {
     const revolverplayTicker = (): void => {
       ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
         this.play(0)
+        this.onRevolverplayCallback(this.transformedData[0])
       })
       remainingTime--
     }
@@ -100,7 +101,7 @@ class EndcardPlugin {
         const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
         if (idx === null) return
         this.play(parseInt(idx))
-        this.onClickCallback(this.videoElement)
+        this.onClickCallback(this.transformedData[parseInt(idx)])
       })
     })
 
@@ -109,6 +110,7 @@ class EndcardPlugin {
         e.preventDefault()
         e.stopPropagation()
         this.replay()
+        // TODO: do we need this.onClickCallback() here?
       })
     }
 
@@ -116,7 +118,7 @@ class EndcardPlugin {
       pauseButton.addEventListener('click', (e) => {
         e.preventDefault()
         e.stopPropagation()
-        this.onRevolverplayPauseCallback(this.videoElement)
+        this.onRevolverplayPauseCallback()
         this.clearRevolverplay()
       })
     }
@@ -174,7 +176,7 @@ class EndcardPlugin {
       this.uiEl.classList.add('hidden')
     }
     this.endcardContainer.classList.remove('hidden')
-    this.onLoadedCallback(this.videoElement)
+    this.onLoadedCallback()
   }
 }
 

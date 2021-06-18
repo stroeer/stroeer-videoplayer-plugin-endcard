@@ -100,8 +100,9 @@ class EndcardPlugin {
         const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
         const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
         if (idx === null) return
-        this.play(parseInt(idx))
-        this.onClickCallback(this.transformedData[parseInt(idx)])
+        const idxNumber = parseInt(idx)
+        this.play(idxNumber)
+        this.onClickCallback(this.transformedData[idxNumber])
       })
     })
 

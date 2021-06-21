@@ -47,31 +47,28 @@ const createDom = () => {
   plugin.endcardContainer.appendChild(button)
   document.body.appendChild(plugin.endcardContainer)
 }
+createDom()
 
 const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
   .mockImplementation(() => '')
-
+  
 test('play should call correct functions', () => {
-  plugin.clearRevolverplay = jest.fn()
-  plugin.hide = jest.fn()
+  plugin.reset = jest.fn()
 
   plugin.play(0)
-  expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.setSrc).toHaveBeenCalledTimes(1)
   expect(svp.load).toHaveBeenCalledTimes(1)
   expect(svp.play).toHaveBeenCalledTimes(1)
-  expect(plugin.hide).toHaveBeenCalledTimes(1)
+  expect(plugin.reset).toHaveBeenCalledTimes(1)
 })
 
 test('replay should call correct functions', () => {
-  plugin.clearRevolverplay = jest.fn()
-  plugin.hide = jest.fn()
+  plugin.reset = jest.fn()
   
 	plugin.replay()
-	expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.play).toHaveBeenCalledTimes(1)
-  expect(plugin.hide).toHaveBeenCalledTimes(1)
+  expect(plugin.reset).toHaveBeenCalledTimes(1)
 })
 
 test('revolverplay should call correct functions', () => {
@@ -80,16 +77,27 @@ test('revolverplay should call correct functions', () => {
   mockTicker.mockRestore()
 })
 
+test('reset should call correct functions', () => {
+  plugin.clearRevolverplay = jest.fn()
+  plugin.removeClickEvents = jest.fn()
+  plugin.hide = jest.fn()
+  
+  plugin.reset()
+  
+  expect(plugin.removeClickEvents).toHaveBeenCalledTimes(1)
+  expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
+  expect(plugin.hide).toHaveBeenCalledTimes(1)
+  expect(plugin.endcardContainer.innerHTML).toEqual('')
+})
+
 test('click events should call correct functions', () => {
-  createDom()
   const tiles = document.querySelectorAll('[data-role="plugin-endcard-tile"]') as NodeListOf<HTMLElement>
 	const replayTile = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
   const pauseButton = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
-	plugin.replay = jest.fn()
-  plugin.play = jest.fn()
-  plugin.clearRevolverplay = jest.fn()
-  plugin.onClickCallback = jest.fn()
-  plugin.onRevolverplayPauseCallback = jest.fn()
+  plugin.clickToPlay = jest.fn()
+  plugin.clickToReplay = jest.fn()
+  plugin.clickToPause = jest.fn()
+  
   plugin.addClickEvents()
   tiles.forEach(tile => {
     tile.click()
@@ -97,11 +105,9 @@ test('click events should call correct functions', () => {
 	replayTile.click()
   pauseButton.click()
 	
-	expect(plugin.replay).toHaveBeenCalledTimes(1)
-  expect(plugin.play).toHaveBeenCalledTimes(1)
-  expect(plugin.onClickCallback).toHaveBeenCalledTimes(1)
-  expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
-  expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
+	expect(plugin.clickToReplay).toHaveBeenCalledTimes(1)
+  expect(plugin.clickToPlay).toHaveBeenCalledTimes(2)
+  expect(plugin.clickToPause).toHaveBeenCalledTimes(1)
 })
 
 test('hide should hide endcard and show UI controlbar', () => {

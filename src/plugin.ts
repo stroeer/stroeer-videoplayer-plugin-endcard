@@ -49,86 +49,7 @@ class EndcardPlugin {
     return this
   }
 
-  revolverplay = (): void => {
-    if (this.revolverplayTime === 0 || !this.showEndcard) return
-
-    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-    const progressSvgCircle = this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')! as HTMLElement
-    let remainingTime = this.revolverplayTime
-    const revolverplayTicker = (): void => {
-      ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
-        this.play(0)
-      })
-      remainingTime--
-    }
-
-    revolverplayTicker()
-    this.intervalTicker = setInterval(revolverplayTicker, 1000)
-  }
-
-  clearRevolverplay = (): void => {
-    if (this.intervalTicker !== null) {
-      clearInterval(this.intervalTicker)
-    }
-  }
-
-  replay = (): void => {
-    this.clearRevolverplay()
-    this.videoplayer.play()
-    this.hide()
-  }
-
-  play = (idx: number): void => {
-    this.clearRevolverplay()
-    this.endpoint = this.transformedData[idx].endpoint
-    this.videoplayer.setSrc(this.transformedData[idx].sources)
-    this.videoplayer.load()
-    this.videoplayer.play()
-    this.hide()
-  }
-
-  addClickEvents = (): void => {
-    const tiles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
-    const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
-    const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
-
-    tiles.forEach(tile => {
-      tile.addEventListener('click', (e) => {
-        e.preventDefault()
-
-        const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
-        const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
-        if (idx === null) return
-        this.play(parseInt(idx))
-        this.onClickCallback(this.videoElement)
-      })
-    })
-
-    if (replayTile !== null) {
-      replayTile.addEventListener('click', (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        this.replay()
-      })
-    }
-
-    if (pauseButton !== null) {
-      pauseButton.addEventListener('click', (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        this.onRevolverplayPauseCallback(this.videoElement)
-        this.clearRevolverplay()
-      })
-    }
-  }
-
-  renderFallback = (): void => {
-    const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
-    this.endcardContainer.innerHTML = ''
-    this.endcardContainer.innerHTML += replayTemplate
-  }
-
-  render = (): void => {
+  public onVideoElFirstQuartile = (): void => {
     if (this.endpoint === null || !this.showEndcard) {
       this.showEndcard = false
       this.renderFallback()
@@ -140,7 +61,6 @@ class EndcardPlugin {
         this.transformedData = transformData(data, this.dataKeyMap)
         logger.log(this.transformedData)
 
-        this.endcardContainer.innerHTML = ''
         for (let i: number = 0; i < 5; i++) {
           const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
           // TODO: maybe there will be a getPosterImage function in videplayer in future
@@ -158,7 +78,121 @@ class EndcardPlugin {
       })
   }
 
-  hide = (): void => {
+  public onVideoElEnd = (): void => {
+    this.addClickEvents()
+    this.show()
+    this.revolverplay()
+  }
+
+  private readonly reset = (): void => {
+    this.clearRevolverplay()
+    this.removeClickEvents()
+    this.endcardContainer.innerHTML = ''
+    this.hide()
+  }
+
+  private readonly revolverplay = (): void => {
+    if (this.revolverplayTime === 0 || !this.showEndcard) return
+
+    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+    const progressSvgCircle = this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')! as HTMLElement
+    let remainingTime = this.revolverplayTime
+    const revolverplayTicker = (): void => {
+      ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
+        this.play(0)
+      })
+      remainingTime--
+    }
+
+    revolverplayTicker()
+    this.intervalTicker = setInterval(revolverplayTicker, 1000)
+  }
+
+  private readonly clearRevolverplay = (): void => {
+    if (this.intervalTicker !== null) {
+      clearInterval(this.intervalTicker)
+    }
+  }
+
+  private readonly replay = (): void => {
+    this.videoplayer.play()
+    this.reset()
+  }
+
+  private readonly play = (idx: number): void => {
+    this.endpoint = this.transformedData[idx].endpoint
+    this.videoplayer.setSrc(this.transformedData[idx].sources)
+    this.videoplayer.setContentVideo()
+    this.videoplayer.load()
+    this.videoplayer.play()
+    this.reset()
+  }
+
+  private readonly clickToPlay = (e: Event): void => {
+    e.preventDefault()
+
+    const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
+    const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
+    if (idx === null) return
+    this.play(parseInt(idx))
+    this.onClickCallback(this.videoElement)
+  }
+
+  private readonly clickToReplay = (e: Event): void => {
+    e.preventDefault()
+    e.stopPropagation()
+    this.replay()
+  }
+
+  private readonly clickToPause = (e: Event): void => {
+    e.preventDefault()
+    e.stopPropagation()
+    this.onRevolverplayPauseCallback(this.videoElement)
+    this.clearRevolverplay()
+  }
+
+  private readonly addClickEvents = (): void => {
+    const tiles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
+    const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
+    const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
+
+    tiles.forEach(tile => {
+      tile.addEventListener('click', this.clickToPlay)
+    })
+
+    if (replayTile !== null) {
+      replayTile.addEventListener('click', this.clickToReplay)
+    }
+
+    if (pauseButton !== null) {
+      pauseButton.addEventListener('click', this.clickToPause)
+    }
+  }
+
+  private readonly removeClickEvents = (): void => {
+    const tiles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
+    const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
+    const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
+
+    tiles.forEach(tile => {
+      tile.removeEventListener('click', this.clickToPlay)
+    })
+
+    if (replayTile !== null) {
+      replayTile.removeEventListener('click', this.clickToReplay)
+    }
+
+    if (pauseButton !== null) {
+      pauseButton.removeEventListener('click', this.clickToPause)
+    }
+  }
+
+  private readonly renderFallback = (): void => {
+    const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
+    this.endcardContainer.innerHTML += replayTemplate
+  }
+
+  private readonly hide = (): void => {
     // TODO: UI switch should be done in UI plugin, here because to show endcard features
     // so isDesktop can be removed if UI plugin bug is fixed
     if (this.isDesktop || this.uiEl.classList.contains('hidden')) {
@@ -167,7 +201,7 @@ class EndcardPlugin {
     this.endcardContainer.classList.add('hidden')
   }
 
-  show = (): void => {
+  private readonly show = (): void => {
     // TODO: UI switch should be done in UI plugin, here because to show endcard features
     // so isDesktop can be removed if UI plugin bug is fixed
     if (this.isDesktop || !this.showEndcard) {

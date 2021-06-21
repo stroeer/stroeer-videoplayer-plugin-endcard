@@ -12,6 +12,7 @@ export interface IStroeerVideoplayer {
   setSrc: Function
   play: Function
   load: Function
+  setContentVideo: Function
 }
 
 export interface IEndcardOptions {

@@ -23,6 +23,7 @@ class StroeerVideoplayer {
 	play = jest.fn()
 	load = jest.fn()
 	setSrc = jest.fn()
+  setContentVideo = jest.fn()
 }
 
 const svp = new StroeerVideoplayer()
@@ -46,7 +47,6 @@ const createDom = () => {
   plugin.endcardContainer.appendChild(button)
   document.body.appendChild(plugin.endcardContainer)
 }
-createDom()
 
 const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
@@ -81,6 +81,7 @@ test('revolverplay should call correct functions', () => {
 })
 
 test('click events should call correct functions', () => {
+  createDom()
   const tiles = document.querySelectorAll('[data-role="plugin-endcard-tile"]') as NodeListOf<HTMLElement>
 	const replayTile = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
   const pauseButton = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement

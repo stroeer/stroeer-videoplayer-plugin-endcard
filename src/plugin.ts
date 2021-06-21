@@ -49,7 +49,7 @@ class EndcardPlugin {
     return this
   }
 
-  public onVideoElFirstQuartile = (): void => {
+  render = (): void => {
     if (this.endpoint === null || !this.showEndcard) {
       this.showEndcard = false
       this.renderFallback()
@@ -78,20 +78,14 @@ class EndcardPlugin {
       })
   }
 
-  public onVideoElEnd = (): void => {
-    this.addClickEvents()
-    this.show()
-    this.revolverplay()
-  }
-
-  private readonly reset = (): void => {
+  reset = (): void => {
     this.clearRevolverplay()
     this.removeClickEvents()
     this.endcardContainer.innerHTML = ''
     this.hide()
   }
 
-  private readonly revolverplay = (): void => {
+  revolverplay = (): void => {
     if (this.revolverplayTime === 0 || !this.showEndcard) return
 
     /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
@@ -108,18 +102,18 @@ class EndcardPlugin {
     this.intervalTicker = setInterval(revolverplayTicker, 1000)
   }
 
-  private readonly clearRevolverplay = (): void => {
+  clearRevolverplay = (): void => {
     if (this.intervalTicker !== null) {
       clearInterval(this.intervalTicker)
     }
   }
 
-  private readonly replay = (): void => {
+  replay = (): void => {
     this.videoplayer.play()
     this.reset()
   }
 
-  private readonly play = (idx: number): void => {
+  play = (idx: number): void => {
     this.endpoint = this.transformedData[idx].endpoint
     this.videoplayer.setSrc(this.transformedData[idx].sources)
     this.videoplayer.setContentVideo()
@@ -128,7 +122,7 @@ class EndcardPlugin {
     this.reset()
   }
 
-  private readonly clickToPlay = (e: Event): void => {
+  clickToPlay = (e: Event): void => {
     e.preventDefault()
 
     const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
@@ -138,20 +132,20 @@ class EndcardPlugin {
     this.onClickCallback(this.videoElement)
   }
 
-  private readonly clickToReplay = (e: Event): void => {
+  clickToReplay = (e: Event): void => {
     e.preventDefault()
     e.stopPropagation()
     this.replay()
   }
 
-  private readonly clickToPause = (e: Event): void => {
+  clickToPause = (e: Event): void => {
     e.preventDefault()
     e.stopPropagation()
     this.onRevolverplayPauseCallback(this.videoElement)
     this.clearRevolverplay()
   }
 
-  private readonly addClickEvents = (): void => {
+  addClickEvents = (): void => {
     const tiles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
     const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
     const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
@@ -169,7 +163,7 @@ class EndcardPlugin {
     }
   }
 
-  private readonly removeClickEvents = (): void => {
+  removeClickEvents = (): void => {
     const tiles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
     const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
     const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
@@ -187,12 +181,12 @@ class EndcardPlugin {
     }
   }
 
-  private readonly renderFallback = (): void => {
+  renderFallback = (): void => {
     const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
     this.endcardContainer.innerHTML += replayTemplate
   }
 
-  private readonly hide = (): void => {
+  hide = (): void => {
     // TODO: UI switch should be done in UI plugin, here because to show endcard features
     // so isDesktop can be removed if UI plugin bug is fixed
     if (this.isDesktop || this.uiEl.classList.contains('hidden')) {
@@ -201,7 +195,7 @@ class EndcardPlugin {
     this.endcardContainer.classList.add('hidden')
   }
 
-  private readonly show = (): void => {
+  show = (): void => {
     // TODO: UI switch should be done in UI plugin, here because to show endcard features
     // so isDesktop can be removed if UI plugin bug is fixed
     if (this.isDesktop || !this.showEndcard) {

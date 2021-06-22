@@ -59,7 +59,7 @@ test('play should call correct functions', () => {
   plugin.clearRevolverplay = jest.fn()
   plugin.hide = jest.fn()
 
-  plugin.play(0)
+  plugin.play(0, true)
   expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
   expect(plugin.hide).toHaveBeenCalledTimes(1)

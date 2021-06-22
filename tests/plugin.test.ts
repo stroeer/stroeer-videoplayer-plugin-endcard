@@ -20,7 +20,7 @@ class StroeerVideoplayer {
     return uiEl
   }
 
-play = jest.fn()
+  play = jest.fn()
   load = jest.fn()
   replaceAndPlay = jest.fn()
   getPosterImage = jest.fn()

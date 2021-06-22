@@ -10,6 +10,8 @@ export interface IStroeerVideoplayer {
   getUIEl: Function
   getVideoEl: Function
   getPosterImage: () => string
+  getEndcardUrl: () => string
+  setAutoplay: Function
   replaceAndPlay: Function
   play: Function
   load: Function

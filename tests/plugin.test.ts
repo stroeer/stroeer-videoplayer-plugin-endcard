@@ -8,22 +8,24 @@ const uiEl = document.createElement('div')
 uiEl.classList.add('stroeer-videoplayer-ui')
 
 class StroeerVideoplayer {
-	constructor() {
-		return this
-	}
+  constructor() {
+    return this
+  }
 
-	getVideoEl = (): HTMLVideoElement => {
-		return videoEl
-	}
+  getVideoEl = (): HTMLVideoElement => {
+    return videoEl
+  }
 
-	getUIEl = (): HTMLElement => {
+  getUIEl = (): HTMLElement => {
     return uiEl
   }
 
-	play = jest.fn()
-	load = jest.fn()
-	setSrc = jest.fn()
-  setContentVideo = jest.fn()
+  play = jest.fn()
+  load = jest.fn()
+  replaceAndPlay = jest.fn()
+  getPosterImage = jest.fn()
+  getEndcardUrl = jest.fn()
+  setAutoplay = jest.fn()
 }
 
 const svp = new StroeerVideoplayer()
@@ -57,10 +59,9 @@ test('play should call correct functions', () => {
   plugin.reset = jest.fn()
 
   plugin.play(0)
-  expect(svp.setSrc).toHaveBeenCalledTimes(1)
-  expect(svp.load).toHaveBeenCalledTimes(1)
-  expect(svp.play).toHaveBeenCalledTimes(1)
-  expect(plugin.reset).toHaveBeenCalledTimes(1)
+  expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
+  expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
+  expect(plugin.hide).toHaveBeenCalledTimes(1)
 })
 
 test('replay should call correct functions', () => {

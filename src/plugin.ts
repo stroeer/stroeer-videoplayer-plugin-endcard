@@ -93,7 +93,9 @@ class EndcardPlugin {
     let remainingTime = this.revolverplayTime
     const revolverplayTicker = (): void => {
       ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
+        this.videoplayer.setAutoplay(true)
         this.play(0)
+        this.onRevolverplayCallback()
       })
       remainingTime--
     }
@@ -114,11 +116,9 @@ class EndcardPlugin {
   }
 
   play = (idx: number): void => {
-    this.endpoint = this.transformedData[idx].endpoint
-    this.videoplayer.setSrc(this.transformedData[idx].sources)
-    this.videoplayer.setContentVideo()
-    this.videoplayer.load()
-    this.videoplayer.play()
+    this.clearRevolverplay()
+    this.videoplayer.replaceAndPlay(this.transformedData[idx])
+    this.endpoint = this.videoplayer.getEndcardUrl()
     this.reset()
   }
 
@@ -128,6 +128,7 @@ class EndcardPlugin {
     const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
     const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
     if (idx === null) return
+    this.videoplayer.setAutoplay(false)
     this.play(parseInt(idx))
     this.onClickCallback(this.videoElement)
   }
@@ -202,7 +203,7 @@ class EndcardPlugin {
       this.uiEl.classList.add('hidden')
     }
     this.endcardContainer.classList.remove('hidden')
-    this.onLoadedCallback(this.videoElement)
+    this.onLoadedCallback()
   }
 }
 

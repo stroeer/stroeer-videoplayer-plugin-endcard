@@ -22,7 +22,7 @@
     ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "image": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
   },
   {
     "sources": [
@@ -47,7 +47,7 @@
     ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "image": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
   },
   {
     "sources": [
@@ -72,7 +72,7 @@
     ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "image": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
   },
   {
     "sources": [
@@ -97,7 +97,7 @@
     ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "image": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
   },
   {
     "sources": [
@@ -122,6 +122,6 @@
     ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "image": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
   }
 ]

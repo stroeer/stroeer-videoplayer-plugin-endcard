@@ -8,21 +8,21 @@ const uiEl = document.createElement('div')
 uiEl.classList.add('stroeer-videoplayer-ui')
 
 class StroeerVideoplayer {
-	constructor() {
-		return this
-	}
+  constructor() {
+    return this
+  }
 
-	getVideoEl = (): HTMLVideoElement => {
-		return videoEl
-	}
+  getVideoEl = (): HTMLVideoElement => {
+    return videoEl
+  }
 
-	getUIEl = (): HTMLElement => {
+  getUIEl = (): HTMLElement => {
     return uiEl
   }
 
-	play = jest.fn()
-	load = jest.fn()
-	replaceAndPlay = jest.fn()
+play = jest.fn()
+  load = jest.fn()
+  replaceAndPlay = jest.fn()
   getPosterImage = jest.fn()
 }
 

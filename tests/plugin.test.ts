@@ -66,19 +66,57 @@ const mockClearRevolverplay = jest
 const mockHide = jest
   .spyOn(plugin, 'hide')
   .mockImplementation(() => '')
+  
+const mockReplay = jest
+  .spyOn(plugin, 'replay')
+  .mockImplementation(() => '')
+
+const mockPlay = jest
+  .spyOn(plugin, 'play')
+  .mockImplementation(() => '')
     
 const mockRemoveClickEvents = jest
   .spyOn(plugin, 'removeClickEvents')
   .mockImplementation(() => '')
+
+test('clickToReplay should call correct functions', () => {
+  const target = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
+  const e = new Event('click')
+  Object.defineProperty(e, 'target', {value: target, enumerable: true});
+  plugin.clickToReplay(e)
+  expect(mockReplay).toHaveBeenCalledTimes(1)
+})
+
+test('clickToPause should call correct functions', () => {
+  plugin.onRevolverplayPauseCallback = jest.fn()
+  const target = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
+  const e = new Event('click')
+  Object.defineProperty(e, 'target', {value: target, enumerable: true});
+  plugin.clickToPause(e)
+  expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
+  expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
+})
+
+test('clickToPlay should call correct functions', () => {
+  plugin.onClickCallback = jest.fn()
+  const target = document.querySelector('[data-role="plugin-endcard-tile"]') as HTMLElement
+  const e = new Event('click')
+  Object.defineProperty(e, 'target', {value: target, enumerable: true});
+  plugin.clickToPlay(e)
+  expect(mockPlay).toHaveBeenCalledTimes(1)
+  expect(plugin.onClickCallback).toHaveBeenCalledTimes(1)
+})
   
 test('play should call correct functions', () => {
+  mockPlay.mockRestore() 
   plugin.play(0, true)
   expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
   expect(mockReset).toHaveBeenCalledTimes(1)
 })
 
-test('replay should call correct functions', () => {    
+test('replay should call correct functions', () => {
+  mockReplay.mockRestore()  
 	plugin.replay()
   expect(svp.play).toHaveBeenCalledTimes(1)
   expect(mockReset).toHaveBeenCalledTimes(1)

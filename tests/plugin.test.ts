@@ -54,41 +54,40 @@ createDom()
 const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
   .mockImplementation(() => '')
+
+const mockReset = jest
+  .spyOn(plugin, 'reset')
+  .mockImplementation(() => '')
+  
+const mockClearRevolverplay = jest
+  .spyOn(plugin, 'clearRevolverplay')
+  .mockImplementation(() => '')
+  
+const mockHide = jest
+  .spyOn(plugin, 'hide')
+  .mockImplementation(() => '')
+    
+const mockRemoveClickEvents = jest
+  .spyOn(plugin, 'removeClickEvents')
+  .mockImplementation(() => '')
   
 test('play should call correct functions', () => {
-  plugin.reset = jest.fn()
-
   plugin.play(0, true)
-  expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
+  expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
-  expect(plugin.hide).toHaveBeenCalledTimes(1)
+  expect(mockReset).toHaveBeenCalledTimes(1)
 })
 
-test('replay should call correct functions', () => {
-  plugin.reset = jest.fn()
-  
+test('replay should call correct functions', () => {    
 	plugin.replay()
   expect(svp.play).toHaveBeenCalledTimes(1)
-  expect(plugin.reset).toHaveBeenCalledTimes(1)
+  expect(mockReset).toHaveBeenCalledTimes(1)
 })
 
 test('revolverplay should call correct functions', () => {
   plugin.revolverplay()
   expect(mockTicker).toHaveBeenCalledTimes(1)
   mockTicker.mockRestore()
-})
-
-test('reset should call correct functions', () => {
-  plugin.clearRevolverplay = jest.fn()
-  plugin.removeClickEvents = jest.fn()
-  plugin.hide = jest.fn()
-  
-  plugin.reset()
-  
-  expect(plugin.removeClickEvents).toHaveBeenCalledTimes(1)
-  expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
-  expect(plugin.hide).toHaveBeenCalledTimes(1)
-  expect(plugin.endcardContainer.innerHTML).toEqual('')
 })
 
 test('click events should call correct functions', () => {
@@ -111,12 +110,6 @@ test('click events should call correct functions', () => {
   expect(plugin.clickToPause).toHaveBeenCalledTimes(1)
 })
 
-test('hide should hide endcard and show UI controlbar', () => {
-  plugin.hide()
-  expect(plugin.endcardContainer.classList).toContain('hidden')
-  expect(plugin.uiEl.classList).not.toContain('hidden')
-})
-
 test('show should show endcard, hide UI controlbar and call callback', () => {
   plugin.onLoadedCallback = jest.fn()
   plugin.showEndcard = false
@@ -124,6 +117,23 @@ test('show should show endcard, hide UI controlbar and call callback', () => {
   expect(plugin.endcardContainer.classList).not.toContain('hidden')
   expect(plugin.uiEl.classList).toContain('hidden')
   expect(plugin.onLoadedCallback).toHaveBeenCalledTimes(1)
+})
+
+test('reset should call correct functions', () => {
+  mockReset.mockRestore()
+  plugin.reset()
+  
+  expect(mockRemoveClickEvents).toHaveBeenCalledTimes(1)
+  expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
+  expect(mockHide).toHaveBeenCalledTimes(1)
+  expect(plugin.endcardContainer.innerHTML).toEqual('')
+})
+
+test('hide should hide endcard and show UI controlbar', () => {
+  mockHide.mockRestore()
+  plugin.hide()
+  expect(plugin.endcardContainer.classList).toContain('hidden')
+  expect(plugin.uiEl.classList).not.toContain('hidden')
 })
 
 // important for async functions --> waits until pending Promises are resolve

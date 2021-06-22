@@ -15,7 +15,6 @@ export interface IStroeerVideoplayer {
   replaceAndPlay: Function
   play: Function
   load: Function
-  setContentVideo: Function
 }
 
 export interface IEndcardOptions {

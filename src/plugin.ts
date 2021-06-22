@@ -94,7 +94,7 @@ class EndcardPlugin {
     const revolverplayTicker = (): void => {
       ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
         this.videoplayer.setAutoplay(true)
-        this.play(0)
+        this.play(0, true)
         this.onRevolverplayCallback()
       })
       remainingTime--
@@ -115,9 +115,9 @@ class EndcardPlugin {
     this.reset()
   }
 
-  play = (idx: number): void => {
+  play = (idx: number, autoplay: boolean): void => {
     this.clearRevolverplay()
-    this.videoplayer.replaceAndPlay(this.transformedData[idx])
+    this.videoplayer.replaceAndPlay(this.transformedData[idx], autoplay)
     this.endpoint = this.videoplayer.getEndcardUrl()
     this.reset()
   }
@@ -129,7 +129,7 @@ class EndcardPlugin {
     const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
     if (idx === null) return
     this.videoplayer.setAutoplay(false)
-    this.play(parseInt(idx))
+    this.play(parseInt(idx), false)
     this.onClickCallback(this.videoElement)
   }
 

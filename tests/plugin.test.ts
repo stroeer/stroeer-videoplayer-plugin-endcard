@@ -60,8 +60,6 @@ test('play should call correct functions', () => {
   plugin.play(0)
   expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
-  expect(svp.load).toHaveBeenCalledTimes(1)
-  expect(svp.play).toHaveBeenCalledTimes(1)
   expect(plugin.hide).toHaveBeenCalledTimes(1)
 })
 

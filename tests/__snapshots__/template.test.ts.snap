@@ -81,7 +81,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://videos.giga.de/files/1307753225/480p.jpg);"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -214,7 +214,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
           Nächstes Video
         </span>
         
-          Title of tile number one
+          Bei voller Fahrt kommt plötzlich Panik auf
         
       </p>
       
@@ -237,7 +237,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://videos.giga.de/files/1307753225/720p.jpg);"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -272,7 +272,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       >
         
           
-          Title of tile number two
+          Bei voller Fahrt kommt plötzlich Panik auf
         
       </p>
       
@@ -295,7 +295,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://videos.giga.de/files/1307753225/1080p.jpg);"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -330,7 +330,123 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       >
         
           
-          Title of tile number three
+          Bei voller Fahrt kommt plötzlich Panik auf
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+    
+  <div
+    class="plugin-endcard-tile plugin-endcard-tile-3"
+    data-idx="3"
+    data-role="plugin-endcard-tile"
+  >
+    
+        
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+    >
+      
+        
+        
+      <svg
+        class="plugin-endcard-play-icon"
+        fill="none"
+        height="29"
+        viewBox="0 0 17 22"
+        width="22"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+          
+        <path
+          d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z"
+          fill="white"
+        />
+        
+        
+      </svg>
+      
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+          Bei voller Fahrt kommt plötzlich Panik auf
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+    
+  <div
+    class="plugin-endcard-tile plugin-endcard-tile-4"
+    data-idx="4"
+    data-role="plugin-endcard-tile"
+  >
+    
+        
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+    >
+      
+        
+        
+      <svg
+        class="plugin-endcard-play-icon"
+        fill="none"
+        height="29"
+        viewBox="0 0 17 22"
+        width="22"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+          
+        <path
+          d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z"
+          fill="white"
+        />
+        
+        
+      </svg>
+      
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+          Bei voller Fahrt kommt plötzlich Panik auf
         
       </p>
       
@@ -361,7 +477,7 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://videos.giga.de/files/1307753225/480p.jpg);"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -494,7 +610,7 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
           Nächstes Video
         </span>
         
-          Title of tile number one
+          Bei voller Fahrt kommt plötzlich Panik auf
         
       </p>
       
@@ -517,7 +633,7 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://videos.giga.de/files/1307753225/720p.jpg);"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -552,7 +668,7 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       >
         
           
-          Title of tile number two
+          Bei voller Fahrt kommt plötzlich Panik auf
         
       </p>
       
@@ -575,7 +691,7 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://videos.giga.de/files/1307753225/1080p.jpg);"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -610,7 +726,123 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       >
         
           
-          Title of tile number three
+          Bei voller Fahrt kommt plötzlich Panik auf
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+    
+  <div
+    class="plugin-endcard-tile plugin-endcard-tile-3"
+    data-idx="3"
+    data-role="plugin-endcard-tile"
+  >
+    
+        
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+    >
+      
+        
+        
+      <svg
+        class="plugin-endcard-play-icon"
+        fill="none"
+        height="29"
+        viewBox="0 0 17 22"
+        width="22"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+          
+        <path
+          d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z"
+          fill="white"
+        />
+        
+        
+      </svg>
+      
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+          Bei voller Fahrt kommt plötzlich Panik auf
+        
+      </p>
+      
+      
+    </div>
+    
+    
+  </div>
+  
+
+  
+    
+  <div
+    class="plugin-endcard-tile plugin-endcard-tile-4"
+    data-idx="4"
+    data-role="plugin-endcard-tile"
+  >
+    
+        
+      
+    <div
+      class="plugin-endcard-thumbnail"
+      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
+    />
+    
+      
+    <div
+      class="plugin-endcard-overlay"
+    >
+      
+        
+        
+      <svg
+        class="plugin-endcard-play-icon"
+        fill="none"
+        height="29"
+        viewBox="0 0 17 22"
+        width="22"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        
+          
+        <path
+          d="M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z"
+          fill="white"
+        />
+        
+        
+      </svg>
+      
+        
+        
+      <p
+        class="plugin-endcard-title"
+      >
+        
+          
+          Bei voller Fahrt kommt plötzlich Panik auf
         
       </p>
       

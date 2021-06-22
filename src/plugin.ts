@@ -139,7 +139,6 @@ class EndcardPlugin {
       .then((data) => {
         this.transformedData = transformData(data, this.dataKeyMap)
         logger.log(this.transformedData)
-        console.log(this.transformedData)
 
         this.endcardContainer.innerHTML = ''
         for (let i: number = 0; i < 5; i++) {

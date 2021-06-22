@@ -23,6 +23,7 @@ class StroeerVideoplayer {
 	play = jest.fn()
 	load = jest.fn()
 	replaceAndPlay = jest.fn()
+  getPosterImage = jest.fn()
 }
 
 const svp = new StroeerVideoplayer()

@@ -22,7 +22,7 @@ class StroeerVideoplayer {
 
 	play = jest.fn()
 	load = jest.fn()
-	setSrc = jest.fn()
+	replaceAndPlay = jest.fn()
 }
 
 const svp = new StroeerVideoplayer()
@@ -58,7 +58,7 @@ test('play should call correct functions', () => {
 
   plugin.play(0)
   expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
-  expect(svp.setSrc).toHaveBeenCalledTimes(1)
+  expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
   expect(svp.load).toHaveBeenCalledTimes(1)
   expect(svp.play).toHaveBeenCalledTimes(1)
   expect(plugin.hide).toHaveBeenCalledTimes(1)

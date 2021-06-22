@@ -58,7 +58,7 @@ class EndcardPlugin {
     const revolverplayTicker = (): void => {
       ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
         this.play(0)
-        this.onRevolverplayCallback(this.transformedData[0])
+        this.onRevolverplayCallback()
       })
       remainingTime--
     }
@@ -82,9 +82,7 @@ class EndcardPlugin {
   play = (idx: number): void => {
     this.clearRevolverplay()
     this.endpoint = this.transformedData[idx].endpoint
-    this.videoplayer.setSrc(this.transformedData[idx].sources)
-    this.videoplayer.load()
-    this.videoplayer.play()
+    this.videoplayer.replaceAndPlay(this.transformedData[idx])
     this.hide()
   }
 
@@ -100,9 +98,8 @@ class EndcardPlugin {
         const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
         const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
         if (idx === null) return
-        const idxNumber = parseInt(idx)
-        this.play(idxNumber)
-        this.onClickCallback(this.transformedData[idxNumber])
+        this.play(parseInt(idx))
+        this.onClickCallback()
       })
     })
 
@@ -142,12 +139,12 @@ class EndcardPlugin {
       .then((data) => {
         this.transformedData = transformData(data, this.dataKeyMap)
         logger.log(this.transformedData)
+        console.log(this.transformedData)
 
         this.endcardContainer.innerHTML = ''
         for (let i: number = 0; i < 5; i++) {
           const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
-          // TODO: maybe there will be a getPosterImage function in videplayer in future
-          const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'))
+          const replayTemplate = getTileReplay(this.videoplayer.getPosterImage())
           if (i === 3) {
             this.endcardContainer.innerHTML += replayTemplate
           }

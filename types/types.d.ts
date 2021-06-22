@@ -1,5 +1,5 @@
 export interface IData {
-  image: string
+  poster: string
   title: string
   sources: object[]
   endpoint: string
@@ -9,7 +9,8 @@ export interface IData {
 export interface IStroeerVideoplayer {
   getUIEl: Function
   getVideoEl: Function
-  setSrc: Function
+  getPosterImage: () => string
+  replaceAndPlay: Function
   play: Function
   load: Function
 }

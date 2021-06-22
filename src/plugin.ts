@@ -10,7 +10,6 @@ class EndcardPlugin {
   videoElement: HTMLVideoElement
   isDesktop: boolean
   endcardContainer: HTMLDivElement
-  endpoint: string | null
   onLoadedCallback: Function
   onClickCallback: Function
   onRevolverplayCallback: Function
@@ -26,7 +25,6 @@ class EndcardPlugin {
     this.videoplayer = stroeervideoplayer
     this.videoElement = stroeervideoplayer.getVideoEl()
 
-    this.endpoint = this.videoElement.getAttribute('data-endcard-url')
     this.dataKeyMap = opts.dataKeyMap !== undefined ? opts.dataKeyMap : noop
     this.transformedData = []
     this.showEndcard = opts.showEndcard !== undefined ? opts.showEndcard : true
@@ -49,6 +47,15 @@ class EndcardPlugin {
     return this
   }
 
+  getEndcardUrl = (): string => {
+    const url = this.videoElement.dataset.endcardUrl
+    return url !== undefined ? url : ''
+  }
+
+  setEndcardUrl = (url: string): void => {
+    this.videoElement.dataset.endcardUrl = url
+  }
+
   revolverplay = (): void => {
     if (this.revolverplayTime === 0 || !this.showEndcard) return
 
@@ -57,7 +64,6 @@ class EndcardPlugin {
     let remainingTime = this.revolverplayTime
     const revolverplayTicker = (): void => {
       ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
-        this.videoplayer.setAutoplay(true)
         this.play(0, true)
         this.onRevolverplayCallback()
       })
@@ -82,8 +88,8 @@ class EndcardPlugin {
 
   play = (idx: number, autoplay: boolean): void => {
     this.clearRevolverplay()
+    this.setEndcardUrl(this.transformedData[idx].endpoint)
     this.videoplayer.replaceAndPlay(this.transformedData[idx], autoplay)
-    this.endpoint = this.videoplayer.getEndcardUrl()
     this.hide()
   }
 
@@ -130,13 +136,14 @@ class EndcardPlugin {
   }
 
   render = (): void => {
-    if (this.endpoint === null || !this.showEndcard) {
+    const endpoint = this.getEndcardUrl()
+    if (endpoint === null || !this.showEndcard) {
       this.showEndcard = false
       this.renderFallback()
       return
     }
 
-    fetchAPI<object>(this.endpoint)
+    fetchAPI<object>(endpoint)
       .then((data) => {
         this.transformedData = transformData(data, this.dataKeyMap)
         logger.log(this.transformedData)

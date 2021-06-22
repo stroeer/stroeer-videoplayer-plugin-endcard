@@ -24,8 +24,6 @@ class StroeerVideoplayer {
   load = jest.fn()
   replaceAndPlay = jest.fn()
   getPosterImage = jest.fn()
-  getEndcardUrl = jest.fn()
-  setAutoplay = jest.fn()
 }
 
 const svp = new StroeerVideoplayer()
@@ -55,12 +53,19 @@ const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
   .mockImplementation(() => '')
 
+test('get and set endcard url work correctly', () => {
+  plugin.setEndcardUrl('www.example.de')
+  expect(plugin.getEndcardUrl()).toEqual('www.example.de')
+})
+
 test('play should call correct functions', () => {
   plugin.clearRevolverplay = jest.fn()
   plugin.hide = jest.fn()
+  plugin.setEndcardUrl = jest.fn()
 
   plugin.play(0, true)
   expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
+  expect(plugin.setEndcardUrl).toHaveBeenCalledTimes(1)
   expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
   expect(plugin.hide).toHaveBeenCalledTimes(1)
 })

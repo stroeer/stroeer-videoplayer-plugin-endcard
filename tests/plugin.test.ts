@@ -104,7 +104,7 @@ test('click events should call correct functions', () => {
 	
 	expect(plugin.replay).toHaveBeenCalledTimes(1)
   expect(plugin.play).toHaveBeenCalledTimes(1)
-  expect(plugin.onClickCallback).toHaveBeenCalledTimes(1)
+  expect(plugin.onClickCallback).toHaveBeenCalledTimes(2)
   expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
   expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
 })

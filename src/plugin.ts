@@ -115,7 +115,7 @@ class EndcardPlugin {
         e.preventDefault()
         e.stopPropagation()
         this.replay()
-        // TODO: do we need this.onClickCallback() here?
+        this.onClickCallback()
       })
     }
 

@@ -24,8 +24,6 @@ class StroeerVideoplayer {
   load = jest.fn()
   replaceAndPlay = jest.fn()
   getPosterImage = jest.fn()
-  getEndcardUrl = jest.fn()
-  setAutoplay = jest.fn()
 }
 
 const svp = new StroeerVideoplayer()
@@ -78,6 +76,10 @@ const mockPlay = jest
 const mockRemoveClickEvents = jest
   .spyOn(plugin, 'removeClickEvents')
   .mockImplementation(() => '')
+  
+const mockSetEndcardUrl = jest
+  .spyOn(plugin, 'setEndcardUrl')
+  .mockImplementation(() => '')
 
 test('clickToReplay should call correct functions', () => {
   const target = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
@@ -110,6 +112,7 @@ test('clickToPlay should call correct functions', () => {
 test('play should call correct functions', () => {
   mockPlay.mockRestore() 
   plugin.play(0, true)
+  expect(mockSetEndcardUrl).toHaveBeenCalledTimes(1)
   expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
   expect(mockReset).toHaveBeenCalledTimes(1)
@@ -126,6 +129,12 @@ test('revolverplay should call correct functions', () => {
   plugin.revolverplay()
   expect(mockTicker).toHaveBeenCalledTimes(1)
   mockTicker.mockRestore()
+})
+
+test('get and set endcard url work correctly', () => {
+  mockSetEndcardUrl.mockRestore()
+  plugin.setEndcardUrl('www.example.de')
+  expect(plugin.getEndcardUrl()).toEqual('www.example.de')
 })
 
 test('click events should call correct functions', () => {

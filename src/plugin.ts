@@ -86,7 +86,7 @@ class EndcardPlugin {
   }
 
   reset = (): void => {
-    this.clearRevolverplay()
+    this.clearRevolverplayTimer()
     this.removeClickEvents()
     this.endcardContainer.innerHTML = ''
     this.hide()
@@ -110,7 +110,7 @@ class EndcardPlugin {
     this.intervalTicker = setInterval(revolverplayTicker, 1000)
   }
 
-  clearRevolverplay = (): void => {
+  clearRevolverplayTimer = (): void => {
     if (this.intervalTicker !== null) {
       clearInterval(this.intervalTicker)
     }
@@ -122,7 +122,7 @@ class EndcardPlugin {
   }
 
   play = (idx: number, autoplay: boolean): void => {
-    this.clearRevolverplay()
+    this.clearRevolverplayTimer()
     this.setEndcardUrl(this.transformedData[idx].endpoint)
     this.videoplayer.replaceAndPlay(this.transformedData[idx], autoplay)
     this.reset()
@@ -145,10 +145,20 @@ class EndcardPlugin {
   }
 
   clickToPause = (e: Event): void => {
+    const circles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-revolverplay-icon"] circle')
+    const target = e.currentTarget as HTMLElement
+
     e.preventDefault()
     e.stopPropagation()
     this.onRevolverplayPauseCallback(this.videoElement)
-    this.clearRevolverplay()
+    this.clearRevolverplayTimer()
+
+    if (target !== null) {
+      target.remove()
+    }
+    circles.forEach((circle) => {
+      circle.remove()
+    })
   }
 
   addClickEvents = (): void => {

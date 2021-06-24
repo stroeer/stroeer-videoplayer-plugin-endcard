@@ -93,6 +93,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
           
       <svg
         class="plugin-endcard-revolverplay-icon"
+        data-role="plugin-endcard-revolverplay-icon"
         fill="none"
         height="75"
         width="103"
@@ -114,6 +115,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
         </g>
         
             
+              
         <circle
           class="plugin-endcard-progress-meter"
           cx="48"
@@ -124,7 +126,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
           stroke-width="2.667"
         />
         
-            
+              
         <circle
           class="plugin-endcard-progress-value"
           cx="48"
@@ -139,6 +141,7 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
           transform="rotate(-90 48 39)"
         />
         
+            
             
         <defs>
           
@@ -489,6 +492,7 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
           
       <svg
         class="plugin-endcard-revolverplay-icon"
+        data-role="plugin-endcard-revolverplay-icon"
         fill="none"
         height="75"
         width="103"
@@ -510,31 +514,6 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
         </g>
         
             
-        <circle
-          class="plugin-endcard-progress-meter"
-          cx="48"
-          cy="39"
-          fill="none"
-          r="30.667"
-          stroke="#fff"
-          stroke-width="2.667"
-        />
-        
-            
-        <circle
-          class="plugin-endcard-progress-value"
-          cx="48"
-          cy="39"
-          data-role="plugin-endcard-progress-value"
-          fill="none"
-          r="30.667"
-          stroke="#fff"
-          stroke-dasharray="192.686"
-          stroke-dashoffset="192.686"
-          stroke-width="2.667"
-          transform="rotate(-90 48 39)"
-        />
-        
             
         <defs>
           

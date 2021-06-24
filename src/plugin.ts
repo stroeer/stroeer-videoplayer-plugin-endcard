@@ -11,7 +11,8 @@ class EndcardPlugin {
   isDesktop: boolean
   endcardContainer: HTMLDivElement
   onLoadedCallback: Function
-  onClickCallback: Function
+  onClickToPlayCallback: Function
+  onClickToReplayCallback: Function
   onRevolverplayCallback: Function
   onRevolverplayPauseCallback: Function
   dataKeyMap: object
@@ -34,7 +35,8 @@ class EndcardPlugin {
     this.isDesktop = window.screen.width > 768
 
     this.onLoadedCallback = opts.onLoadedCallback !== undefined ? opts.onLoadedCallback : noop
-    this.onClickCallback = opts.onClickCallback !== undefined ? opts.onClickCallback : noop
+    this.onClickToPlayCallback = opts.onClickToPlayCallback !== undefined ? opts.onClickToPlayCallback : noop
+    this.onClickToReplayCallback = opts.onClickToReplayCallback !== undefined ? opts.onClickToReplayCallback : noop
     this.onRevolverplayCallback = opts.onRevolverplayCallback !== undefined ? opts.onRevolverplayCallback : noop
     this.onRevolverplayPauseCallback = opts.onRevolverplayPauseCallback !== undefined ? opts.onRevolverplayPauseCallback : noop
 
@@ -106,7 +108,7 @@ class EndcardPlugin {
         const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
         if (idx === null) return
         this.play(parseInt(idx), false)
-        this.onClickCallback()
+        this.onClickToPlayCallback()
       })
     })
 
@@ -115,7 +117,7 @@ class EndcardPlugin {
         e.preventDefault()
         e.stopPropagation()
         this.replay()
-        this.onClickCallback()
+        this.onClickToReplayCallback()
       })
     }
 

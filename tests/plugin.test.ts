@@ -93,7 +93,8 @@ test('click events should call correct functions', () => {
 	plugin.replay = jest.fn()
   plugin.play = jest.fn()
   plugin.clearRevolverplay = jest.fn()
-  plugin.onClickCallback = jest.fn()
+  plugin.onClickToPlayCallback = jest.fn()
+  plugin.onClickToReplayCallback = jest.fn()
   plugin.onRevolverplayPauseCallback = jest.fn()
   plugin.addClickEvents()
   tiles.forEach(tile => {
@@ -104,7 +105,8 @@ test('click events should call correct functions', () => {
 	
 	expect(plugin.replay).toHaveBeenCalledTimes(1)
   expect(plugin.play).toHaveBeenCalledTimes(1)
-  expect(plugin.onClickCallback).toHaveBeenCalledTimes(2)
+  expect(plugin.onClickToPlayCallback).toHaveBeenCalledTimes(2)
+  expect(plugin.onClickToReplayCallback).toHaveBeenCalledTimes(1)
   expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
   expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
 })

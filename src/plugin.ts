@@ -58,35 +58,6 @@ class EndcardPlugin {
     this.videoElement.dataset.endcardUrl = url
   }
 
-  render = (): void => {
-    const endpoint = this.getEndcardUrl()
-    if (endpoint === null || !this.showEndcard) {
-      this.showEndcard = false
-      this.renderFallback()
-      return
-    }
-
-    fetchAPI<object>(endpoint)
-      .then((data) => {
-        this.transformedData = transformData(data, this.dataKeyMap)
-        logger.log(this.transformedData)
-
-        for (let i: number = 0; i < 5; i++) {
-          const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
-          const replayTemplate = getTileReplay(this.videoplayer.getPosterImage())
-          if (i === 3) {
-            this.endcardContainer.innerHTML += replayTemplate
-          }
-          this.endcardContainer.innerHTML += tileTemplate
-        }
-      })
-      .catch(err => {
-        logger.log('Something went wrong with fetching api!', err)
-        this.showEndcard = false
-        this.renderFallback()
-      })
-  }
-
   reset = (): void => {
     this.clearRevolverplay()
     this.removeClickEvents()
@@ -193,6 +164,35 @@ class EndcardPlugin {
   renderFallback = (): void => {
     const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
     this.endcardContainer.innerHTML += replayTemplate
+  }
+
+  render = (): void => {
+    const endpoint = this.getEndcardUrl()
+    if (endpoint === null || !this.showEndcard) {
+      this.showEndcard = false
+      this.renderFallback()
+      return
+    }
+
+    fetchAPI<object>(endpoint)
+      .then((data) => {
+        this.transformedData = transformData(data, this.dataKeyMap)
+        logger.log(this.transformedData)
+
+        for (let i: number = 0; i < 5; i++) {
+          const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
+          const replayTemplate = getTileReplay(this.videoplayer.getPosterImage())
+          if (i === 3) {
+            this.endcardContainer.innerHTML += replayTemplate
+          }
+          this.endcardContainer.innerHTML += tileTemplate
+        }
+      })
+      .catch(err => {
+        logger.log('Something went wrong with fetching api!', err)
+        this.showEndcard = false
+        this.renderFallback()
+      })
   }
 
   hide = (): void => {

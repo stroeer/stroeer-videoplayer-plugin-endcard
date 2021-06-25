@@ -82,11 +82,13 @@ const mockSetEndcardUrl = jest
   .mockImplementation(() => '')
 
 test('clickToReplay should call correct functions', () => {
+  plugin.onClickToReplayCallback = jest.fn()
   const target = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
   const e = new Event('click')
   Object.defineProperty(e, 'target', {value: target, enumerable: true});
   plugin.clickToReplay(e)
   expect(mockReplay).toHaveBeenCalledTimes(1)
+  expect(plugin.onClickToReplayCallback).toHaveBeenCalledTimes(1)
 })
 
 test('clickToPause should call correct functions', () => {
@@ -100,13 +102,13 @@ test('clickToPause should call correct functions', () => {
 })
 
 test('clickToPlay should call correct functions', () => {
-  plugin.onClickCallback = jest.fn()
+  plugin.onClickToPlayCallback = jest.fn()
   const target = document.querySelector('[data-role="plugin-endcard-tile"]') as HTMLElement
   const e = new Event('click')
   Object.defineProperty(e, 'target', {value: target, enumerable: true});
   plugin.clickToPlay(e)
   expect(mockPlay).toHaveBeenCalledTimes(1)
-  expect(plugin.onClickCallback).toHaveBeenCalledTimes(1)
+  expect(plugin.onClickToPlayCallback).toHaveBeenCalledTimes(1)
 })
   
 test('play should call correct functions', () => {

@@ -99,15 +99,16 @@
 				onLoadedCallback: () => {
 				 console.log('OnLoadedCallback triggered')
 			 	},
-			 	onClickCallback: (videoData) => {
+			 	onClickToPlayCallback: () => {
 					videoData = video.dataset.meta
-					console.log('OnClickCallback triggered', videoData)
+					console.log('onClickToPlayCallback triggered', videoData)
 				},
-				onRevolverplayCallback: (videoData) => {
-				 console.log('OnRevolverplayCallback triggered', videoData)
-				 if (videoData) {
-					 // do tracking with videoData
-				 }
+				onClickToReplayCallback: () => {
+					videoData = video.dataset.meta
+					console.log('onClickToReplayCallback triggered', videoData)
+				},
+				onRevolverplayCallback: () => {
+				 console.log('OnRevolverplayCallback triggered')
 			 	},
 			 	onRevolverplayPauseCallback: () => {
 					console.log('OnRevolverplayPauseCallback triggered')

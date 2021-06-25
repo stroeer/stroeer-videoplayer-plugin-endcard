@@ -10,9 +10,9 @@ class EndcardPlugin {
   videoElement: HTMLVideoElement
   isDesktop: boolean
   endcardContainer: HTMLDivElement
-  endpoint: string | null
   onLoadedCallback: Function
-  onClickCallback: Function
+  onClickToPlayCallback: Function
+  onClickToReplayCallback: Function
   onRevolverplayCallback: Function
   onRevolverplayPauseCallback: Function
   dataKeyMap: object
@@ -26,7 +26,6 @@ class EndcardPlugin {
     this.videoplayer = stroeervideoplayer
     this.videoElement = stroeervideoplayer.getVideoEl()
 
-    this.endpoint = this.videoElement.getAttribute('data-endcard-url')
     this.dataKeyMap = opts.dataKeyMap !== undefined ? opts.dataKeyMap : noop
     this.transformedData = []
     this.showEndcard = opts.showEndcard !== undefined ? opts.showEndcard : true
@@ -36,7 +35,8 @@ class EndcardPlugin {
     this.isDesktop = window.screen.width > 768
 
     this.onLoadedCallback = opts.onLoadedCallback !== undefined ? opts.onLoadedCallback : noop
-    this.onClickCallback = opts.onClickCallback !== undefined ? opts.onClickCallback : noop
+    this.onClickToPlayCallback = opts.onClickToPlayCallback !== undefined ? opts.onClickToPlayCallback : noop
+    this.onClickToReplayCallback = opts.onClickToReplayCallback !== undefined ? opts.onClickToReplayCallback : noop
     this.onRevolverplayCallback = opts.onRevolverplayCallback !== undefined ? opts.onRevolverplayCallback : noop
     this.onRevolverplayPauseCallback = opts.onRevolverplayPauseCallback !== undefined ? opts.onRevolverplayPauseCallback : noop
 
@@ -49,6 +49,15 @@ class EndcardPlugin {
     return this
   }
 
+  getEndcardUrl = (): string => {
+    const url = this.videoElement.dataset.endcardUrl
+    return url !== undefined ? url : ''
+  }
+
+  setEndcardUrl = (url: string): void => {
+    this.videoElement.dataset.endcardUrl = url
+  }
+
   revolverplay = (): void => {
     if (this.revolverplayTime === 0 || !this.showEndcard) return
 
@@ -57,7 +66,8 @@ class EndcardPlugin {
     let remainingTime = this.revolverplayTime
     const revolverplayTicker = (): void => {
       ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
-        this.play(0)
+        this.play(0, true)
+        this.onRevolverplayCallback()
       })
       remainingTime--
     }
@@ -78,12 +88,10 @@ class EndcardPlugin {
     this.hide()
   }
 
-  play = (idx: number): void => {
+  play = (idx: number, autoplay: boolean): void => {
     this.clearRevolverplay()
-    this.endpoint = this.transformedData[idx].endpoint
-    this.videoplayer.setSrc(this.transformedData[idx].sources)
-    this.videoplayer.load()
-    this.videoplayer.play()
+    this.setEndcardUrl(this.transformedData[idx].endpoint)
+    this.videoplayer.replaceAndPlay(this.transformedData[idx], autoplay)
     this.hide()
   }
 
@@ -99,8 +107,8 @@ class EndcardPlugin {
         const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
         const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
         if (idx === null) return
-        this.play(parseInt(idx))
-        this.onClickCallback(this.videoElement)
+        this.play(parseInt(idx), false)
+        this.onClickToPlayCallback()
       })
     })
 
@@ -109,6 +117,7 @@ class EndcardPlugin {
         e.preventDefault()
         e.stopPropagation()
         this.replay()
+        this.onClickToReplayCallback()
       })
     }
 
@@ -116,7 +125,7 @@ class EndcardPlugin {
       pauseButton.addEventListener('click', (e) => {
         e.preventDefault()
         e.stopPropagation()
-        this.onRevolverplayPauseCallback(this.videoElement)
+        this.onRevolverplayPauseCallback()
         this.clearRevolverplay()
       })
     }
@@ -129,13 +138,14 @@ class EndcardPlugin {
   }
 
   render = (): void => {
-    if (this.endpoint === null || !this.showEndcard) {
+    const endpoint = this.getEndcardUrl()
+    if (endpoint === null || !this.showEndcard) {
       this.showEndcard = false
       this.renderFallback()
       return
     }
 
-    fetchAPI<object>(this.endpoint)
+    fetchAPI<object>(endpoint)
       .then((data) => {
         this.transformedData = transformData(data, this.dataKeyMap)
         logger.log(this.transformedData)
@@ -143,8 +153,7 @@ class EndcardPlugin {
         this.endcardContainer.innerHTML = ''
         for (let i: number = 0; i < 5; i++) {
           const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
-          // TODO: maybe there will be a getPosterImage function in videplayer in future
-          const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'))
+          const replayTemplate = getTileReplay(this.videoplayer.getPosterImage())
           if (i === 3) {
             this.endcardContainer.innerHTML += replayTemplate
           }
@@ -174,7 +183,7 @@ class EndcardPlugin {
       this.uiEl.classList.add('hidden')
     }
     this.endcardContainer.classList.remove('hidden')
-    this.onLoadedCallback(this.videoElement)
+    this.onLoadedCallback()
   }
 }
 

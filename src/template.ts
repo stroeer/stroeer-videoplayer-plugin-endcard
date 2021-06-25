@@ -6,7 +6,7 @@ const getTile = (index: number, obj: IData, revolverplayTime: number): string =>
       ${index === 0 && revolverplayTime !== 0
         ? '<button class="plugin-endcard-button-pause" data-role="plugin-endcard-pause">Anhalten</button>'
         : ''}  
-      <div class="plugin-endcard-thumbnail" style="background-image: url(${obj.image});"></div>
+      <div class="plugin-endcard-thumbnail" style="background-image: url(${obj.poster});"></div>
       <div class="plugin-endcard-overlay">
         ${index === 0
         ? `

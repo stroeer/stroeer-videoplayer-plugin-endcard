@@ -8,21 +8,22 @@ const uiEl = document.createElement('div')
 uiEl.classList.add('stroeer-videoplayer-ui')
 
 class StroeerVideoplayer {
-	constructor() {
-		return this
-	}
+  constructor() {
+    return this
+  }
 
-	getVideoEl = (): HTMLVideoElement => {
-		return videoEl
-	}
+  getVideoEl = (): HTMLVideoElement => {
+    return videoEl
+  }
 
-	getUIEl = (): HTMLElement => {
+  getUIEl = (): HTMLElement => {
     return uiEl
   }
 
-	play = jest.fn()
-	load = jest.fn()
-	setSrc = jest.fn()
+  play = jest.fn()
+  load = jest.fn()
+  replaceAndPlay = jest.fn()
+  getPosterImage = jest.fn()
 }
 
 const svp = new StroeerVideoplayer()
@@ -52,15 +53,20 @@ const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
   .mockImplementation(() => '')
 
+test('get and set endcard url work correctly', () => {
+  plugin.setEndcardUrl('www.example.de')
+  expect(plugin.getEndcardUrl()).toEqual('www.example.de')
+})
+
 test('play should call correct functions', () => {
   plugin.clearRevolverplay = jest.fn()
   plugin.hide = jest.fn()
+  plugin.setEndcardUrl = jest.fn()
 
-  plugin.play(0)
+  plugin.play(0, true)
   expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
-  expect(svp.setSrc).toHaveBeenCalledTimes(1)
-  expect(svp.load).toHaveBeenCalledTimes(1)
-  expect(svp.play).toHaveBeenCalledTimes(1)
+  expect(plugin.setEndcardUrl).toHaveBeenCalledTimes(1)
+  expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
   expect(plugin.hide).toHaveBeenCalledTimes(1)
 })
 
@@ -87,7 +93,8 @@ test('click events should call correct functions', () => {
 	plugin.replay = jest.fn()
   plugin.play = jest.fn()
   plugin.clearRevolverplay = jest.fn()
-  plugin.onClickCallback = jest.fn()
+  plugin.onClickToPlayCallback = jest.fn()
+  plugin.onClickToReplayCallback = jest.fn()
   plugin.onRevolverplayPauseCallback = jest.fn()
   plugin.addClickEvents()
   tiles.forEach(tile => {
@@ -98,7 +105,8 @@ test('click events should call correct functions', () => {
 	
 	expect(plugin.replay).toHaveBeenCalledTimes(1)
   expect(plugin.play).toHaveBeenCalledTimes(1)
-  expect(plugin.onClickCallback).toHaveBeenCalledTimes(1)
+  expect(plugin.onClickToPlayCallback).toHaveBeenCalledTimes(1)
+  expect(plugin.onClickToReplayCallback).toHaveBeenCalledTimes(1)
   expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
   expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
 })

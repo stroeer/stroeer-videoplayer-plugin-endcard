@@ -1,5 +1,5 @@
 export interface IData {
-  image: string
+  poster: string
   title: string
   sources: object[]
   endpoint: string
@@ -9,14 +9,16 @@ export interface IData {
 export interface IStroeerVideoplayer {
   getUIEl: Function
   getVideoEl: Function
-  setSrc: Function
+  getPosterImage: () => string
+  replaceAndPlay: Function
   play: Function
   load: Function
 }
 
 export interface IEndcardOptions {
   onLoadedCallback?: Function
-  onClickCallback?: Function
+  onClickToPlayCallback?: Function
+  onClickToReplayCallback?: Function
   onRevolverplayCallback?: Function
   onRevolverplayPauseCallback?: Function
   dataKeyMap?: Object

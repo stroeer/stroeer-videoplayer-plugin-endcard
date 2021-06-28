@@ -20,6 +20,7 @@ class StroeerVideoplayer {
     return uiEl
   }
 
+  getRootEl = jest.fn()
   play = jest.fn()
   load = jest.fn()
   replaceAndPlay = jest.fn()

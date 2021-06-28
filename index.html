@@ -52,6 +52,7 @@
 			StroeerVideoplayer.registerPlugin(StroeerVideoplayerEndcardPlugin)
 
 			let videoData
+			let playRound = 0
 			const video = document.getElementById("myvideo");
 			video.addEventListener('error', function() {
 				console.log('error', this.error.code, this.error.message)
@@ -73,7 +74,13 @@
 			})
 			video.addEventListener('contentVideoStart', function() {
 				videoData = video.dataset.meta
+				playRound++
 				console.log('contentVideoStart', videoData) 
+				console.log('playRound: ', playRound)
+				if (playRound === 3) {
+					console.log('DEINIT')
+					myvideoplayer.deinitPlugin('Endcard')
+				}
 			})
 			video.addEventListener('contentVideoEnded', function() {
 				console.log('contentVideoEnded')

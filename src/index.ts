@@ -29,11 +29,12 @@ const plugin = {
   },
   deinit: (stroeervideoplayer: IStroeerVideoplayer) => {
     const videoEl = stroeervideoplayer.getVideoEl()
-    const endcardContainer = videoEl.getRootEl().querySelector('.plugin-endcard-container')
+    const endcardContainer = stroeervideoplayer.getRootEl().querySelector('.plugin-endcard-container')
 
     if (endcardContainer !== undefined) {
       videoEl.removeEventListener('contentVideoFirstQuartile', onVideoElFirstQuartile)
       videoEl.removeEventListener('contentVideoEnded', onVideoElEnd)
+      endcardPlugin.reset()
       endcardContainer.remove()
     }
   },

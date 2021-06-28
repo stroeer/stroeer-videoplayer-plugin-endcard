@@ -20,30 +20,10 @@
         "type": "video/mp4"
       }
     ],
-    "endpoint": "http://localhost:5000/1",
-    "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
-  },
-  {
-    "sources": [
-      {
-        "quality": "1080",
-        "label": "1080p",
-        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-1080p.mp4",
-        "type": "video/mp4"
-      },
-      {
-        "quality": "720",
-        "label": "720p",
-        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-720p.mp4",
-        "type": "video/mp4"
-      },
-      {
-        "quality": "240",
-        "label": "240p",
-        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-240p.mp4",
-        "type": "video/mp4"
-      }
+    "playlists": [
+      "https://lx56.spieletips.de/1093076903_v4/playlist.m3u8",
+      "https://vid-cdn60.stroeermb.de/1093076903_v4/playlist.m3u8",
+      "https://vid-cdn61.stroeermb.de/1093076903_v4/playlist.m3u8"
     ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
@@ -70,30 +50,10 @@
         "type": "video/mp4"
       }
     ],
-    "endpoint": "http://localhost:5000/1",
-    "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
-  },
-  {
-    "sources": [
-      {
-        "quality": "1080",
-        "label": "1080p",
-        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-1080p.mp4",
-        "type": "video/mp4"
-      },
-      {
-        "quality": "720",
-        "label": "720p",
-        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-720p.mp4",
-        "type": "video/mp4"
-      },
-      {
-        "quality": "240",
-        "label": "240p",
-        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-240p.mp4",
-        "type": "video/mp4"
-      }
+    "playlists": [
+      "https://lx54.spieletips.de/1295467186_v4/playlist.m3u8",
+      "https://vid-cdn60.stroeermb.de/1295467186_v4/playlist.m3u8",
+      "https://vid-cdn61.stroeermb.de/1295467186_v4/playlist.m3u8"
     ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
@@ -119,6 +79,71 @@
         "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-240p.mp4",
         "type": "video/mp4"
       }
+    ],
+    "playlists": [
+      "http://lx55.spieletips.de/536504839_v4/playlist.m3u8",
+      "http://vid-cdn60.stroeermb.de/536504839_v4/playlist.m3u8",
+      "http://vid-cdn61.stroeermb.de/536504839_v4/playlist.m3u8"
+    ],
+    "endpoint": "http://localhost:5000/1",
+    "title": "Bei voller Fahrt kommt plötzlich Panik auf",
+    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+  },
+  {
+    "sources": [
+      {
+        "quality": "1080",
+        "label": "1080p",
+        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-1080p.mp4",
+        "type": "video/mp4"
+      },
+      {
+        "quality": "720",
+        "label": "720p",
+        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-720p.mp4",
+        "type": "video/mp4"
+      },
+      {
+        "quality": "240",
+        "label": "240p",
+        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-240p.mp4",
+        "type": "video/mp4"
+      }
+    ],
+    "playlists": [
+      "https://lx56.spieletips.de/1093076903_v4/playlist.m3u8",
+      "https://vid-cdn60.stroeermb.de/1093076903_v4/playlist.m3u8",
+      "https://vid-cdn61.stroeermb.de/1093076903_v4/playlist.m3u8"
+    ],
+    "endpoint": "http://localhost:5000/1",
+    "title": "Bei voller Fahrt kommt plötzlich Panik auf",
+    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+  },
+  {
+    "sources": [
+      {
+        "quality": "1080",
+        "label": "1080p",
+        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-1080p.mp4",
+        "type": "video/mp4"
+      },
+      {
+        "quality": "720",
+        "label": "720p",
+        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-720p.mp4",
+        "type": "video/mp4"
+      },
+      {
+        "quality": "240",
+        "label": "240p",
+        "src": "https://dlc2.t-online.de/s/2021/05/07/20027894-240p.mp4",
+        "type": "video/mp4"
+      }
+    ],
+    "playlists": [
+      "http://lx55.spieletips.de/536504839_v4/playlist.m3u8",
+      "http://vid-cdn60.stroeermb.de/536504839_v4/playlist.m3u8",
+      "http://vid-cdn61.stroeermb.de/536504839_v4/playlist.m3u8"
     ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",

@@ -1,9 +1,9 @@
 export interface IData {
   poster: string
   title: string
-  sources: object[]
+  sources?: object[]
+  playlists?: []
   endpoint: string
-  // add more
 }
 
 export interface IStroeerVideoplayer {

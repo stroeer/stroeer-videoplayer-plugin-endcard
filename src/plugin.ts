@@ -11,7 +11,8 @@ class EndcardPlugin {
   isDesktop: boolean
   endcardContainer: HTMLDivElement
   onLoadedCallback: Function
-  onClickCallback: Function
+  onClickToPlayCallback: Function
+  onClickToReplayCallback: Function
   onRevolverplayCallback: Function
   onRevolverplayPauseCallback: Function
   dataKeyMap: object
@@ -34,7 +35,8 @@ class EndcardPlugin {
     this.isDesktop = window.screen.width > 768
 
     this.onLoadedCallback = opts.onLoadedCallback !== undefined ? opts.onLoadedCallback : noop
-    this.onClickCallback = opts.onClickCallback !== undefined ? opts.onClickCallback : noop
+    this.onClickToPlayCallback = opts.onClickToPlayCallback !== undefined ? opts.onClickToPlayCallback : noop
+    this.onClickToReplayCallback = opts.onClickToReplayCallback !== undefined ? opts.onClickToReplayCallback : noop
     this.onRevolverplayCallback = opts.onRevolverplayCallback !== undefined ? opts.onRevolverplayCallback : noop
     this.onRevolverplayPauseCallback = opts.onRevolverplayPauseCallback !== undefined ? opts.onRevolverplayPauseCallback : noop
 
@@ -54,35 +56,6 @@ class EndcardPlugin {
 
   setEndcardUrl = (url: string): void => {
     this.videoElement.dataset.endcardUrl = url
-  }
-
-  render = (): void => {
-    const endpoint = this.getEndcardUrl()
-    if (endpoint === null || !this.showEndcard) {
-      this.showEndcard = false
-      this.renderFallback()
-      return
-    }
-
-    fetchAPI<object>(endpoint)
-      .then((data) => {
-        this.transformedData = transformData(data, this.dataKeyMap)
-        logger.log(this.transformedData)
-
-        for (let i: number = 0; i < 5; i++) {
-          const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
-          const replayTemplate = getTileReplay(this.videoplayer.getPosterImage())
-          if (i === 3) {
-            this.endcardContainer.innerHTML += replayTemplate
-          }
-          this.endcardContainer.innerHTML += tileTemplate
-        }
-      })
-      .catch(err => {
-        logger.log('Something went wrong with fetching api!', err)
-        this.showEndcard = false
-        this.renderFallback()
-      })
   }
 
   reset = (): void => {
@@ -135,13 +108,14 @@ class EndcardPlugin {
     const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
     if (idx === null) return
     this.play(parseInt(idx), false)
-    this.onClickCallback(this.videoElement)
+    this.onClickToPlayCallback()
   }
 
   clickToReplay = (e: Event): void => {
     e.preventDefault()
     e.stopPropagation()
     this.replay()
+    this.onClickToReplayCallback()
   }
 
   clickToPause = (e: Event): void => {
@@ -200,6 +174,35 @@ class EndcardPlugin {
   renderFallback = (): void => {
     const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
     this.endcardContainer.innerHTML += replayTemplate
+  }
+
+  render = (): void => {
+    const endpoint = this.getEndcardUrl()
+    if (endpoint === null || !this.showEndcard) {
+      this.showEndcard = false
+      this.renderFallback()
+      return
+    }
+
+    fetchAPI<object>(endpoint)
+      .then((data) => {
+        this.transformedData = transformData(data, this.dataKeyMap)
+        logger.log(this.transformedData)
+
+        for (let i: number = 0; i < 5; i++) {
+          const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
+          const replayTemplate = getTileReplay(this.videoplayer.getPosterImage())
+          if (i === 3) {
+            this.endcardContainer.innerHTML += replayTemplate
+          }
+          this.endcardContainer.innerHTML += tileTemplate
+        }
+      })
+      .catch(err => {
+        logger.log('Something went wrong with fetching api!', err)
+        this.showEndcard = false
+        this.renderFallback()
+      })
   }
 
   hide = (): void => {

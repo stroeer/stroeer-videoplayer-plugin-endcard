@@ -17,7 +17,8 @@ export interface IStroeerVideoplayer {
 
 export interface IEndcardOptions {
   onLoadedCallback?: Function
-  onClickCallback?: Function
+  onClickToPlayCallback?: Function
+  onClickToReplayCallback?: Function
   onRevolverplayCallback?: Function
   onRevolverplayPauseCallback?: Function
   dataKeyMap?: Object

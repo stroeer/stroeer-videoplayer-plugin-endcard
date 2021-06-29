@@ -688,10 +688,10 @@
   resolved "https://registry.yarnpkg.com/@stroeer/stroeer-videoplayer-ivad-ui/-/stroeer-videoplayer-ivad-ui-0.0.1.tgz#96f80eb246e46252044a46e14526b8575709e30f"
   integrity sha512-g4U/EA2oiRRMaqoCVbt8wY6tIUNaANuZh7ba1tIvaa/xWLBTXwE0wzoGj0iHNyEyct1Ozjlr5ufh1CAIMYvSAg==
 
-"@stroeer/stroeer-videoplayer@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@stroeer/stroeer-videoplayer/-/stroeer-videoplayer-0.0.5.tgz#220269d0ba9fe74a9825c9568df1cead6c88c97b"
-  integrity sha512-rgqD3oJUa9v4o4gFxCHNS1EMWkTpfXo9d+SjncHSLotL1qd9IrQw2ENSYO4t9rM//0kFlDSmi/XFHBFXp7TJqg==
+"@stroeer/stroeer-videoplayer@^0.0.7":
+  version "0.0.7"
+  resolved "https://npm.stroeermediabrands.de/@stroeer%2fstroeer-videoplayer/-/stroeer-videoplayer-0.0.7.tgz#28a2e3ce519e6957782720bf761fe851a9f944b0"
+  integrity sha512-RkLTBgyMPX4S7yim3GBOnmMKwCTfp0j+nMxD9iIW5z0yvybUzr1MD+3hni9HuUlpn6jkyzC6mZyjVwn6dEIxhQ==
 
 "@superevilmegaco/jest-evil-svg-transformer@^0.0.4":
   version "0.0.4"

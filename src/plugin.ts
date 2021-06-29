@@ -58,6 +58,13 @@ class EndcardPlugin {
     this.videoElement.dataset.endcardUrl = url
   }
 
+  reset = (): void => {
+    this.clearRevolverplay()
+    this.removeClickEvents()
+    this.endcardContainer.innerHTML = ''
+    this.hide()
+  }
+
   revolverplay = (): void => {
     if (this.revolverplayTime === 0 || !this.showEndcard) return
 
@@ -83,16 +90,39 @@ class EndcardPlugin {
   }
 
   replay = (): void => {
-    this.clearRevolverplay()
     this.videoplayer.play()
-    this.hide()
+    this.reset()
   }
 
   play = (idx: number, autoplay: boolean): void => {
     this.clearRevolverplay()
     this.setEndcardUrl(this.transformedData[idx].endpoint)
     this.videoplayer.replaceAndPlay(this.transformedData[idx], autoplay)
-    this.hide()
+    this.reset()
+  }
+
+  clickToPlay = (e: Event): void => {
+    e.preventDefault()
+
+    const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
+    const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
+    if (idx === null) return
+    this.play(parseInt(idx), false)
+    this.onClickToPlayCallback()
+  }
+
+  clickToReplay = (e: Event): void => {
+    e.preventDefault()
+    e.stopPropagation()
+    this.replay()
+    this.onClickToReplayCallback()
+  }
+
+  clickToPause = (e: Event): void => {
+    e.preventDefault()
+    e.stopPropagation()
+    this.onRevolverplayPauseCallback()
+    this.clearRevolverplay()
   }
 
   addClickEvents = (): void => {
@@ -101,39 +131,38 @@ class EndcardPlugin {
     const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
 
     tiles.forEach(tile => {
-      tile.addEventListener('click', (e) => {
-        e.preventDefault()
-
-        const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
-        const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
-        if (idx === null) return
-        this.play(parseInt(idx), false)
-        this.onClickToPlayCallback()
-      })
+      tile.addEventListener('click', this.clickToPlay)
     })
 
     if (replayTile !== null) {
-      replayTile.addEventListener('click', (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        this.replay()
-        this.onClickToReplayCallback()
-      })
+      replayTile.addEventListener('click', this.clickToReplay)
     }
 
     if (pauseButton !== null) {
-      pauseButton.addEventListener('click', (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        this.onRevolverplayPauseCallback()
-        this.clearRevolverplay()
-      })
+      pauseButton.addEventListener('click', this.clickToPause)
+    }
+  }
+
+  removeClickEvents = (): void => {
+    const tiles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
+    const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
+    const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
+
+    tiles.forEach(tile => {
+      tile.removeEventListener('click', this.clickToPlay)
+    })
+
+    if (replayTile !== null) {
+      replayTile.removeEventListener('click', this.clickToReplay)
+    }
+
+    if (pauseButton !== null) {
+      pauseButton.removeEventListener('click', this.clickToPause)
     }
   }
 
   renderFallback = (): void => {
     const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
-    this.endcardContainer.innerHTML = ''
     this.endcardContainer.innerHTML += replayTemplate
   }
 
@@ -150,7 +179,6 @@ class EndcardPlugin {
         this.transformedData = transformData(data, this.dataKeyMap)
         logger.log(this.transformedData)
 
-        this.endcardContainer.innerHTML = ''
         for (let i: number = 0; i < 5; i++) {
           const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
           const replayTemplate = getTileReplay(this.videoplayer.getPosterImage())

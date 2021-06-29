@@ -8,6 +8,7 @@ export interface IData {
 
 export interface IStroeerVideoplayer {
   getUIEl: Function
+  getRootEl: Function
   getVideoEl: Function
   getPosterImage: () => string
   replaceAndPlay: Function

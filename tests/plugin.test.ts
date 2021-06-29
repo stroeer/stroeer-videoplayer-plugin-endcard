@@ -20,6 +20,7 @@ class StroeerVideoplayer {
     return uiEl
   }
 
+  getRootEl = jest.fn()
   play = jest.fn()
   load = jest.fn()
   replaceAndPlay = jest.fn()
@@ -53,31 +54,78 @@ const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
   .mockImplementation(() => '')
 
-test('get and set endcard url work correctly', () => {
-  plugin.setEndcardUrl('www.example.de')
-  expect(plugin.getEndcardUrl()).toEqual('www.example.de')
+const mockReset = jest
+  .spyOn(plugin, 'reset')
+  .mockImplementation(() => '')
+  
+const mockClearRevolverplay = jest
+  .spyOn(plugin, 'clearRevolverplay')
+  .mockImplementation(() => '')
+  
+const mockHide = jest
+  .spyOn(plugin, 'hide')
+  .mockImplementation(() => '')
+  
+const mockReplay = jest
+  .spyOn(plugin, 'replay')
+  .mockImplementation(() => '')
+
+const mockPlay = jest
+  .spyOn(plugin, 'play')
+  .mockImplementation(() => '')
+    
+const mockRemoveClickEvents = jest
+  .spyOn(plugin, 'removeClickEvents')
+  .mockImplementation(() => '')
+  
+const mockSetEndcardUrl = jest
+  .spyOn(plugin, 'setEndcardUrl')
+  .mockImplementation(() => '')
+
+test('clickToReplay should call correct functions', () => {
+  plugin.onClickToReplayCallback = jest.fn()
+  const target = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
+  const e = new Event('click')
+  Object.defineProperty(e, 'target', {value: target, enumerable: true});
+  plugin.clickToReplay(e)
+  expect(mockReplay).toHaveBeenCalledTimes(1)
+  expect(plugin.onClickToReplayCallback).toHaveBeenCalledTimes(1)
 })
 
-test('play should call correct functions', () => {
-  plugin.clearRevolverplay = jest.fn()
-  plugin.hide = jest.fn()
-  plugin.setEndcardUrl = jest.fn()
+test('clickToPause should call correct functions', () => {
+  plugin.onRevolverplayPauseCallback = jest.fn()
+  const target = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
+  const e = new Event('click')
+  Object.defineProperty(e, 'target', {value: target, enumerable: true});
+  plugin.clickToPause(e)
+  expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
+  expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
+})
 
+test('clickToPlay should call correct functions', () => {
+  plugin.onClickToPlayCallback = jest.fn()
+  const target = document.querySelector('[data-role="plugin-endcard-tile"]') as HTMLElement
+  const e = new Event('click')
+  Object.defineProperty(e, 'target', {value: target, enumerable: true});
+  plugin.clickToPlay(e)
+  expect(mockPlay).toHaveBeenCalledTimes(1)
+  expect(plugin.onClickToPlayCallback).toHaveBeenCalledTimes(1)
+})
+  
+test('play should call correct functions', () => {
+  mockPlay.mockRestore() 
   plugin.play(0, true)
-  expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
-  expect(plugin.setEndcardUrl).toHaveBeenCalledTimes(1)
+  expect(mockSetEndcardUrl).toHaveBeenCalledTimes(1)
+  expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
-  expect(plugin.hide).toHaveBeenCalledTimes(1)
+  expect(mockReset).toHaveBeenCalledTimes(1)
 })
 
 test('replay should call correct functions', () => {
-  plugin.clearRevolverplay = jest.fn()
-  plugin.hide = jest.fn()
-  
+  mockReplay.mockRestore()  
 	plugin.replay()
-	expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.play).toHaveBeenCalledTimes(1)
-  expect(plugin.hide).toHaveBeenCalledTimes(1)
+  expect(mockReset).toHaveBeenCalledTimes(1)
 })
 
 test('revolverplay should call correct functions', () => {
@@ -86,16 +134,20 @@ test('revolverplay should call correct functions', () => {
   mockTicker.mockRestore()
 })
 
+test('get and set endcard url work correctly', () => {
+  mockSetEndcardUrl.mockRestore()
+  plugin.setEndcardUrl('www.example.de')
+  expect(plugin.getEndcardUrl()).toEqual('www.example.de')
+})
+
 test('click events should call correct functions', () => {
   const tiles = document.querySelectorAll('[data-role="plugin-endcard-tile"]') as NodeListOf<HTMLElement>
 	const replayTile = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
   const pauseButton = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
-	plugin.replay = jest.fn()
-  plugin.play = jest.fn()
-  plugin.clearRevolverplay = jest.fn()
-  plugin.onClickToPlayCallback = jest.fn()
-  plugin.onClickToReplayCallback = jest.fn()
-  plugin.onRevolverplayPauseCallback = jest.fn()
+  plugin.clickToPlay = jest.fn()
+  plugin.clickToReplay = jest.fn()
+  plugin.clickToPause = jest.fn()
+  
   plugin.addClickEvents()
   tiles.forEach(tile => {
     tile.click()
@@ -103,18 +155,9 @@ test('click events should call correct functions', () => {
 	replayTile.click()
   pauseButton.click()
 	
-	expect(plugin.replay).toHaveBeenCalledTimes(1)
-  expect(plugin.play).toHaveBeenCalledTimes(1)
-  expect(plugin.onClickToPlayCallback).toHaveBeenCalledTimes(1)
-  expect(plugin.onClickToReplayCallback).toHaveBeenCalledTimes(1)
-  expect(plugin.clearRevolverplay).toHaveBeenCalledTimes(1)
-  expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
-})
-
-test('hide should hide endcard and show UI controlbar', () => {
-  plugin.hide()
-  expect(plugin.endcardContainer.classList).toContain('hidden')
-  expect(plugin.uiEl.classList).not.toContain('hidden')
+	expect(plugin.clickToReplay).toHaveBeenCalledTimes(1)
+  expect(plugin.clickToPlay).toHaveBeenCalledTimes(2)
+  expect(plugin.clickToPause).toHaveBeenCalledTimes(1)
 })
 
 test('show should show endcard, hide UI controlbar and call callback', () => {
@@ -124,6 +167,23 @@ test('show should show endcard, hide UI controlbar and call callback', () => {
   expect(plugin.endcardContainer.classList).not.toContain('hidden')
   expect(plugin.uiEl.classList).toContain('hidden')
   expect(plugin.onLoadedCallback).toHaveBeenCalledTimes(1)
+})
+
+test('reset should call correct functions', () => {
+  mockReset.mockRestore()
+  plugin.reset()
+  
+  expect(mockRemoveClickEvents).toHaveBeenCalledTimes(1)
+  expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
+  expect(mockHide).toHaveBeenCalledTimes(1)
+  expect(plugin.endcardContainer.innerHTML).toEqual('')
+})
+
+test('hide should hide endcard and show UI controlbar', () => {
+  mockHide.mockRestore()
+  plugin.hide()
+  expect(plugin.endcardContainer.classList).toContain('hidden')
+  expect(plugin.uiEl.classList).not.toContain('hidden')
 })
 
 // important for async functions --> waits until pending Promises are resolve

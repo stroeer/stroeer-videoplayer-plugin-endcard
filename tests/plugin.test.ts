@@ -59,7 +59,7 @@ const mockReset = jest
   .mockImplementation(() => '')
   
 const mockClearRevolverplay = jest
-  .spyOn(plugin, 'clearRevolverplay')
+  .spyOn(plugin, 'clearRevolverplayTimer')
   .mockImplementation(() => '')
   
 const mockHide = jest

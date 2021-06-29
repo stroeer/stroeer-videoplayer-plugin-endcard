@@ -10,12 +10,16 @@ const getTile = (index: number, obj: IData, revolverplayTime: number): string =>
       <div class="plugin-endcard-overlay">
         ${index === 0
         ? `
-          <svg class="plugin-endcard-revolverplay-icon" width="103" height="75" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="plugin-endcard-revolverplay-icon" data-role="plugin-endcard-revolverplay-icon" width="103" height="75" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d)">
               <path d="M62.073 37.89l-20-13.333A1.334 1.334 0 0040 25.667v26.666a1.334 1.334 0 002.073 1.11l20-13.334a1.335 1.335 0 000-2.218z" fill="#fff"/>
             </g>
-            <circle class="plugin-endcard-progress-meter" cx="48" cy="39" r="30.667" fill="none" stroke="#fff" stroke-width="2.667"/>
-            <circle class="plugin-endcard-progress-value" data-role="plugin-endcard-progress-value" cx="48" cy="39" r="30.667" transform="rotate(-90 48 39)" fill="none" stroke="#fff" stroke-width="2.667" stroke-dasharray="192.686" stroke-dashoffset="192.686" />
+            ${revolverplayTime !== 0
+            ? `
+              <circle class="plugin-endcard-progress-meter" cx="48" cy="39" r="30.667" fill="none" stroke="#fff" stroke-width="2.667"/>
+              <circle class="plugin-endcard-progress-value" data-role="plugin-endcard-progress-value" cx="48" cy="39" r="30.667" transform="rotate(-90 48 39)" fill="none" stroke="#fff" stroke-width="2.667" stroke-dasharray="192.686" stroke-dashoffset="192.686" />
+            `
+            : ''}
             <defs>
               <filter id="filter0_d" x="-5.333" y="-1" width="112" height="112" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                 <feFlood flood-opacity="0" result="BackgroundImageFix"/>

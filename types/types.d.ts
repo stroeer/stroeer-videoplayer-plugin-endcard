@@ -2,7 +2,7 @@ export interface IData {
   poster: string
   title: string
   sources?: object[]
-  playlists?: []
+  playlists?: string[]
   endpoint: string
 }
 

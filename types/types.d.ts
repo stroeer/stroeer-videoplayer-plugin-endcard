@@ -1,9 +1,11 @@
 export interface IData {
-  poster: string
   title: string
   sources?: object[]
   playlists?: string[]
   endpoint: string
+  image_large: string
+  image_medium: string
+  image_small: string
 }
 
 export interface IStroeerVideoplayer {

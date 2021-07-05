@@ -2,11 +2,22 @@ import { IData } from '../types/types'
 
 const getTile = (index: number, obj: IData, revolverplayTime: number): string => {
   const template = `
+    <style>
+      .plugin-endcard-tile-${index} .plugin-endcard-thumbnail {
+        background-image: url(${obj.image_small});
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-${index} .plugin-endcard-thumbnail {
+          background-image: url(${index === 0 ? obj.image_large : obj.image_medium});
+        }
+      }
+    </style>
     <div class="plugin-endcard-tile plugin-endcard-tile-${index}" data-idx="${index}" data-role="plugin-endcard-tile">
       ${index === 0 && revolverplayTime !== 0
         ? '<button class="plugin-endcard-button-pause" data-role="plugin-endcard-pause">Anhalten</button>'
         : ''}  
-      <div class="plugin-endcard-thumbnail" style="background-image: url(${obj.poster});"></div>
+      <div class="plugin-endcard-thumbnail"></div>
       <div class="plugin-endcard-overlay">
         ${index === 0
         ? `

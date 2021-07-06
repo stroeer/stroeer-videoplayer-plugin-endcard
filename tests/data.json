@@ -20,9 +20,16 @@
         "type": "video/mp4"
       }
     ],
+    "playlists": [
+      "https://lx56.spieletips.de/1093076903_v4/playlist.m3u8",
+      "https://vid-cdn60.stroeermb.de/1093076903_v4/playlist.m3u8",
+      "https://vid-cdn61.stroeermb.de/1093076903_v4/playlist.m3u8"
+    ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "image_large": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/c_Master-16-9-Large/tid_da/index.jpg",
+    "image_medium": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/600/tid_da/index.jpg",
+    "image_small": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
   },
   {
     "sources": [
@@ -45,9 +52,16 @@
         "type": "video/mp4"
       }
     ],
+    "playlists": [
+      "https://lx54.spieletips.de/1295467186_v4/playlist.m3u8",
+      "https://vid-cdn60.stroeermb.de/1295467186_v4/playlist.m3u8",
+      "https://vid-cdn61.stroeermb.de/1295467186_v4/playlist.m3u8"
+    ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "image_large": "https://bilder.t-online.de/b/89/99/34/66/id_89993466/c_Master-16-9-Large/tid_da/index.jpg",
+    "image_medium": "https://bilder.t-online.de/b/89/99/34/66/id_89993466/600/tid_da/index.jpg",
+    "image_small": "https://bilder.t-online.de/b/89/99/34/66/id_89993466/300/tid_da/index.jpg"
   },
   {
     "sources": [
@@ -70,9 +84,16 @@
         "type": "video/mp4"
       }
     ],
+    "playlists": [
+      "http://lx55.spieletips.de/536504839_v4/playlist.m3u8",
+      "http://vid-cdn60.stroeermb.de/536504839_v4/playlist.m3u8",
+      "http://vid-cdn61.stroeermb.de/536504839_v4/playlist.m3u8"
+    ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "image_large": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg",
+    "image_medium": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg",
+    "image_small": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
   },
   {
     "sources": [
@@ -95,9 +116,16 @@
         "type": "video/mp4"
       }
     ],
+    "playlists": [
+      "https://lx56.spieletips.de/1093076903_v4/playlist.m3u8",
+      "https://vid-cdn60.stroeermb.de/1093076903_v4/playlist.m3u8",
+      "https://vid-cdn61.stroeermb.de/1093076903_v4/playlist.m3u8"
+    ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "image_large": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg",
+    "image_medium": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg",
+    "image_small": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
   },
   {
     "sources": [
@@ -120,8 +148,15 @@
         "type": "video/mp4"
       }
     ],
+    "playlists": [
+      "http://lx55.spieletips.de/536504839_v4/playlist.m3u8",
+      "http://vid-cdn60.stroeermb.de/536504839_v4/playlist.m3u8",
+      "http://vid-cdn61.stroeermb.de/536504839_v4/playlist.m3u8"
+    ],
     "endpoint": "http://localhost:5000/1",
     "title": "Bei voller Fahrt kommt plötzlich Panik auf",
-    "poster": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
+    "image_large": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg",
+    "image_medium": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg",
+    "image_small": "https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg"
   }
 ]

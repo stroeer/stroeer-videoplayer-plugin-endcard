@@ -64,6 +64,21 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
 >
   
     
+  <style>
+    
+      .plugin-endcard-tile-0 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-0 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/c_Master-16-9-Large/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
+  
+    
   <div
     class="plugin-endcard-tile plugin-endcard-tile-0"
     data-idx="0"
@@ -81,7 +96,6 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -230,6 +244,21 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
 
   
     
+  <style>
+    
+      .plugin-endcard-tile-1 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/89/99/34/66/id_89993466/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-1 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/89/99/34/66/id_89993466/600/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
+  
+    
   <div
     class="plugin-endcard-tile plugin-endcard-tile-1"
     data-idx="1"
@@ -240,7 +269,6 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -286,6 +314,21 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
   </div>
   
 
+  
+    
+  <style>
+    
+      .plugin-endcard-tile-2 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-2 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
   
     
   <div
@@ -298,7 +341,6 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -344,6 +386,21 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
   </div>
   
 
+  
+    
+  <style>
+    
+      .plugin-endcard-tile-3 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-3 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
   
     
   <div
@@ -356,7 +413,6 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -404,6 +460,21 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
 
   
     
+  <style>
+    
+      .plugin-endcard-tile-4 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-4 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
+  
+    
   <div
     class="plugin-endcard-tile plugin-endcard-tile-4"
     data-idx="4"
@@ -414,7 +485,6 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -470,6 +540,21 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
 >
   
     
+  <style>
+    
+      .plugin-endcard-tile-0 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-0 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/c_Master-16-9-Large/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
+  
+    
   <div
     class="plugin-endcard-tile plugin-endcard-tile-0"
     data-idx="0"
@@ -480,7 +565,6 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -602,6 +686,21 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
 
   
     
+  <style>
+    
+      .plugin-endcard-tile-1 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/89/99/34/66/id_89993466/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-1 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/89/99/34/66/id_89993466/600/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
+  
+    
   <div
     class="plugin-endcard-tile plugin-endcard-tile-1"
     data-idx="1"
@@ -612,7 +711,6 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -658,6 +756,21 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
   </div>
   
 
+  
+    
+  <style>
+    
+      .plugin-endcard-tile-2 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-2 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
   
     
   <div
@@ -670,7 +783,6 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -716,6 +828,21 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
   </div>
   
 
+  
+    
+  <style>
+    
+      .plugin-endcard-tile-3 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-3 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
   
     
   <div
@@ -728,7 +855,6 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       
@@ -776,6 +902,21 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
 
   
     
+  <style>
+    
+      .plugin-endcard-tile-4 .plugin-endcard-thumbnail {
+        background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+      }
+
+      @media only screen and (min-width: 769px) {
+        .plugin-endcard-tile-4 .plugin-endcard-thumbnail {
+          background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);
+        }
+      }
+    
+  </style>
+  
+    
   <div
     class="plugin-endcard-tile plugin-endcard-tile-4"
     data-idx="4"
@@ -786,7 +927,6 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       
     <div
       class="plugin-endcard-thumbnail"
-      style="background-image: url(https://bilder.t-online.de/b/90/00/67/78/id_90006778/300/tid_da/index.jpg);"
     />
     
       

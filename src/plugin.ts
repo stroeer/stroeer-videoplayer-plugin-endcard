@@ -124,7 +124,7 @@ class EndcardPlugin {
 
     e.preventDefault()
     e.stopPropagation()
-    this.onRevolverplayPauseCallback(this.videoElement)
+    this.onRevolverplayPauseCallback()
     this.clearRevolverplayTimer()
 
     if (target !== null) {

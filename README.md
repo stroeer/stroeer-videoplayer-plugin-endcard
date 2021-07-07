@@ -1,16 +1,110 @@
-Stroeer Videoplayer Endcard Plugin
-==================================
+# Stroeer Videoplayer Endcard Plugin
 
-## Development
+---
 
-Install via dependencies via `yarn install`.
+## 🧑‍💻 Development
 
-Build via `yarn run build`. Lint via `yarn run lint`. Test via `yarn run test`.
+Install dependencies via `yarn install`.
 
-See coverage with `yarn run test --coverage`.
-
-Run E2E-Tests via `cypress run` or interactive `cypress open`.
+Build via `yarn run build`.
 
 Start local server with index.html via `yarn start`
 
 You can use `yarn start` and `yarn watch` in different terminals to see saved changes immediately.
+Important: You have to set the correct url of your API in [index.html](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/83b2d310e4e3e7dbb5770b1af2f50086e25958f3/index.html#L32) as `data-endcard-url` on video element.
+
+Test via `yarn run test`.
+
+For more commands see [package.json](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/83b2d310e4e3e7dbb5770b1af2f50086e25958f3/package.json#L9)
+
+## 👾 Dependencies
+This is a plugin for a videoplayer, make sure your videoplayer provide these [functions](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/83b2d310e4e3e7dbb5770b1af2f50086e25958f3/types/types.d.ts#L11).
+
+The Stroeer Videoplayer Endcard Plugin works with data from a custom API but uses determined keys. So you have to provide these keys or you have to map these in the options object. For more information read next section.
+
+## 😯 Notable features
+The Stroeer Videoplayer Endcard Plugin uses determined [data keys](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/83b2d310e4e3e7dbb5770b1af2f50086e25958f3/types/types.d.ts#L1). If these keys are named different in your API, you can map as many keys as you like via `dataKeyMap` in options object.
+
+```javascript
+myvideoplayer.initPlugin('Endcard', {
+	dataKeyMap: {
+		// oldKey, newKey
+		poster: 'image_large',
+	},
+})
+```
+
+## 🔌 Options
+
+You can see all available options [here](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/83b2d310e4e3e7dbb5770b1af2f50086e25958f3/types/types.d.ts#L21).
+	
+### `onLoadedCallback` - Function
+
+Callback which is triggered when Endcard is loaded and shown.
+
+### `onClickToPlayCallback` - Function
+
+Callback which is triggered when user clicks on one tile except replay tile.
+
+### `onClickToReplayCallback` - Function
+
+Callback which is triggered when user clicks on replay tile.
+
+### `onRevolverplayCallback` - Function
+
+Callback which is triggered when an endcard video is started by revolverplay.
+
+### `onRevolverplayPauseCallback` - Function
+
+Callback which is triggered when user clicks on "Anhalten"-button.
+
+### `dataKeyMap` - Object
+
+Object to map keys of API data structure.
+
+### `revolverplayTime` - number
+
+The number of seconds for the revolverplay countdown. If you set `0` then revolverplay is deactivated.
+
+### `showEndcard` - boolean
+
+Must be set to true, else the fallback is shown.
+
+## 🌐 Real World Example
+
+You can see a running example also in [index.html](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/master/index.html)
+
+The only required data-attribute for the endcard to work is `data-endcard-url`.
+```HTML
+<video id="myvideo" class="stroeervideoplayer" data-endcard-url="http://localhost:5000/">
+	<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-1080p.mp4" type="video/mp4" data-label="1080p" />
+	<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-720p.mp4" type="video/mp4" data-label="720p" />
+	<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-240p.mp4" type="video/mp4" data-label="240p" />
+</video>
+``` 
+
+```javascript
+const myvideoplayer = new StroeerVideoplayer(video)
+myvideoplayer.initPlugin('Endcard', {
+	revolverplayTime: 7,
+	showEndcard: true,
+	dataKeyMap: {
+		poster: 'image_large',
+	},
+	onLoadedCallback: () => {
+	 console.log('OnLoadedCallback triggered')
+ 	},
+ 	onClickToPlayCallback: () => {
+		console.log('onClickToPlayCallback triggered')
+	},
+	onClickToReplayCallback: () => {
+		console.log('onClickToReplayCallback triggered')
+	},
+	onRevolverplayCallback: () => {
+	 console.log('OnRevolverplayCallback triggered')
+ 	},
+ 	onRevolverplayPauseCallback: () => {
+		console.log('OnRevolverplayPauseCallback triggered')
+	},
+})
+```

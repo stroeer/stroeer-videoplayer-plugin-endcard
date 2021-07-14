@@ -113,7 +113,7 @@ myvideoplayer.initPlugin('Endcard', {
 })
 ```
 
-## Style
+## 👗 Style
 
 You have multiple [scss variables](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/master/src/endcard.scss) to style your endcard.
 

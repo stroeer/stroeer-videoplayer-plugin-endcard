@@ -34,6 +34,8 @@ myvideoplayer.initPlugin('Endcard', {
 })
 ```
 
+If there is a problem with the API then the fallback (only replay tile) is shown.
+
 ## 🔌 Options
 
 You can see all available options [here](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/83b2d310e4e3e7dbb5770b1af2f50086e25958f3/types/types.d.ts#L21).
@@ -65,10 +67,12 @@ Object to map keys of API data structure.
 ### `revolverplayTime` - number
 
 The number of seconds for the revolverplay countdown. If you set `0` then revolverplay is deactivated.
+Default: 5
 
 ### `showEndcard` - boolean
 
-Must be set to true, else the fallback is shown.
+If set to false the fallback (only replay tile) is shown.
+Default: true
 
 ## 🌐 Real World Example
 

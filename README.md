@@ -112,3 +112,29 @@ myvideoplayer.initPlugin('Endcard', {
 	},
 })
 ```
+
+## Style
+
+You have multiple [scss variables](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/master/src/endcard.scss) to style your endcard.
+
+```scss
+$endcard-plugin-highlight-color: #424242 !default;
+$endcard-plugin-bg-color: #000 !default;
+$endcard-plugin-tile-border: 2px solid #fff !default;
+$endcard-plugin-title-bg: linear-gradient(
+  180deg,
+  rgba(0, 0, 0, 0) 0%,
+  rgba(0, 0, 0, 0.8) 100%
+) !default;
+$endcard-plugin-spacing-large: 16px !default;
+$endcard-plugin-spacing-small: 12px !default;
+$endcard-plugin-font-size-smaller: 10px !default;
+$endcard-plugin-font-size-small: 12px !default;
+$endcard-plugin-font-size-medium: 14px !default;
+$endcard-plugin-font-size-large: 16px !default;
+$endcard-plugin-text-color: #fff !default;
+$endcard-plugin-button-pause-bg-color: rgba(255, 255, 255, 0.4) !default;
+$endcard-plugin-button-pause-bg-color-hover: rgba(255, 255, 255, 0.2) !default;
+$endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
+$endcard-plugin-controlbar-height-mobile: 64px !default;
+```

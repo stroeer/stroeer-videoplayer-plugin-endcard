@@ -32,7 +32,7 @@
   "@rollup/plugin-node-resolve": "^11.2.0",
   "@rollup/plugin-typescript": "^8.1.0",
   "@stroeer/stroeer-videoplayer": "^0.0.7",
-  "@stroeer/stroeer-videoplayer-default-ui": "^0.0.21",
+  "@stroeer/stroeer-videoplayer-default-ui": "^0.0.22",
   "@stroeer/stroeer-videoplayer-ivad-ui": "^0.0.1",
   "@superevilmegaco/jest-evil-svg-transformer": "^0.0.4",
   "@types/jest": "^26.0.23",

@@ -20,7 +20,7 @@ async function fetchAPI<T> (request: RequestInfo): Promise<T> {
 }
 
 const transformData: Function = (data: [], keyMap: IData) => {
-  for (const [oldKey, newKey] of Object.entries(keyMap)) {
+  for (const [newKey, oldKey] of Object.entries(keyMap)) {
     data.forEach(item => {
       if (!item[oldKey]) return
       item[newKey] = item[oldKey]

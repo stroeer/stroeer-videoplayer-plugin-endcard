@@ -28,8 +28,9 @@ The Stroeer Videoplayer Endcard Plugin uses determined [data keys](https://githu
 ```javascript
 myvideoplayer.initPlugin('Endcard', {
 	dataKeyMap: {
-		// oldKey, newKey
-		poster: 'image_large',
+		// key of endcard, key from API
+		image_large: 'poster',
+		image_small: 'thumbnail',
 	},
 })
 ```
@@ -91,7 +92,9 @@ myvideoplayer.initPlugin('Endcard', {
 	revolverplayTime: 7,
 	showEndcard: true,
 	dataKeyMap: {
-		poster: 'image_large',
+		image_large: 'preview_image',
+		image_medium: 'preview_image',
+		image_small: 'thumbnail'
 	},
 	onLoadedCallback: () => {
 	 console.log('OnLoadedCallback triggered')

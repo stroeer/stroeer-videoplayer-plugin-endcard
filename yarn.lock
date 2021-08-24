@@ -678,10 +678,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stroeer/stroeer-videoplayer-default-ui@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@stroeer/stroeer-videoplayer-default-ui/-/stroeer-videoplayer-default-ui-0.0.8.tgz#5ba025826ae8bcce06bedbf744c5f60ba71d09d3"
-  integrity sha512-mqdkPe7Bq26Z6RhlLWT0p6NOeVGX8xaSprYzj3r8iI75QM+GdRMzjdYh8KTYo1ORaebOe8ljVwPuROTcWK62aA==
+"@stroeer/stroeer-videoplayer-default-ui@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@stroeer/stroeer-videoplayer-default-ui/-/stroeer-videoplayer-default-ui-0.0.21.tgz#671b2dd3492e836bf62ff34893ca45b6263545ee"
+  integrity sha512-POoJNUDrWLwtG/DwEwmeTOOZuN13x8zU3MS29wSQtdxdI+OtibO3bOSob6QlDwqdzR1UllB6jRRr6/3sK7+QGw==
 
 "@stroeer/stroeer-videoplayer-ivad-ui@^0.0.1":
   version "0.0.1"

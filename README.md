@@ -65,10 +65,12 @@ Object to map keys of API data structure.
 ### `revolverplayTime` - number
 
 The number of seconds for the revolverplay countdown. If you set `0` then revolverplay is deactivated.
+`Default: 5`
 
 ### `showEndcard` - boolean
 
-Must be set to true, else the fallback is shown.
+Must be set to false to show the fallback.
+`Default: true`
 
 ## 🌐 Real World Example
 

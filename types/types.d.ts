@@ -15,7 +15,6 @@ export interface IStroeerVideoplayer {
   getPosterImage: () => string
   replaceAndPlay: Function
   play: Function
-  load: Function
 }
 
 export interface IEndcardOptions {

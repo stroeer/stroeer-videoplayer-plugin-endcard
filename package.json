@@ -1,5 +1,5 @@
 {
- "version": "0.8.0",
+ "version": "0.9.0",
  "name": "@stroeer/stroeer-videoplayer-plugin-endcard",
  "description": "Ströer Videoplayer Endcard Plugin",
  "main": "dist/StroeerVideoplayer-endcard-plugin.umd.js",
@@ -31,8 +31,8 @@
   "@rollup/plugin-json": "^4.1.0",
   "@rollup/plugin-node-resolve": "^11.2.0",
   "@rollup/plugin-typescript": "^8.1.0",
-  "@stroeer/stroeer-videoplayer": "^0.0.7",
-  "@stroeer/stroeer-videoplayer-default-ui": "^0.0.8",
+  "@stroeer/stroeer-videoplayer": "^0.0.9",
+  "@stroeer/stroeer-videoplayer-default-ui": "^0.0.24",
   "@stroeer/stroeer-videoplayer-ivad-ui": "^0.0.1",
   "@superevilmegaco/jest-evil-svg-transformer": "^0.0.4",
   "@types/jest": "^26.0.23",

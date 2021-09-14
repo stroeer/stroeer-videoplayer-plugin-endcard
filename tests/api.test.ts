@@ -38,9 +38,9 @@ beforeEach(function () {
 
 test('data should be transformed', () => {
   const keyMap = {
-    duration: 'time',
-    test: 'test2',
-    title: 'text'
+    time: 'duration',
+    test2: 'test',
+    text: 'title'
   }
   const expectedData = [
     {

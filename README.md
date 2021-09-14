@@ -28,8 +28,9 @@ The Stroeer Videoplayer Endcard Plugin uses determined [data keys](https://githu
 ```javascript
 myvideoplayer.initPlugin('Endcard', {
 	dataKeyMap: {
-		// oldKey, newKey
-		poster: 'image_large',
+		// key of endcard, key from API
+		image_large: 'poster',
+		image_small: 'thumbnail',
 	},
 })
 ```
@@ -67,12 +68,12 @@ Object to map keys of API data structure.
 ### `revolverplayTime` - number
 
 The number of seconds for the revolverplay countdown. If you set `0` then revolverplay is deactivated.
-Default: 5
+`Default: 5`
 
 ### `showEndcard` - boolean
 
 If set to false the fallback (only replay tile) is shown.
-Default: true
+`Default: true`
 
 ## 🌐 Real World Example
 
@@ -93,7 +94,9 @@ myvideoplayer.initPlugin('Endcard', {
 	revolverplayTime: 7,
 	showEndcard: true,
 	dataKeyMap: {
-		poster: 'image_large',
+		image_large: 'preview_image',
+		image_medium: 'preview_image',
+		image_small: 'thumbnail'
 	},
 	onLoadedCallback: () => {
 	 console.log('OnLoadedCallback triggered')

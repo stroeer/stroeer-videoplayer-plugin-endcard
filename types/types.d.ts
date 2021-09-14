@@ -1,6 +1,5 @@
 export interface IData {
   title: string
-  sources?: object[]
   playlists?: string[]
   endpoint: string
   image_large: string
@@ -15,7 +14,6 @@ export interface IStroeerVideoplayer {
   getPosterImage: () => string
   replaceAndPlay: Function
   play: Function
-  load: Function
 }
 
 export interface IEndcardOptions {

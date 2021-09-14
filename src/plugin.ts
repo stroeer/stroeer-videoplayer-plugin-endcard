@@ -31,7 +31,6 @@ class EndcardPlugin {
     this.showEndcard = opts.showEndcard !== undefined ? opts.showEndcard : true
     this.revolverplayTime = opts.revolverplayTime !== undefined ? opts.revolverplayTime : 5
     this.intervalTicker = null
-    // TODO: isDesktop can be removed if UI plugin bug is fixed
     this.isDesktop = window.screen.width > 768
 
     this.onLoadedCallback = opts.onLoadedCallback !== undefined ? opts.onLoadedCallback : noop
@@ -172,7 +171,7 @@ class EndcardPlugin {
   }
 
   renderFallback = (): void => {
-    const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
+    const replayTemplate = getTileReplay(this.videoplayer.getPosterImage(), 'plugin-endcard-tile-single')
     this.endcardContainer.innerHTML += replayTemplate
   }
 
@@ -206,8 +205,6 @@ class EndcardPlugin {
   }
 
   hide = (): void => {
-    // TODO: UI switch should be done in UI plugin, here because to show endcard features
-    // so isDesktop can be removed if UI plugin bug is fixed
     if (this.isDesktop || this.uiEl.classList.contains('hidden')) {
       this.uiEl.classList.remove('hidden')
     }
@@ -215,8 +212,6 @@ class EndcardPlugin {
   }
 
   show = (): void => {
-    // TODO: UI switch should be done in UI plugin, here because to show endcard features
-    // so isDesktop can be removed if UI plugin bug is fixed
     if (this.isDesktop || !this.showEndcard) {
       this.uiEl.classList.add('hidden')
     }

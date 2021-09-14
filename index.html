@@ -29,8 +29,8 @@
 	<body>
 		<div class="container">
 			<video id="myvideo" class="stroeervideoplayer" data-meta='{"id":255559724,"title":"4 Tipps, mit denen du beim Amazon Prime Day richtig sparen kannst","duration":188,"producer":"origin:self","uploaded":"2019-07-12T13:02:07.000Z"}'
-				preload="metadata" poster="https://videos.giga.de/files/1307753225/720p.jpg" controls playsinline data-endcard-url="https://videos.giga.de/suggestions/872357948">
-				<source src="https://vid-cdn60.stroeermb.de/787303133_v4/playlist.m3u8" type="application/x-mpegURL">
+				preload="metadata" poster="https://videos.giga.de/files/1307753225/720p.jpg" controls playsinline data-endcard-url="https://videos.giga.de/suggestions/1307753225">
+				<source src="https://vid-cdn60.stroeermb.de/1307753225_v4/playlist.m3u8" type="application/x-mpegURL">
 			</video>
 		</div>
 
@@ -105,7 +105,9 @@
 					// key of endcard, key from API
 					image_large: 'preview_image',
 					image_medium: 'preview_image',
-					image_small: 'thumbnail'
+					image_small: 'thumbnail',
+					endpoint: 'endcard_url',
+					poster: 'preview_image', // TODO: remove after: change key poster in video-player to image_large
 				},
 				onLoadedCallback: () => {
 				 console.log('OnLoadedCallback triggered')

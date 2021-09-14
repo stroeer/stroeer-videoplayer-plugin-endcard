@@ -171,7 +171,7 @@ class EndcardPlugin {
   }
 
   renderFallback = (): void => {
-    const replayTemplate = getTileReplay(this.videoplayer.getVideoEl().getAttribute('poster'), 'plugin-endcard-tile-single')
+    const replayTemplate = getTileReplay(this.videoplayer.getPosterImage(), 'plugin-endcard-tile-single')
     this.endcardContainer.innerHTML += replayTemplate
   }
 

@@ -14,6 +14,8 @@ export interface IStroeerVideoplayer {
   getPosterImage: () => string
   replaceAndPlay: Function
   play: Function
+  // if stroeer-videoplayer-default-ui isn't used then there is no function exitFullscreen
+  exitFullscreen?: Function
 }
 
 export interface IEndcardOptions {

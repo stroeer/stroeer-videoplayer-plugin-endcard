@@ -215,6 +215,9 @@ class EndcardPlugin {
     if (this.isDesktop || !this.showEndcard) {
       this.uiEl.classList.add('hidden')
     }
+    if (typeof this.videoplayer.exitFullscreen === 'function') {
+      this.videoplayer.exitFullscreen()
+    }
     this.endcardContainer.classList.remove('hidden')
     this.onLoadedCallback()
   }

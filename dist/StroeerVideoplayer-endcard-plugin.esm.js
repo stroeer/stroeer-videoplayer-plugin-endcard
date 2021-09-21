@@ -283,9 +283,6 @@ var EndcardPlugin = /** @class */ (function () {
             });
         };
         this.hide = function () {
-            if (_this.uiEl.classList.contains('hidden')) {
-                _this.uiEl.classList.remove('hidden');
-            }
             if (_this.uiEl.classList.contains('plugin-endcard-ui-small')) {
                 _this.uiEl.classList.remove('plugin-endcard-ui-small');
             }
@@ -293,9 +290,6 @@ var EndcardPlugin = /** @class */ (function () {
         };
         this.show = function () {
             _this.uiEl.classList.add('plugin-endcard-ui-small');
-            if (_this.showFallback) {
-                _this.uiEl.classList.add('hidden');
-            }
             if (typeof _this.videoplayer.exitFullscreen === 'function') {
                 _this.videoplayer.exitFullscreen();
             }

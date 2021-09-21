@@ -200,9 +200,6 @@ class EndcardPlugin {
   }
 
   hide = (): void => {
-    if (this.uiEl.classList.contains('hidden')) {
-      this.uiEl.classList.remove('hidden')
-    }
     if (this.uiEl.classList.contains('plugin-endcard-ui-small')) {
       this.uiEl.classList.remove('plugin-endcard-ui-small')
     }
@@ -212,9 +209,6 @@ class EndcardPlugin {
   show = (): void => {
     this.uiEl.classList.add('plugin-endcard-ui-small')
 
-    if (this.showFallback) {
-      this.uiEl.classList.add('hidden')
-    }
     if (typeof this.videoplayer.exitFullscreen === 'function') {
       this.videoplayer.exitFullscreen()
     }

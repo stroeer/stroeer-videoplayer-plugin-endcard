@@ -158,7 +158,6 @@ test('show should show endcard, hide UI controlbar and call callback', () => {
   plugin.showFallback = true
   plugin.show()
   expect(plugin.endcardContainer.classList).not.toContain('hidden')
-  expect(plugin.uiEl.classList).toContain('hidden')
   expect(plugin.uiEl.classList).toContain('plugin-endcard-ui-small')
   expect(plugin.onLoadedCallback).toHaveBeenCalledTimes(1)
 })
@@ -176,7 +175,6 @@ test('hide should hide endcard and show UI controlbar', () => {
   mockHide.mockRestore()
   plugin.hide()
   expect(plugin.endcardContainer.classList).toContain('hidden')
-  expect(plugin.uiEl.classList).not.toContain('hidden')
   expect(plugin.uiEl.classList).not.toContain('plugin-endcard-ui-small')
 })
 

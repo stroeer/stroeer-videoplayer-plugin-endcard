@@ -45,6 +45,10 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
   overflow: hidden;
 }
 
+.plugin-endcard-tile-replay {
+  z-index: 101;
+}
+
 .plugin-endcard-tile-single,
 .plugin-endcard-tile-0 {
   display: block;

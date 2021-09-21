@@ -2,8 +2,8 @@
  "version": "0.10.0",
  "name": "@stroeer/stroeer-videoplayer-plugin-endcard",
  "description": "Ströer Videoplayer Endcard Plugin",
- "main": "dist/StroeerVideoplayer-endcard-plugin.umd.js",
- "module": "dist/StroeerVideoplayer-endcard-plugin.esm.js",
+ "main": "dist/stroeerVideoplayer-endcard-plugin.umd.js",
+ "module": "dist/stroeerVideoplayer-endcard-plugin.esm.js",
  "files": [
   "dist"
  ],

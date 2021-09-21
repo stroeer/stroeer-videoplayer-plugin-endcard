@@ -3,6 +3,7 @@
  "name": "@stroeer/stroeer-videoplayer-plugin-endcard",
  "description": "Ströer Videoplayer Endcard Plugin",
  "main": "dist/StroeerVideoplayer-endcard-plugin.umd.js",
+ "module": "dist/StroeerVideoplayer-endcard-plugin.esm.js",
  "files": [
   "dist"
  ],

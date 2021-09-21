@@ -53,10 +53,6 @@ createDom()
 const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
   .mockImplementation(() => '')
-
-const mockReset = jest
-  .spyOn(plugin, 'reset')
-  .mockImplementation(() => '')
   
 const mockClearRevolverplay = jest
   .spyOn(plugin, 'clearRevolverplayTimer')
@@ -116,16 +112,13 @@ test('play should call correct functions', () => {
   mockPlay.mockRestore() 
   plugin.play(0, true)
   expect(mockSetEndcardUrl).toHaveBeenCalledTimes(1)
-  expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
   expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
-  expect(mockReset).toHaveBeenCalledTimes(1)
 })
 
 test('replay should call correct functions', () => {
   mockReplay.mockRestore()  
 	plugin.replay()
   expect(svp.play).toHaveBeenCalledTimes(1)
-  expect(mockReset).toHaveBeenCalledTimes(1)
 })
 
 test('revolverplay should call correct functions', () => {
@@ -162,7 +155,7 @@ test('click events should call correct functions', () => {
 
 test('show should show endcard, hide UI controlbar and call callback', () => {
   plugin.onLoadedCallback = jest.fn()
-  plugin.showEndcard = false
+  plugin.showFallback = true
   plugin.show()
   expect(plugin.endcardContainer.classList).not.toContain('hidden')
   expect(plugin.uiEl.classList).toContain('hidden')
@@ -170,7 +163,6 @@ test('show should show endcard, hide UI controlbar and call callback', () => {
 })
 
 test('reset should call correct functions', () => {
-  mockReset.mockRestore()
   plugin.reset()
   
   expect(mockRemoveClickEvents).toHaveBeenCalledTimes(1)
@@ -210,13 +202,13 @@ describe('testing render with working fetch API', () => {
 
   test('render should call renderFallback in case default endcard should not be shown', async () => {    
     plugin.renderFallback = jest.fn()
-    plugin.showEndcard = false
+    plugin.showFallback = true
     plugin.render()
     expect(plugin.renderFallback).toHaveBeenCalledTimes(1)
   })
   
   test('render should fill endcardContainer with HTML', async () => {   
-    plugin.showEndcard = true
+    plugin.showFallback = false
     plugin.endcardContainer.innerHTML = ''
     plugin.render()
     await flushPromises()
@@ -231,7 +223,8 @@ describe('testing render with failing fetch API', () => {
   })
   
   test('render should call renderFallback', async () => {
-    plugin.showEndcard = true  
+    // even showFallback is set to false, fallback is rendered because API fails
+    plugin.showFallback = false
     plugin.render()
     await flushPromises()
     expect(plugin.renderFallback).toHaveBeenCalledTimes(1)

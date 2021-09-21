@@ -70,10 +70,10 @@ Object to map keys of API data structure.
 The number of seconds for the revolverplay countdown. If you set `0` then revolverplay is deactivated.
 `Default: 5`
 
-### `showEndcard` - boolean
+### `showFallback` - boolean
 
-If set to false the fallback (only replay tile) is shown.
-`Default: true`
+If set to true the fallback (only replay tile) is shown.
+`Default: false`
 
 ## 🌐 Real World Example
 
@@ -92,7 +92,6 @@ The only required data-attribute for the endcard to work is `data-endcard-url`.
 const myvideoplayer = new StroeerVideoplayer(video)
 myvideoplayer.initPlugin('Endcard', {
 	revolverplayTime: 7,
-	showEndcard: true,
 	dataKeyMap: {
 		image_large: 'preview_image',
 		image_medium: 'preview_image',

@@ -8,7 +8,6 @@ import { ticker } from './revolverplay'
 class EndcardPlugin {
   videoplayer: IStroeerVideoplayer
   videoElement: HTMLVideoElement
-  isDesktop: boolean
   endcardContainer: HTMLDivElement
   onLoadedCallback: Function
   onClickToPlayCallback: Function
@@ -17,7 +16,7 @@ class EndcardPlugin {
   onRevolverplayPauseCallback: Function
   dataKeyMap: object
   transformedData: IData[]
-  showEndcard: boolean
+  showFallback: boolean
   uiEl: HTMLDivElement
   revolverplayTime: number
   intervalTicker: NodeJS.Timeout | null
@@ -28,10 +27,9 @@ class EndcardPlugin {
 
     this.dataKeyMap = opts.dataKeyMap !== undefined ? opts.dataKeyMap : noop
     this.transformedData = []
-    this.showEndcard = opts.showEndcard !== undefined ? opts.showEndcard : true
+    this.showFallback = opts.showFallback !== undefined ? opts.showFallback : false
     this.revolverplayTime = opts.revolverplayTime !== undefined ? opts.revolverplayTime : 5
     this.intervalTicker = null
-    this.isDesktop = window.screen.width > 768
 
     this.onLoadedCallback = opts.onLoadedCallback !== undefined ? opts.onLoadedCallback : noop
     this.onClickToPlayCallback = opts.onClickToPlayCallback !== undefined ? opts.onClickToPlayCallback : noop
@@ -65,7 +63,7 @@ class EndcardPlugin {
   }
 
   revolverplay = (): void => {
-    if (this.revolverplayTime === 0 || !this.showEndcard) return
+    if (this.revolverplayTime === 0 || this.showFallback) return
 
     /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
     const progressSvgCircle = this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')! as HTMLElement
@@ -90,14 +88,11 @@ class EndcardPlugin {
 
   replay = (): void => {
     this.videoplayer.play()
-    this.reset()
   }
 
   play = (idx: number, autoplay: boolean): void => {
-    this.clearRevolverplayTimer()
     this.setEndcardUrl(this.transformedData[idx].endpoint)
     this.videoplayer.replaceAndPlay(this.transformedData[idx], autoplay)
-    this.reset()
   }
 
   clickToPlay = (e: Event): void => {
@@ -177,8 +172,8 @@ class EndcardPlugin {
 
   render = (): void => {
     const endpoint = this.getEndcardUrl()
-    if (endpoint === null || !this.showEndcard) {
-      this.showEndcard = false
+    if (endpoint === null || this.showFallback) {
+      this.showFallback = true
       this.renderFallback()
       return
     }
@@ -199,20 +194,25 @@ class EndcardPlugin {
       })
       .catch(err => {
         logger.log('Something went wrong with fetching api!', err)
-        this.showEndcard = false
+        this.showFallback = true
         this.renderFallback()
       })
   }
 
   hide = (): void => {
-    if (this.isDesktop || this.uiEl.classList.contains('hidden')) {
+    if (this.uiEl.classList.contains('hidden')) {
       this.uiEl.classList.remove('hidden')
+    }
+    if (this.uiEl.classList.contains('plugin-endcard-ui-small')) {
+      this.uiEl.classList.remove('plugin-endcard-ui-small')
     }
     this.endcardContainer.classList.add('hidden')
   }
 
   show = (): void => {
-    if (this.isDesktop || !this.showEndcard) {
+    this.uiEl.classList.add('plugin-endcard-ui-small')
+
+    if (this.showFallback) {
       this.uiEl.classList.add('hidden')
     }
     if (typeof this.videoplayer.exitFullscreen === 'function') {

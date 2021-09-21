@@ -43,7 +43,7 @@
 		<script src="node_modules/@stroeer/stroeer-videoplayer-default-ui/dist/StroeerVideoplayer-default-ui.umd.js"></script>
 		<link rel="stylesheet" href="node_modules/@stroeer/stroeer-videoplayer-default-ui/dist/StroeerVideoplayer-default-ui.css" />
 		
-		<script src="dist/StroeerVideoplayer-endcard-plugin.umd.js"></script>
+		<script src="dist/stroeerVideoplayer-endcard-plugin.umd.js"></script>
 
 		<script>
 			StroeerVideoplayer.registerUI(StroeerVideoplayerDefaultUI);
@@ -99,8 +99,7 @@
 
 
 			myvideoplayer.initPlugin('Endcard', {
-				revolverplayTime: 7,
-				showEndcard: true,
+				revolverplayTime: 0,
 				dataKeyMap: {
 					// key of endcard, key from API
 					image_large: 'preview_image',

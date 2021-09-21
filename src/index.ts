@@ -6,11 +6,17 @@ import './endcard.scss'
 
 let endcardPlugin: EndcardPlugin
 
+const onVideoElPlay = (e: Event): void => {
+  endcardPlugin.reset()
+  if (e.target !== null) e.target.removeEventListener('play', onVideoElPlay)
+}
+
 const onVideoElFirstQuartile = (): void => {
   endcardPlugin.render()
 }
 
-const onVideoElEnd = (): void => {
+const onVideoElEnd = (e: Event): void => {
+  if (e.target !== null) e.target.addEventListener('play', onVideoElPlay)
   endcardPlugin.addClickEvents()
   endcardPlugin.show()
   endcardPlugin.revolverplay()

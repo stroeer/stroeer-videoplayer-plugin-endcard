@@ -26,5 +26,5 @@ export interface IEndcardOptions {
   onRevolverplayPauseCallback?: Function
   dataKeyMap?: Object
   revolverplayTime?: number
-  showEndcard?: boolean
+  showFallback?: boolean
 }

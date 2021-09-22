@@ -16,7 +16,7 @@ $endcard-plugin-text-color: #fff !default;
 $endcard-plugin-button-pause-bg-color: rgba(255, 255, 255, 0.4) !default;
 $endcard-plugin-button-pause-bg-color-hover: rgba(255, 255, 255, 0.2) !default;
 $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
-$endcard-plugin-controlbar-height-mobile: 64px !default;
+$endcard-plugin-controlbar-height-mobile: 55px !default;
 
 .plugin-endcard-container {
   background-color: $endcard-plugin-bg-color;
@@ -43,6 +43,10 @@ $endcard-plugin-controlbar-height-mobile: 64px !default;
   box-sizing: border-box;
   cursor: pointer;
   overflow: hidden;
+}
+
+.plugin-endcard-tile-replay {
+  z-index: 101;
 }
 
 .plugin-endcard-tile-single,
@@ -95,18 +99,12 @@ $endcard-plugin-controlbar-height-mobile: 64px !default;
 
 .plugin-endcard-title {
   margin: 0;
-  padding: $endcard-plugin-spacing-small $endcard-plugin-spacing-large;
+  padding: $endcard-plugin-spacing-small;
   width: 100%;
   box-sizing: border-box;
   color: $endcard-plugin-text-color;
   font-weight: bold;
   font-size: $endcard-plugin-font-size-medium;
-  background: $endcard-plugin-title-bg;
-
-  .plugin-endcard-tile-0 & {
-    font-size: $endcard-plugin-font-size-large;
-    padding: $endcard-plugin-spacing-large;
-  }
 }
 
 .plugin-endcard-replay-title {
@@ -158,13 +156,36 @@ $endcard-plugin-controlbar-height-mobile: 64px !default;
   transition: all 1s ease;
 }
 
+.stroeer-videoplayer .stroeer-videoplayer-ui.plugin-endcard-ui-small {
+  height: $endcard-plugin-controlbar-height-mobile;
+  top: inherit;
+  bottom: 0;
+
+  .default .video-overlay {
+    background: none;
+  }
+}
+
 @media only screen and (min-width: 769px) {
+  .plugin-endcard-container {
+    z-index: 101;
+  }
+
   .plugin-endcard-tile {
     display: block;
   }
 
   .plugin-endcard-overlay {
     bottom: 0;
+  }
+
+  .plugin-endcard-title {
+    background: $endcard-plugin-title-bg;
+
+    .plugin-endcard-tile-0 & {
+      font-size: $endcard-plugin-font-size-large;
+      padding: $endcard-plugin-spacing-large;
+    }
   }
 
   .plugin-endcard-tile-0 {

@@ -43,6 +43,16 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
   box-sizing: border-box;
   cursor: pointer;
   overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: $endcard-plugin-tile-overlay-bg;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.4s;
+    opacity: 0;
+  }
 }
 
 .plugin-endcard-tile-replay {
@@ -59,11 +69,7 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
 .plugin-endcard-tile-0,
 .plugin-endcard-tile-replay {
   &::before {
-    content: "";
-    position: absolute;
-    background-color: $endcard-plugin-tile-overlay-bg;
-    width: 100%;
-    height: 100%;
+    opacity: 1;
   }
 }
 
@@ -221,6 +227,10 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
     }
 
     &:hover {
+      &::before {
+        opacity: 1;
+      }
+
       .plugin-endcard-overlay {
         opacity: 1;
       }

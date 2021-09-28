@@ -323,7 +323,7 @@
         return EndcardPlugin;
     }());
 
-    var version = "0.11.0";
+    var version = "0.11.1";
 
     var endcardPlugin;
     var onVideoElPlay = function (e) {

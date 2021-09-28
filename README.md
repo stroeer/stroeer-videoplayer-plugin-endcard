@@ -20,6 +20,16 @@ For more commands see [package.json](https://github.com/stroeer/stroeer-videopla
 ## 👾 Dependencies
 This is a plugin for a videoplayer, make sure your videoplayer provide these [functions](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/83b2d310e4e3e7dbb5770b1af2f50086e25958f3/types/types.d.ts#L11).
 
+
+The Endcard Plugin assumes that your site provides the bootstrap 3.3.7 `.hidden` class. If you don't provide this class please add it to your sites css.
+
+```css
+.hidden {
+  display: none !important;
+}
+```
+
+
 The Stroeer Videoplayer Endcard Plugin works with data from a custom API but uses determined keys. So you have to provide these keys or you have to map these in the options object. For more information read next section.
 
 ## 😯 Notable features
@@ -68,11 +78,13 @@ Object to map keys of API data structure.
 ### `revolverplayTime` - number
 
 The number of seconds for the revolverplay countdown. If you set `0` then revolverplay is deactivated.
+
 `Default: 5`
 
 ### `showFallback` - boolean
 
 If set to true the fallback (only replay tile) is shown.
+
 `Default: false`
 
 ## 🌐 Real World Example
@@ -82,9 +94,7 @@ You can see a running example also in [index.html](https://github.com/stroeer/st
 The only required data-attribute for the endcard to work is `data-endcard-url`.
 ```HTML
 <video id="myvideo" class="stroeervideoplayer" data-endcard-url="http://localhost:5000/">
-	<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-1080p.mp4" type="video/mp4" data-label="1080p" />
-	<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-720p.mp4" type="video/mp4" data-label="720p" />
-	<source src="https://evilcdn.net/demo-videos/walialu-44s-testspot-longboarding-240p.mp4" type="video/mp4" data-label="240p" />
+	<source src="https://vid-cdn60.stroeermb.de/1307753225_v4/playlist.m3u8" type="application/x-mpegURL">
 </video>
 ``` 
 
@@ -98,7 +108,7 @@ myvideoplayer.initPlugin('Endcard', {
 		image_small: 'thumbnail'
 	},
 	onLoadedCallback: () => {
-	 console.log('OnLoadedCallback triggered')
+		console.log('OnLoadedCallback triggered')
  	},
  	onClickToPlayCallback: () => {
 		console.log('onClickToPlayCallback triggered')
@@ -107,7 +117,7 @@ myvideoplayer.initPlugin('Endcard', {
 		console.log('onClickToReplayCallback triggered')
 	},
 	onRevolverplayCallback: () => {
-	 console.log('OnRevolverplayCallback triggered')
+		console.log('OnRevolverplayCallback triggered')
  	},
  	onRevolverplayPauseCallback: () => {
 		console.log('OnRevolverplayPauseCallback triggered')
@@ -130,13 +140,13 @@ $endcard-plugin-title-bg: linear-gradient(
 ) !default;
 $endcard-plugin-spacing-large: 16px !default;
 $endcard-plugin-spacing-small: 12px !default;
-$endcard-plugin-font-size-smaller: 10px !default;
 $endcard-plugin-font-size-small: 12px !default;
+$endcard-plugin-font-size-smaller: 10px !default;
 $endcard-plugin-font-size-medium: 14px !default;
 $endcard-plugin-font-size-large: 16px !default;
 $endcard-plugin-text-color: #fff !default;
 $endcard-plugin-button-pause-bg-color: rgba(255, 255, 255, 0.4) !default;
 $endcard-plugin-button-pause-bg-color-hover: rgba(255, 255, 255, 0.2) !default;
 $endcard-plugin-tile-overlay-bg: rgba(0, 0, 0, 0.4) !default;
-$endcard-plugin-controlbar-height-mobile: 64px !default;
+$endcard-plugin-controlbar-height-mobile: 55px !default;
 ```

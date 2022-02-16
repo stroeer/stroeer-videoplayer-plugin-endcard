@@ -65,7 +65,7 @@ class EndcardPlugin {
   revolverplay = (): void => {
     if (this.revolverplayTime === 0 || this.showFallback) return
 
-    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+    /* eslint-disable-next-line */
     const progressSvgCircle = this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')! as HTMLElement
     let remainingTime = this.revolverplayTime
     const revolverplayTicker = (): void => {

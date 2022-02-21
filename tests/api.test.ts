@@ -82,7 +82,7 @@ test('api fetch should throw error', async () => {
   setOk = false
   try {
     await fetchAPI('https://videos.giga.de/suggestions/1363284707')
-  } catch (e) {
+  } catch (e: any) {
     expect(e.message).toEqual('HTTP error! status: undefined')
   }
 })

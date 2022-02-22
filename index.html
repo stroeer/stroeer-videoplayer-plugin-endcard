@@ -92,6 +92,21 @@
 			video.addEventListener('contentVideoThirdQuartile', function() {
 				console.log('contentVideoThirdQuartile')
 			})
+			video.addEventListener('plugin-endcard:show', function() {
+				console.log('plugin-endcard:show')
+			})
+			video.addEventListener('plugin-endcard:click-to-play', function() {
+				console.log('plugin-endcard:click-to-play')
+			})
+			video.addEventListener('plugin-endcard:click-to-replay', function() {
+				console.log('plugin-endcard:click-to-replay')
+			})
+			video.addEventListener('plugin-endcard:revolverplay', function() {
+				console.log('plugin-endcard:revolverplay')
+			})
+			video.addEventListener('plugin-endcard:revolverplay-pause', function() {
+				console.log('plugin-endcard:revolverplay-pause')
+			})
 
 			const myvideoplayer = new StroeerVideoplayer(video)
 			myvideoplayer.loadStreamSource()

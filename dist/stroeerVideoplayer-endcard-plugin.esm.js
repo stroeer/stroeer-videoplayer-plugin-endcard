@@ -83,7 +83,7 @@ function fetchAPI(request) {
                 case 1:
                     response = _a.sent();
                     if (!response.ok) {
-                        throw new Error("HTTP error! status: " + response.status);
+                        throw new Error("HTTP error! status: ".concat(response.status));
                     }
                     _a.label = 2;
                 case 2:
@@ -117,18 +117,18 @@ var transformData = function (data, keyMap) {
 };
 
 var getTile = function (index, obj, revolverplayTime) {
-    var template = "\n    <style>\n      .plugin-endcard-tile-" + index + " .plugin-endcard-thumbnail {\n        background-image: url(" + obj.image_small + ");\n      }\n\n      @media only screen and (min-width: 769px) {\n        .plugin-endcard-tile-" + index + " .plugin-endcard-thumbnail {\n          background-image: url(" + (index === 0 ? obj.image_large : obj.image_medium) + ");\n        }\n      }\n    </style>\n    <div class=\"plugin-endcard-tile plugin-endcard-tile-" + index + "\" data-idx=\"" + index + "\" data-role=\"plugin-endcard-tile\">\n      " + (index === 0 && revolverplayTime !== 0
+    var template = "\n    <style>\n      .plugin-endcard-tile-".concat(index, " .plugin-endcard-thumbnail {\n        background-image: url(").concat(obj.image_small, ");\n      }\n\n      @media only screen and (min-width: 769px) {\n        .plugin-endcard-tile-").concat(index, " .plugin-endcard-thumbnail {\n          background-image: url(").concat(index === 0 ? obj.image_large : obj.image_medium, ");\n        }\n      }\n    </style>\n    <div class=\"plugin-endcard-tile plugin-endcard-tile-").concat(index, "\" data-idx=\"").concat(index, "\" data-role=\"plugin-endcard-tile\">\n      ").concat(index === 0 && revolverplayTime !== 0
         ? '<button class="plugin-endcard-button-pause" data-role="plugin-endcard-pause">Anhalten</button>'
-        : '') + "  \n      <div class=\"plugin-endcard-thumbnail\"></div>\n      <div class=\"plugin-endcard-overlay\">\n        " + (index === 0
-        ? "\n          <svg class=\"plugin-endcard-revolverplay-icon\" data-role=\"plugin-endcard-revolverplay-icon\" width=\"103\" height=\"75\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n            <g filter=\"url(#filter0_d)\">\n              <path d=\"M62.073 37.89l-20-13.333A1.334 1.334 0 0040 25.667v26.666a1.334 1.334 0 002.073 1.11l20-13.334a1.335 1.335 0 000-2.218z\" fill=\"#fff\"/>\n            </g>\n            " + (revolverplayTime !== 0
+        : '', "  \n      <div class=\"plugin-endcard-thumbnail\"></div>\n      <div class=\"plugin-endcard-overlay\">\n        ").concat(index === 0
+        ? "\n          <svg class=\"plugin-endcard-revolverplay-icon\" data-role=\"plugin-endcard-revolverplay-icon\" width=\"103\" height=\"75\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n            <g filter=\"url(#filter0_d)\">\n              <path d=\"M62.073 37.89l-20-13.333A1.334 1.334 0 0040 25.667v26.666a1.334 1.334 0 002.073 1.11l20-13.334a1.335 1.335 0 000-2.218z\" fill=\"#fff\"/>\n            </g>\n            ".concat(revolverplayTime !== 0
             ? "\n              <circle class=\"plugin-endcard-progress-meter\" cx=\"48\" cy=\"39\" r=\"30.667\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.667\"/>\n              <circle class=\"plugin-endcard-progress-value\" data-role=\"plugin-endcard-progress-value\" cx=\"48\" cy=\"39\" r=\"30.667\" transform=\"rotate(-90 48 39)\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.667\" stroke-dasharray=\"192.686\" stroke-dashoffset=\"192.686\" />\n            "
-            : '') + "\n            <defs>\n              <filter id=\"filter0_d\" x=\"-5.333\" y=\"-1\" width=\"112\" height=\"112\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">\n                <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>\n                <feColorMatrix in=\"SourceAlpha\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\"/>\n                <feOffset dy=\"16\"/><feGaussianBlur stdDeviation=\"20\"/>\n                <feColorMatrix values=\"0 0 0 0 0.490196 0 0 0 0 0.596078 0 0 0 0 0.698039 0 0 0 0.2 0\"/>\n                <feBlend mode=\"multiply\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow\"/>\n                <feBlend in=\"SourceGraphic\" in2=\"effect1_dropShadow\" result=\"shape\"/>\n              </filter>\n            </defs>\n          </svg> \n        "
-        : "\n        <svg class=\"plugin-endcard-play-icon\" width=\"22\" height=\"29\" viewBox=\"0 0 17 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n          <path d=\"M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z\" fill=\"white\"/>\n        </svg>\n        ") + "\n        <p class=\"plugin-endcard-title\">\n          " + (index === 0 ? '<span class="plugin-endcard-title-pre">Nächstes Video</span>' : '') + "\n          " + obj.title + "\n        </p>\n      </div>\n    </div>\n\n  ";
+            : '', "\n            <defs>\n              <filter id=\"filter0_d\" x=\"-5.333\" y=\"-1\" width=\"112\" height=\"112\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">\n                <feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>\n                <feColorMatrix in=\"SourceAlpha\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\"/>\n                <feOffset dy=\"16\"/><feGaussianBlur stdDeviation=\"20\"/>\n                <feColorMatrix values=\"0 0 0 0 0.490196 0 0 0 0 0.596078 0 0 0 0 0.698039 0 0 0 0.2 0\"/>\n                <feBlend mode=\"multiply\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow\"/>\n                <feBlend in=\"SourceGraphic\" in2=\"effect1_dropShadow\" result=\"shape\"/>\n              </filter>\n            </defs>\n          </svg> \n        ")
+        : "\n        <svg class=\"plugin-endcard-play-icon\" width=\"22\" height=\"29\" viewBox=\"0 0 17 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n          <path d=\"M16.555 10.168L1.555 0.168C1.248 -0.0359995 0.853 -0.0559995 0.529 0.118001C0.203 0.292001 0 0.631001 0 1V21C0 21.369 0.203 21.708 0.528 21.882C0.676 21.961 0.838 22 1 22C1.194 22 1.388 21.943 1.555 21.832L16.555 11.832C16.833 11.646 17 11.334 17 11C17 10.666 16.833 10.354 16.555 10.168Z\" fill=\"white\"/>\n        </svg>\n        ", "\n        <p class=\"plugin-endcard-title\">\n          ").concat(index === 0 ? '<span class="plugin-endcard-title-pre">Nächstes Video</span>' : '', "\n          ").concat(obj.title, "\n        </p>\n      </div>\n    </div>\n\n  ");
     return template;
 };
 var getTileReplay = function (imageUrl, classes) {
     if (classes === void 0) { classes = ''; }
-    var template = "\n    <div class=\"plugin-endcard-tile-replay " + classes + "\" data-role=\"plugin-endcard-tile-replay\">\n      <div class=\"plugin-endcard-thumbnail\" style=\"background-image: url(" + imageUrl + ");\"></div>\n      <div class=\"plugin-endcard-overlay\">\n        <svg class=\"plugin-endcard-replay-icon\" width=\"26\" height=\"21\" viewBox=\"0 0 20 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n          <path d=\"M19 16H1C0.447715 16 0 15.5523 0 15V10C0 9.44772 0.447715 9 1 9C1.55228 9 2 9.44772 2 10V14H18V5H8V8L3 4L8 0V3H19C19.553 3 20 3.447 20 4V15C20 15.553 19.553 16 19 16Z\" fill=\"white\"/>\n        </svg>\n        <p class=\"plugin-endcard-replay-title\">Video wiederholen</p>\n      </div>\n    </div>\n  ";
+    var template = "\n    <div class=\"plugin-endcard-tile-replay ".concat(classes, "\" data-role=\"plugin-endcard-tile-replay\">\n      <div class=\"plugin-endcard-thumbnail\" style=\"background-image: url(").concat(imageUrl, ");\"></div>\n      <div class=\"plugin-endcard-overlay\">\n        <svg class=\"plugin-endcard-replay-icon\" width=\"26\" height=\"21\" viewBox=\"0 0 20 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n          <path d=\"M19 16H1C0.447715 16 0 15.5523 0 15V10C0 9.44772 0.447715 9 1 9C1.55228 9 2 9.44772 2 10V14H18V5H8V8L3 4L8 0V3H19C19.553 3 20 3.447 20 4V15C20 15.553 19.553 16 19 16Z\" fill=\"white\"/>\n        </svg>\n        <p class=\"plugin-endcard-replay-title\">Video wiederholen</p>\n      </div>\n    </div>\n  ");
     return template;
 };
 
@@ -176,6 +176,7 @@ var EndcardPlugin = /** @class */ (function () {
             var revolverplayTicker = function () {
                 ticker(_this.revolverplayTime, remainingTime, progressSvgCircle, function () {
                     _this.play(0, true);
+                    _this.dispatchEvent('plugin-endcard:revolverplay');
                     _this.onRevolverplayCallback();
                 });
                 remainingTime--;
@@ -202,12 +203,14 @@ var EndcardPlugin = /** @class */ (function () {
             if (idx === null)
                 return;
             _this.play(parseInt(idx), false);
+            _this.dispatchEvent('plugin-endcard:click-to-play');
             _this.onClickToPlayCallback();
         };
         this.clickToReplay = function (e) {
             e.preventDefault();
             e.stopPropagation();
             _this.replay();
+            _this.dispatchEvent('plugin-endcard:click-to-replay');
             _this.onClickToReplayCallback();
         };
         this.clickToPause = function (e) {
@@ -215,6 +218,7 @@ var EndcardPlugin = /** @class */ (function () {
             var target = e.currentTarget;
             e.preventDefault();
             e.stopPropagation();
+            _this.dispatchEvent('plugin-endcard:revolverplay-pause');
             _this.onRevolverplayPauseCallback();
             _this.clearRevolverplayTimer();
             if (target !== null) {
@@ -294,6 +298,7 @@ var EndcardPlugin = /** @class */ (function () {
                 _this.videoplayer.exitFullscreen();
             }
             _this.endcardContainer.classList.remove('hidden');
+            _this.dispatchEvent('plugin-endcard:show');
             _this.onLoadedCallback();
         };
         this.videoplayer = stroeervideoplayer;
@@ -314,6 +319,11 @@ var EndcardPlugin = /** @class */ (function () {
         this.videoElement.after(this.endcardContainer);
         return this;
     }
+    EndcardPlugin.prototype.dispatchEvent = function (eventName, data) {
+        if (data === void 0) { data = {}; }
+        var event = new CustomEvent(eventName, { detail: data });
+        this.videoplayer.getVideoEl().dispatchEvent(event);
+    };
     return EndcardPlugin;
 }());
 
@@ -358,4 +368,4 @@ var plugin = {
     version: version
 };
 
-export default plugin;
+export { plugin as default };

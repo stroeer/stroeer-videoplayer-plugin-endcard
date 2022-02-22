@@ -46,6 +46,11 @@ class EndcardPlugin {
     return this
   }
 
+  dispatchEvent (eventName: string, data: object = {}): void {
+    const event = new CustomEvent(eventName, { detail: data })
+    this.videoplayer.getVideoEl().dispatchEvent(event)
+  }
+
   getEndcardUrl = (): string => {
     const url = this.videoElement.dataset.endcardUrl
     return url !== undefined ? url : ''
@@ -71,6 +76,7 @@ class EndcardPlugin {
     const revolverplayTicker = (): void => {
       ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
         this.play(0, true)
+        this.dispatchEvent('plugin-endcard:revolverplay')
         this.onRevolverplayCallback()
       })
       remainingTime--
@@ -102,6 +108,7 @@ class EndcardPlugin {
     const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
     if (idx === null) return
     this.play(parseInt(idx), false)
+    this.dispatchEvent('plugin-endcard:click-to-play')
     this.onClickToPlayCallback()
   }
 
@@ -109,6 +116,7 @@ class EndcardPlugin {
     e.preventDefault()
     e.stopPropagation()
     this.replay()
+    this.dispatchEvent('plugin-endcard:click-to-replay')
     this.onClickToReplayCallback()
   }
 
@@ -118,6 +126,7 @@ class EndcardPlugin {
 
     e.preventDefault()
     e.stopPropagation()
+    this.dispatchEvent('plugin-endcard:revolverplay-pause')
     this.onRevolverplayPauseCallback()
     this.clearRevolverplayTimer()
 
@@ -213,6 +222,7 @@ class EndcardPlugin {
       this.videoplayer.exitFullscreen()
     }
     this.endcardContainer.classList.remove('hidden')
+    this.dispatchEvent('plugin-endcard:show')
     this.onLoadedCallback()
   }
 }

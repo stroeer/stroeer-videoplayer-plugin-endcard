@@ -170,7 +170,7 @@ var EndcardPlugin = /** @class */ (function () {
         this.revolverplay = function () {
             if (_this.revolverplayTime === 0 || _this.showFallback)
                 return;
-            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+            /* eslint-disable-next-line */
             var progressSvgCircle = _this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]');
             var remainingTime = _this.revolverplayTime;
             var revolverplayTicker = function () {
@@ -327,7 +327,7 @@ var EndcardPlugin = /** @class */ (function () {
     return EndcardPlugin;
 }());
 
-var version = "0.11.1";
+var version = "0.12.0";
 
 var endcardPlugin;
 var onVideoElPlay = function (e) {

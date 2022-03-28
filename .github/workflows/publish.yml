@@ -3,21 +3,42 @@ on:
     tags:
     - 'v*'
 
-name: Publish to NPM
+name: Publish
 
 jobs:
-  publish:
-    runs-on: ubuntu-latest
+  npm:
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn install || exit 1
+          registry-url: 'https://registry.npmjs.org'
+      - run: yarn install --frozen-lockfile || exit 1
       - run: yarn lint || exit 2
       - run: yarn test || exit 3
       - run: yarn build || exit 4
-      - uses: JS-DevTools/npm-publish@v1
+      - name: publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
+
+  github:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          token: ${{ secrets.NPM_TOKEN }}
-          access: public
+          node-version: 16
+          registry-url: "https://npm.pkg.github.com"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn install --frozen-lockfile || exit 1
+      - run: yarn lint || exit 2
+      - run: yarn test || exit 3
+      - run: yarn build || exit 4
+      - name: publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm publish
+

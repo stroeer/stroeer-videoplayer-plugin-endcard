@@ -180,7 +180,7 @@ test('hide should hide endcard and show UI controlbar', () => {
 
 // important for async functions --> waits until pending Promises are resolve
 // https://stackoverflow.com/questions/44741102/how-to-make-jest-wait-for-all-asynchronous-code-to-finish-execution-before-expec
-const flushPromises = () => new Promise(setImmediate) 
+const flushPromises = () => new Promise(process.nextTick)
 
 describe('testing render with working fetch API', () => {
   // Applies only to tests in this describe block

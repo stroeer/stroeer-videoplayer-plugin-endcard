@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Endcard Plugin</title>
+
+		<style>
+			html, body {
+				font-family: Roboto, sans-serif;
+				background-color: black;
+			}
+
+			video {
+				max-width: 100%;
+				width: 100%;
+			}
+
+			.container {
+				margin: 0 auto;
+				max-width: 650px;
+			}
+
+			.hidden {
+				display: none !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<video id="myvideo" class="stroeervideoplayer" data-meta='{"id":255559724,"title":"4 Tipps, mit denen du beim Amazon Prime Day richtig sparen kannst","duration":188,"producer":"origin:self","uploaded":"2019-07-12T13:02:07.000Z"}'
+				preload="metadata" poster="https://videos.giga.de/files/1307753225/720p.jpg" controls playsinline data-endcard-url="https://videos.giga.de/suggestions/1307753225">
+				<source src="https://vid-cdn60.stroeermb.de/1307753225_v4/playlist.m3u8" type="application/x-mpegURL">
+			</video>
+		</div>
+
+		<link rel="stylesheet" href="dist/stroeerVideoplayer-endcard-plugin.min.css" />
+		<link rel="stylesheet" href="node_modules/@stroeer/stroeer-videoplayer/dist/StroeerVideoplayer.css" />
+		<link rel="stylesheet" href="node_modules/@stroeer/stroeer-videoplayer-default-ui/dist/StroeerVideoplayer-default-ui.css" />
+
+		<script type="module" src="dev.esm.js"></script>
+	</body>
+</html>

@@ -6,6 +6,9 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import scss from 'rollup-plugin-scss'
 import pkg from './package.json'
 
+const isDevMode = Boolean(process.env.ROLLUP_WATCH)
+console.log('is dev mode', isDevMode)
+
 export default [{
   input: 'src/index.ts',
   output: {
@@ -13,11 +16,13 @@ export default [{
     exports: 'default',
     format: 'umd',
     name: 'StroeerVideoplayerEndcardPlugin',
-    sourcemap: true
+    sourcemap: isDevMode
   },
   plugins: [
     nodeResolve(),
-    typescript(),
+    typescript({
+      sourceMap: isDevMode
+    }),
     json(),
     svg(),
     scss({
@@ -32,12 +37,15 @@ export default [{
   output: [
     {
       file: pkg.module,
-      format: 'es'
+      format: 'es',
+      sourcemap: isDevMode
     }
   ],
   plugins: [
     nodeResolve(),
-    typescript(),
+    typescript({
+      sourceMap: isDevMode
+    }),
     json(),
     svg(),
     scss({

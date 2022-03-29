@@ -8,6 +8,7 @@
   "dist"
  ],
  "scripts": {
+  "dev": "rollup -c rollup.config.dev.js -w",
   "start": "lite-server",
   "build": "npm-run-all build:*",
   "build:js": "rollup -c",

@@ -10,6 +10,7 @@ export default [{
     {
       file: 'dev/stroeerVideoplayer-endcard-plugin.esm.js',
       format: 'es',
+      exports: 'named',
       sourcemap: true
     }
   ],

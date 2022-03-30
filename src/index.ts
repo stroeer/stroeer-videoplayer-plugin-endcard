@@ -47,4 +47,4 @@ const plugin = {
   version: version
 }
 
-export default plugin
+export { plugin as StroeerVideoplayerEndcardPlugin }

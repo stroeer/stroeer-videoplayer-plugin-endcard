@@ -1,6 +1,6 @@
 import StroeerVideoplayer from '@stroeer/stroeer-videoplayer'
 import StroeerVideoplayerDefaultUI from '@stroeer/stroeer-videoplayer-default-ui'
-import StroeerVideoplayerEndcardPlugin from './stroeerVideoplayer-endcard-plugin.esm'
+import { StroeerVideoplayerEndcardPlugin } from './stroeerVideoplayer-endcard-plugin.esm'
 
 StroeerVideoplayer.registerUI(StroeerVideoplayerDefaultUI)
 StroeerVideoplayer.registerPlugin(StroeerVideoplayerEndcardPlugin)

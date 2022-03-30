@@ -6,3 +6,9 @@ dev.html
 /coverage
 /yarn-error.log
 /stats.html
+dev/dev.esm.js
+dev/dev.esm.js.map
+dev/stroeerVideoplayer-endcard-plugin.esm.js
+dev/stroeerVideoplayer-endcard-plugin.esm.js.map
+dev/stroeerVideoplayer-endcard-plugin.min.css
+dev/stroeerVideoplayer-endcard-plugin.min.css.map

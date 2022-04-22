@@ -30,7 +30,8 @@ const plugin = {
     const videoEl = stroeervideoplayer.getVideoEl()
     endcardPlugin = new EndcardPlugin(stroeervideoplayer, opts)
 
-    videoEl.addEventListener('contentVideoFirstQuartile', onVideoElFirstQuartile)
+    console.log('add second octile')
+    videoEl.addEventListener('contentVideoSecondOctile', onVideoElFirstQuartile)
     videoEl.addEventListener('contentVideoEnded', onVideoElEnd)
   },
   deinit: (stroeervideoplayer: IStroeerVideoplayer) => {
@@ -38,7 +39,7 @@ const plugin = {
     const endcardContainer = stroeervideoplayer.getRootEl().querySelector('.plugin-endcard-container')
 
     if (endcardContainer !== undefined) {
-      videoEl.removeEventListener('contentVideoFirstQuartile', onVideoElFirstQuartile)
+      videoEl.removeEventListener('contentVideoSecondOctile', onVideoElFirstQuartile)
       videoEl.removeEventListener('contentVideoEnded', onVideoElEnd)
       endcardPlugin.reset()
       endcardContainer.remove()

@@ -47,16 +47,16 @@ video.addEventListener('contentVideoEnded', function () {
   console.log('contentVideoEnded')
 })
 
-video.addEventListener('contentVideoFirstQuartile', function () {
-  console.log('contentVideoFirstQuartile')
+video.addEventListener('contentVideoSecondOctile', function () {
+  console.log('contentVideoSecondOctile')
 })
 
 video.addEventListener('contentVideoMidpoint', function () {
   console.log('contentVideoMidpoint')
 })
 
-video.addEventListener('contentVideoThirdQuartile', function () {
-  console.log('contentVideoThirdQuartile')
+video.addEventListener('contentVideoSixthOctile', function () {
+  console.log('contentVideoSixthOctile')
 })
 
 video.addEventListener('plugin-endcard:show', function () {

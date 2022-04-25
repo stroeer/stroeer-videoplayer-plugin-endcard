@@ -30,7 +30,6 @@ const plugin = {
     const videoEl = stroeervideoplayer.getVideoEl()
     endcardPlugin = new EndcardPlugin(stroeervideoplayer, opts)
 
-    console.log('add second octile')
     videoEl.addEventListener('contentVideoSecondOctile', onVideoElFirstQuartile)
     videoEl.addEventListener('contentVideoEnded', onVideoElEnd)
   },

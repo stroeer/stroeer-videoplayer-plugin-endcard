@@ -27,6 +27,10 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
   bottom: 0;
 }
 
+.endcard-hidden {
+  display: none !important;
+}
+
 .plugin-endcard-overlay {
   position: absolute;
   width: 100%;

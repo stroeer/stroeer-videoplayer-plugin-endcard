@@ -15,19 +15,13 @@ Important: You have to set the correct url of your API in [index.html](https://g
 
 Test via `yarn run test`.
 
+Dev environment via: `yarn run dev`
+
 For more commands see [package.json](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/83b2d310e4e3e7dbb5770b1af2f50086e25958f3/package.json#L9)
 
 ## 👾 Dependencies
 This is a plugin for a videoplayer, make sure your videoplayer provide these [functions](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/83b2d310e4e3e7dbb5770b1af2f50086e25958f3/types/types.d.ts#L11).
 
-
-The Endcard Plugin assumes that your site provides the bootstrap 3.3.7 `.hidden` class. If you don't provide this class please add it to your sites css.
-
-```css
-.hidden {
-  display: none !important;
-}
-```
 
 
 The Stroeer Videoplayer Endcard Plugin works with data from a custom API but uses determined keys. So you have to provide these keys or you have to map these in the options object. For more information read next section.
@@ -37,10 +31,13 @@ The Stroeer Videoplayer Endcard Plugin uses determined [data keys](https://githu
 
 ```javascript
 myvideoplayer.initPlugin('Endcard', {
+  showEndcard: true,
 	dataKeyMap: {
 		// key of endcard, key from API
-		image_large: 'poster',
-		image_small: 'thumbnail',
+    endpoint: ‘endcard_url’,
+    image_small: ‘thumbnail’,
+    image_medium: ‘preview_image’,
+    image_large: ‘preview_image’,
 	},
 })
 ```

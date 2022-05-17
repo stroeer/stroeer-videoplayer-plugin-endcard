@@ -53,15 +53,15 @@ createDom()
 const mockTicker = jest
   .spyOn(revolverplay, 'ticker')
   .mockImplementation(() => '')
-  
+
 const mockClearRevolverplay = jest
   .spyOn(plugin, 'clearRevolverplayTimer')
   .mockImplementation(() => '')
-  
+
 const mockHide = jest
   .spyOn(plugin, 'hide')
   .mockImplementation(() => '')
-  
+
 const mockReplay = jest
   .spyOn(plugin, 'replay')
   .mockImplementation(() => '')
@@ -69,11 +69,11 @@ const mockReplay = jest
 const mockPlay = jest
   .spyOn(plugin, 'play')
   .mockImplementation(() => '')
-    
+
 const mockRemoveClickEvents = jest
   .spyOn(plugin, 'removeClickEvents')
   .mockImplementation(() => '')
-  
+
 const mockSetEndcardUrl = jest
   .spyOn(plugin, 'setEndcardUrl')
   .mockImplementation(() => '')
@@ -82,7 +82,7 @@ test('clickToReplay should call correct functions', () => {
   plugin.onClickToReplayCallback = jest.fn()
   const target = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
   const e = new Event('click')
-  Object.defineProperty(e, 'target', {value: target, enumerable: true});
+  Object.defineProperty(e, 'target', { value: target, enumerable: true });
   plugin.clickToReplay(e)
   expect(mockReplay).toHaveBeenCalledTimes(1)
   expect(plugin.onClickToReplayCallback).toHaveBeenCalledTimes(1)
@@ -92,7 +92,7 @@ test('clickToPause should call correct functions', () => {
   plugin.onRevolverplayPauseCallback = jest.fn()
   const target = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
   const e = new Event('click')
-  Object.defineProperty(e, 'target', {value: target, enumerable: true});
+  Object.defineProperty(e, 'target', { value: target, enumerable: true });
   plugin.clickToPause(e)
   expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
   expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
@@ -102,22 +102,22 @@ test('clickToPlay should call correct functions', () => {
   plugin.onClickToPlayCallback = jest.fn()
   const target = document.querySelector('[data-role="plugin-endcard-tile"]') as HTMLElement
   const e = new Event('click')
-  Object.defineProperty(e, 'target', {value: target, enumerable: true});
+  Object.defineProperty(e, 'target', { value: target, enumerable: true });
   plugin.clickToPlay(e)
   expect(mockPlay).toHaveBeenCalledTimes(1)
   expect(plugin.onClickToPlayCallback).toHaveBeenCalledTimes(1)
 })
-  
+
 test('play should call correct functions', () => {
-  mockPlay.mockRestore() 
+  mockPlay.mockRestore()
   plugin.play(0, true)
   expect(mockSetEndcardUrl).toHaveBeenCalledTimes(1)
   expect(svp.replaceAndPlay).toHaveBeenCalledTimes(1)
 })
 
 test('replay should call correct functions', () => {
-  mockReplay.mockRestore()  
-	plugin.replay()
+  mockReplay.mockRestore()
+  plugin.replay()
   expect(svp.play).toHaveBeenCalledTimes(1)
 })
 
@@ -135,20 +135,20 @@ test('get and set endcard url work correctly', () => {
 
 test('click events should call correct functions', () => {
   const tiles = document.querySelectorAll('[data-role="plugin-endcard-tile"]') as NodeListOf<HTMLElement>
-	const replayTile = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
+  const replayTile = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
   const pauseButton = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
   plugin.clickToPlay = jest.fn()
   plugin.clickToReplay = jest.fn()
   plugin.clickToPause = jest.fn()
-  
+
   plugin.addClickEvents()
   tiles.forEach(tile => {
     tile.click()
   })
-	replayTile.click()
+  replayTile.click()
   pauseButton.click()
-	
-	expect(plugin.clickToReplay).toHaveBeenCalledTimes(1)
+
+  expect(plugin.clickToReplay).toHaveBeenCalledTimes(1)
   expect(plugin.clickToPlay).toHaveBeenCalledTimes(2)
   expect(plugin.clickToPause).toHaveBeenCalledTimes(1)
 })
@@ -157,14 +157,14 @@ test('show should show endcard, hide UI controlbar and call callback', () => {
   plugin.onLoadedCallback = jest.fn()
   plugin.showFallback = true
   plugin.show()
-  expect(plugin.endcardContainer.classList).not.toContain('hidden')
+  expect(plugin.endcardContainer.classList).not.toContain('endcard-hidden')
   expect(plugin.uiEl.classList).toContain('plugin-endcard-ui-small')
   expect(plugin.onLoadedCallback).toHaveBeenCalledTimes(1)
 })
 
 test('reset should call correct functions', () => {
   plugin.reset()
-  
+
   expect(mockRemoveClickEvents).toHaveBeenCalledTimes(1)
   expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
   expect(mockHide).toHaveBeenCalledTimes(1)
@@ -174,7 +174,7 @@ test('reset should call correct functions', () => {
 test('hide should hide endcard and show UI controlbar', () => {
   mockHide.mockRestore()
   plugin.hide()
-  expect(plugin.endcardContainer.classList).toContain('hidden')
+  expect(plugin.endcardContainer.classList).toContain('endcard-hidden')
   expect(plugin.uiEl.classList).not.toContain('plugin-endcard-ui-small')
 })
 
@@ -200,14 +200,14 @@ describe('testing render with working fetch API', () => {
     })
   })
 
-  test('render should call renderFallback in case default endcard should not be shown', async () => {    
+  test('render should call renderFallback in case default endcard should not be shown', async () => {
     plugin.renderFallback = jest.fn()
     plugin.showFallback = true
     plugin.render()
     expect(plugin.renderFallback).toHaveBeenCalledTimes(1)
   })
-  
-  test('render should fill endcardContainer with HTML', async () => {   
+
+  test('render should fill endcardContainer with HTML', async () => {
     plugin.showFallback = false
     plugin.endcardContainer.innerHTML = ''
     plugin.render()
@@ -221,7 +221,7 @@ describe('testing render with failing fetch API', () => {
   beforeEach(function () {
     global.fetch = jest.fn().mockImplementation(async () => Promise.reject("API is down"))
   })
-  
+
   test('render should call renderFallback', async () => {
     // even showFallback is set to false, fallback is rendered because API fails
     plugin.showFallback = false

@@ -40,7 +40,7 @@ class EndcardPlugin {
     this.uiEl = stroeervideoplayer.getUIEl()
 
     this.endcardContainer = document.createElement('div')
-    this.endcardContainer.classList.add('plugin-endcard-container', 'hidden')
+    this.endcardContainer.classList.add('plugin-endcard-container', 'endcard-hidden')
     this.videoElement.after(this.endcardContainer)
 
     return this
@@ -212,7 +212,7 @@ class EndcardPlugin {
     if (this.uiEl.classList.contains('plugin-endcard-ui-small')) {
       this.uiEl.classList.remove('plugin-endcard-ui-small')
     }
-    this.endcardContainer.classList.add('hidden')
+    this.endcardContainer.classList.add('endcard-hidden')
   }
 
   show = (): void => {
@@ -221,7 +221,7 @@ class EndcardPlugin {
     if (typeof this.videoplayer.exitFullscreen === 'function') {
       this.videoplayer.exitFullscreen()
     }
-    this.endcardContainer.classList.remove('hidden')
+    this.endcardContainer.classList.remove('endcard-hidden')
     this.dispatchEvent('plugin-endcard:show')
     this.onLoadedCallback()
   }

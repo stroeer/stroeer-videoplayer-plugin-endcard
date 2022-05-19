@@ -13,7 +13,7 @@ Start local dev environment via: `yarn run dev`
 Start local server with index.html via `yarn start`
 
 You can use `yarn start` and `yarn watch` in different terminals to see saved changes immediately.
-Important: You have to set the correct url of your API in [index.html](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/main/index.html#L32) as `data-endcard-url` on video element.
+Important: You have to set the correct url of your API in [index.html](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/main/dev/index.html#L32) as `data-endcard-url` on video element.
 
 Test via `yarn run test`.
 
@@ -86,7 +86,7 @@ If set to true the fallback (only replay tile) is shown.
 
 ## 🌐 Real World Example
 
-You can see a running example also in [index.html](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/main/index.html)
+You can see a running example also in [index.html](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/main/dev/index.html)
 
 The only required data-attribute for the endcard to work is `data-endcard-url`.
 ```HTML

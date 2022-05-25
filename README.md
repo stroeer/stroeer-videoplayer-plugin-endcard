@@ -34,12 +34,52 @@ myvideoplayer.initPlugin('Endcard', {
   showEndcard: true,
 	dataKeyMap: {
 		// key of endcard, key from API
+    poster: ‘preview_image’,
     endpoint: ‘endcard_url’,
     image_small: ‘thumbnail’,
     image_medium: ‘preview_image’,
     image_large: ‘preview_image’,
 	},
 })
+```
+
+## API endpoint
+These endpoint items are needed for the endcard plugin:
+
+`endpoint: string` - link to the suggestions for this video
+
+`title: string` - caption/title of the video
+
+`image_small: string` - poster image in small size for all images and a browser width less than 769px
+
+`image_medium: string` - poster image in medium size for all images and a browser min-width: 769px
+
+`image_large: string` - poster image in large size for the large image and a browser min-width: 769px
+
+`poster: string` - poster image which will be set in the original video element after the endcard
+
+`playlists: array of strings` - needed by the video player
+
+An API example could look like this: 
+```json
+[
+  {
+    "title": "Elden Ring: Fundorte aller 7 legendären Zauber und Anrufungen",
+    "image_small": "https://files.giga-video.de/8b/8f/d4/ce5267fe9772673bb448ea25f9_ciAyNDYgMTM4AzhmYzJmNzZiNGFm.jpg",
+    "image_medium": "https://files.giga-video.de/8b/8f/d4/ce5267fe9772673bb448ea25f9_ciAyNDYgMTM4AzhmYzJmNzZiNGFm.jpg",
+    "image_large": "https://files.giga-video.de/8b/8f/d4/ce5267fe9772673bb448ea25f9_ciAyNDYgMTM4AzhmYzJmNzZiNGFm.jpg",
+    "poster": "https://files.giga-video.de/8b/8f/d4/ce5267fe9772673bb448ea25f9_AzhmYzJmNzZiNGFm.jpg",
+    "playlists": [
+      "https://lx56.spieletips.de/2072001061_v4/playlist.m3u8",
+      "https://vid-cdn60.stroeermb.de/2072001061_v4/playlist.m3u8",
+      "https://vid-cdn61.stroeermb.de/2072001061_v4/playlist.m3u8"
+    ],
+    "endpoint": "https://videos-dev.giga.de/suggestions/2072001061"
+  },
+  {
+  ...
+  },
+]
 ```
 
 If there is a problem with the API then the fallback (only replay tile) is shown.

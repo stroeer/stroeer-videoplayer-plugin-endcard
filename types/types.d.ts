@@ -1,6 +1,7 @@
 export interface IData {
   title: string
   playlists?: string[]
+  poster?: string
   endpoint: string
   image_large: string
   image_medium: string

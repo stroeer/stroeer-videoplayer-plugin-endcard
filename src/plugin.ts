@@ -99,6 +99,7 @@ class EndcardPlugin {
   play = (idx: number, autoplay: boolean): void => {
     this.setEndcardUrl(this.transformedData[idx].endpoint)
     this.videoplayer.replaceAndPlay(this.transformedData[idx], autoplay)
+    this.dispatchEvent('plugin-endcard:play')
   }
 
   clickToPlay = (e: Event): void => {

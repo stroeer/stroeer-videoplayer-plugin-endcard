@@ -14,6 +14,8 @@ module.exports = {
     StroeerVideoplayer: 'readonly'
   },
   rules: {
-    'comma-dangle': 'only-multiline'
+    'comma-dangle': ['error', {
+      'objects': 'only-multiline'
+    }]
   }
 }

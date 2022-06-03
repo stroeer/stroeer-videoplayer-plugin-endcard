@@ -10,14 +10,18 @@ console.log('is dev mode', isDevMode)
 
 export default [{
   input: 'src/index.ts',
-  output: [
-    {
-      file: pkg.module,
-      format: 'es',
-      exports: 'named',
-      sourcemap: isDevMode
-    }
-  ],
+  output: [{
+    file: pkg.module,
+    format: 'es',
+    exports: 'named',
+    sourcemap: isDevMode
+  }, {
+    file: pkg.main,
+    format: 'umd',
+    exports: 'named',
+    name: 'StroeerVideoPlayerEndcardPlugin',
+    sourcemap: isDevMode
+  }],
   plugins: [
     nodeResolve(),
     typescript({

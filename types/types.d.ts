@@ -28,4 +28,5 @@ export interface IEndcardOptions {
   dataKeyMap?: Object
   revolverplayTime?: number
   showFallback?: boolean
+  transformApiData?: (data: IData[]) => IData[]
 }

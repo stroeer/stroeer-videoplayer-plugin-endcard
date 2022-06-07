@@ -1,5 +1,5 @@
 {
-  "version": "1.0.6",
+  "version": "1.1.0",
   "name": "@stroeer/stroeer-videoplayer-plugin-endcard",
   "description": "Ströer Videoplayer Endcard Plugin",
   "main": "dist/stroeerVideoplayer-endcard-plugin.umd.js",
@@ -43,6 +43,7 @@
     "@typescript-eslint/parser": "4.0.0",
     "cypress": "9.5.2",
     "eslint": "7.12.1",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "21.0.1",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2",

@@ -58,17 +58,11 @@ const mockClearRevolverplay = jest
   .spyOn(plugin, 'clearRevolverplayTimer')
   .mockImplementation(() => '')
 
-const mockHide = jest
-  .spyOn(plugin, 'hide')
-  .mockImplementation(() => '')
+const mockHide = jest.spyOn(plugin, 'hide').mockImplementation(() => '')
 
-const mockReplay = jest
-  .spyOn(plugin, 'replay')
-  .mockImplementation(() => '')
+const mockReplay = jest.spyOn(plugin, 'replay').mockImplementation(() => '')
 
-const mockPlay = jest
-  .spyOn(plugin, 'play')
-  .mockImplementation(() => '')
+const mockPlay = jest.spyOn(plugin, 'play').mockImplementation(() => '')
 
 const mockRemoveClickEvents = jest
   .spyOn(plugin, 'removeClickEvents')
@@ -80,9 +74,11 @@ const mockSetEndcardUrl = jest
 
 test('clickToReplay should call correct functions', () => {
   plugin.onClickToReplayCallback = jest.fn()
-  const target = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
+  const target = document.querySelector(
+    '[data-role="plugin-endcard-tile-replay"]'
+  ) as HTMLElement
   const e = new Event('click')
-  Object.defineProperty(e, 'target', { value: target, enumerable: true });
+  Object.defineProperty(e, 'target', { value: target, enumerable: true })
   plugin.clickToReplay(e)
   expect(mockReplay).toHaveBeenCalledTimes(1)
   expect(plugin.onClickToReplayCallback).toHaveBeenCalledTimes(1)
@@ -90,9 +86,11 @@ test('clickToReplay should call correct functions', () => {
 
 test('clickToPause should call correct functions', () => {
   plugin.onRevolverplayPauseCallback = jest.fn()
-  const target = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
+  const target = document.querySelector(
+    '[data-role="plugin-endcard-pause"]'
+  ) as HTMLButtonElement
   const e = new Event('click')
-  Object.defineProperty(e, 'target', { value: target, enumerable: true });
+  Object.defineProperty(e, 'target', { value: target, enumerable: true })
   plugin.clickToPause(e)
   expect(mockClearRevolverplay).toHaveBeenCalledTimes(1)
   expect(plugin.onRevolverplayPauseCallback).toHaveBeenCalledTimes(1)
@@ -100,9 +98,11 @@ test('clickToPause should call correct functions', () => {
 
 test('clickToPlay should call correct functions', () => {
   plugin.onClickToPlayCallback = jest.fn()
-  const target = document.querySelector('[data-role="plugin-endcard-tile"]') as HTMLElement
+  const target = document.querySelector(
+    '[data-role="plugin-endcard-tile"]'
+  ) as HTMLElement
   const e = new Event('click')
-  Object.defineProperty(e, 'target', { value: target, enumerable: true });
+  Object.defineProperty(e, 'target', { value: target, enumerable: true })
   plugin.clickToPlay(e)
   expect(mockPlay).toHaveBeenCalledTimes(1)
   expect(plugin.onClickToPlayCallback).toHaveBeenCalledTimes(1)
@@ -134,15 +134,21 @@ test('get and set endcard url work correctly', () => {
 })
 
 test('click events should call correct functions', () => {
-  const tiles = document.querySelectorAll('[data-role="plugin-endcard-tile"]') as NodeListOf<HTMLElement>
-  const replayTile = document.querySelector('[data-role="plugin-endcard-tile-replay"]') as HTMLElement
-  const pauseButton = document.querySelector('[data-role="plugin-endcard-pause"]') as HTMLButtonElement
+  const tiles = document.querySelectorAll(
+    '[data-role="plugin-endcard-tile"]'
+  ) as NodeListOf<HTMLElement>
+  const replayTile = document.querySelector(
+    '[data-role="plugin-endcard-tile-replay"]'
+  ) as HTMLElement
+  const pauseButton = document.querySelector(
+    '[data-role="plugin-endcard-pause"]'
+  ) as HTMLButtonElement
   plugin.clickToPlay = jest.fn()
   plugin.clickToReplay = jest.fn()
   plugin.clickToPause = jest.fn()
 
   plugin.addClickEvents()
-  tiles.forEach(tile => {
+  tiles.forEach((tile) => {
     tile.click()
   })
   replayTile.click()
@@ -192,7 +198,7 @@ describe('testing render with working fetch API', () => {
           Id: '123',
           json: function () {
             return plugin.transformedData
-          }
+          },
         })
       })
 
@@ -214,12 +220,21 @@ describe('testing render with working fetch API', () => {
     await flushPromises()
     expect(plugin.endcardContainer.innerHTML).not.toEqual('')
   })
+
+  test('render should call the transformApiData function', async () => {
+    plugin.transformApiData = jest.fn()
+    plugin.render()
+    await flushPromises()
+    expect(plugin.transformApiData).toHaveBeenCalledTimes(1)
+  })
 })
 
 describe('testing render with failing fetch API', () => {
   // Applies only to tests in this describe block
   beforeEach(function () {
-    global.fetch = jest.fn().mockImplementation(async () => Promise.reject("API is down"))
+    global.fetch = jest
+      .fn()
+      .mockImplementation(async () => Promise.reject('API is down'))
   })
 
   test('render should call renderFallback', async () => {

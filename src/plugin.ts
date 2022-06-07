@@ -1,9 +1,9 @@
-import noop from './noop'
-import logger from './logger'
+import { IData, IEndcardOptions, IStroeerVideoplayer } from '../types/types'
 import { fetchAPI, transformData } from './api'
-import { getTile, getTileReplay } from './template'
-import { IData, IStroeerVideoplayer, IEndcardOptions } from '../types/types'
+import logger from './logger'
+import { noop, noopData } from './noop'
 import { ticker } from './revolverplay'
+import { getTile, getTileReplay } from './template'
 
 class EndcardPlugin {
   videoplayer: IStroeerVideoplayer
@@ -20,33 +20,58 @@ class EndcardPlugin {
   uiEl: HTMLDivElement
   revolverplayTime: number
   intervalTicker: NodeJS.Timeout | null
+  transformApiData: (data: IData[]) => IData[]
 
-  constructor (stroeervideoplayer: IStroeerVideoplayer, opts: IEndcardOptions = {}) {
+  constructor(
+    stroeervideoplayer: IStroeerVideoplayer,
+    opts: IEndcardOptions = {}
+  ) {
     this.videoplayer = stroeervideoplayer
     this.videoElement = stroeervideoplayer.getVideoEl()
 
     this.dataKeyMap = opts.dataKeyMap !== undefined ? opts.dataKeyMap : noop
     this.transformedData = []
-    this.showFallback = opts.showFallback !== undefined ? opts.showFallback : false
-    this.revolverplayTime = opts.revolverplayTime !== undefined ? opts.revolverplayTime : 5
+    this.showFallback =
+      opts.showFallback !== undefined ? opts.showFallback : false
+    this.revolverplayTime =
+      opts.revolverplayTime !== undefined ? opts.revolverplayTime : 5
     this.intervalTicker = null
 
-    this.onLoadedCallback = opts.onLoadedCallback !== undefined ? opts.onLoadedCallback : noop
-    this.onClickToPlayCallback = opts.onClickToPlayCallback !== undefined ? opts.onClickToPlayCallback : noop
-    this.onClickToReplayCallback = opts.onClickToReplayCallback !== undefined ? opts.onClickToReplayCallback : noop
-    this.onRevolverplayCallback = opts.onRevolverplayCallback !== undefined ? opts.onRevolverplayCallback : noop
-    this.onRevolverplayPauseCallback = opts.onRevolverplayPauseCallback !== undefined ? opts.onRevolverplayPauseCallback : noop
+    this.onLoadedCallback =
+      opts.onLoadedCallback !== undefined ? opts.onLoadedCallback : noop
+    this.onClickToPlayCallback =
+      opts.onClickToPlayCallback !== undefined
+        ? opts.onClickToPlayCallback
+        : noop
+    this.onClickToReplayCallback =
+      opts.onClickToReplayCallback !== undefined
+        ? opts.onClickToReplayCallback
+        : noop
+    this.onRevolverplayCallback =
+      opts.onRevolverplayCallback !== undefined
+        ? opts.onRevolverplayCallback
+        : noop
+    this.onRevolverplayPauseCallback =
+      opts.onRevolverplayPauseCallback !== undefined
+        ? opts.onRevolverplayPauseCallback
+        : noop
+
+    this.transformApiData =
+      opts.transformApiData !== undefined ? opts.transformApiData : noopData
 
     this.uiEl = stroeervideoplayer.getUIEl()
 
     this.endcardContainer = document.createElement('div')
-    this.endcardContainer.classList.add('plugin-endcard-container', 'endcard-hidden')
+    this.endcardContainer.classList.add(
+      'plugin-endcard-container',
+      'endcard-hidden'
+    )
     this.videoElement.after(this.endcardContainer)
 
     return this
   }
 
-  dispatchEvent (eventName: string, data: object = {}): void {
+  dispatchEvent(eventName: string, data: object = {}): void {
     const event = new CustomEvent(eventName, { detail: data })
     this.videoplayer.getVideoEl().dispatchEvent(event)
   }
@@ -71,7 +96,9 @@ class EndcardPlugin {
     if (this.revolverplayTime === 0 || this.showFallback) return
 
     /* eslint-disable-next-line */
-    const progressSvgCircle = this.endcardContainer.querySelector('[data-role="plugin-endcard-progress-value"]')! as HTMLElement
+    const progressSvgCircle = this.endcardContainer.querySelector(
+      '[data-role="plugin-endcard-progress-value"]'
+    )! as HTMLElement
     let remainingTime = this.revolverplayTime
     const revolverplayTicker = (): void => {
       ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
@@ -105,7 +132,9 @@ class EndcardPlugin {
   clickToPlay = (e: Event): void => {
     e.preventDefault()
 
-    const el = (e.target as Element).closest('[data-role="plugin-endcard-tile"]')
+    const el = (e.target as Element).closest(
+      '[data-role="plugin-endcard-tile"]'
+    )
     const idx: string | null = el !== null ? el.getAttribute('data-idx') : null
     if (idx === null) return
     this.play(parseInt(idx), false)
@@ -122,7 +151,9 @@ class EndcardPlugin {
   }
 
   clickToPause = (e: Event): void => {
-    const circles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-revolverplay-icon"] circle')
+    const circles = this.endcardContainer.querySelectorAll(
+      '[data-role="plugin-endcard-revolverplay-icon"] circle'
+    )
     const target = e.currentTarget as HTMLElement
 
     e.preventDefault()
@@ -140,11 +171,17 @@ class EndcardPlugin {
   }
 
   addClickEvents = (): void => {
-    const tiles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
-    const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
-    const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
+    const tiles = this.endcardContainer.querySelectorAll(
+      '[data-role="plugin-endcard-tile"]'
+    )
+    const pauseButton = this.endcardContainer.querySelector(
+      '[data-role="plugin-endcard-pause"]'
+    )
+    const replayTile = this.endcardContainer.querySelector(
+      '[data-role="plugin-endcard-tile-replay"]'
+    )
 
-    tiles.forEach(tile => {
+    tiles.forEach((tile) => {
       tile.addEventListener('click', this.clickToPlay)
     })
 
@@ -158,11 +195,17 @@ class EndcardPlugin {
   }
 
   removeClickEvents = (): void => {
-    const tiles = this.endcardContainer.querySelectorAll('[data-role="plugin-endcard-tile"]')
-    const pauseButton = this.endcardContainer.querySelector('[data-role="plugin-endcard-pause"]')
-    const replayTile = this.endcardContainer.querySelector('[data-role="plugin-endcard-tile-replay"]')
+    const tiles = this.endcardContainer.querySelectorAll(
+      '[data-role="plugin-endcard-tile"]'
+    )
+    const pauseButton = this.endcardContainer.querySelector(
+      '[data-role="plugin-endcard-pause"]'
+    )
+    const replayTile = this.endcardContainer.querySelector(
+      '[data-role="plugin-endcard-tile-replay"]'
+    )
 
-    tiles.forEach(tile => {
+    tiles.forEach((tile) => {
       tile.removeEventListener('click', this.clickToPlay)
     })
 
@@ -176,7 +219,10 @@ class EndcardPlugin {
   }
 
   renderFallback = (): void => {
-    const replayTemplate = getTileReplay(this.videoplayer.getPosterImage(), 'plugin-endcard-tile-single')
+    const replayTemplate = getTileReplay(
+      this.videoplayer.getPosterImage(),
+      'plugin-endcard-tile-single'
+    )
     this.endcardContainer.innerHTML += replayTemplate
   }
 
@@ -191,18 +237,25 @@ class EndcardPlugin {
     fetchAPI<object>(endpoint)
       .then((data) => {
         this.transformedData = transformData(data, this.dataKeyMap)
+        this.transformedData = this.transformApiData(this.transformedData)
         logger.log(this.transformedData)
 
         for (let i: number = 0; i < 5; i++) {
-          const tileTemplate = getTile(i, this.transformedData[i], this.revolverplayTime)
-          const replayTemplate = getTileReplay(this.videoplayer.getPosterImage())
+          const tileTemplate = getTile(
+            i,
+            this.transformedData[i],
+            this.revolverplayTime
+          )
+          const replayTemplate = getTileReplay(
+            this.videoplayer.getPosterImage()
+          )
           if (i === 3) {
             this.endcardContainer.innerHTML += replayTemplate
           }
           this.endcardContainer.innerHTML += tileTemplate
         }
       })
-      .catch(err => {
+      .catch((err) => {
         logger.log('Something went wrong with fetching api!', err)
         this.showFallback = true
         this.renderFallback()

@@ -1,5 +1,7 @@
-const noop = (): boolean => {
+export function noop(): boolean {
   return false
 }
 
-export default noop
+export function noopData<T> (data: T): T {
+  return data
+}

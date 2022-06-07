@@ -1,10 +1,10 @@
 module.exports = {
-  extends: 'standard-with-typescript',
+  extends: ['standard-with-typescript', 'prettier'],
   env: {
     'cypress/globals': true
   },
   parserOptions: {
-    project: './tsconfig.eslint.json',
+    project: './tsconfig.json',
     tsconfigRootDir: __dirname
   },
   plugins: [
@@ -12,10 +12,5 @@ module.exports = {
   ],
   globals: {
     StroeerVideoplayer: 'readonly'
-  },
-  rules: {
-    'comma-dangle': ['error', {
-      'objects': 'only-multiline'
-    }]
   }
 }

@@ -124,7 +124,7 @@ If set to true the fallback (only replay tile) is shown.
 
 `Default: false`
 
-### `showFallback` - Function
+### `transformApiData` - Function
 
 A function which gets the current API Data after it got transformed by the `dataKeyMap` and should return a conformal data object.
 This function can be used to filter or manipulate the data in an data format compliant way.

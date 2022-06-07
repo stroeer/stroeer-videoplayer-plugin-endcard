@@ -233,12 +233,14 @@ class EndcardPlugin {
       this.renderFallback()
       return
     }
-
     fetchAPI<object>(endpoint)
       .then((data) => {
         this.transformedData = transformData(data, this.dataKeyMap)
         this.transformedData = this.transformApiData(this.transformedData)
         logger.log(this.transformedData)
+
+        this.showFallback = false
+        this.endcardContainer.innerHTML = ''
 
         for (let i: number = 0; i < 5; i++) {
           const tileTemplate = getTile(
@@ -254,6 +256,7 @@ class EndcardPlugin {
           }
           this.endcardContainer.innerHTML += tileTemplate
         }
+        this.revolverplay()
       })
       .catch((err) => {
         logger.log('Something went wrong with fetching api!', err)
@@ -274,6 +277,10 @@ class EndcardPlugin {
 
     if (typeof this.videoplayer.exitFullscreen === 'function') {
       this.videoplayer.exitFullscreen()
+    }
+    if (this.endcardContainer.childNodes.length === 0) {
+      this.showFallback = true
+      this.renderFallback()
     }
     this.endcardContainer.classList.remove('endcard-hidden')
     this.dispatchEvent('plugin-endcard:show')

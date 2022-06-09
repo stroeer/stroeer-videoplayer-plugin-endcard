@@ -245,3 +245,19 @@ describe('testing render with failing fetch API', () => {
     expect(plugin.renderFallback).toHaveBeenCalledTimes(1)
   })
 })
+
+describe('testing render with pending fetch api', () => {
+  let container: any
+  beforeEach(() => {
+      container = plugin.endcardContainer.innerHTML;
+  })
+  afterEach(() => {
+      plugin.endcardContainer.innerHTML = container;
+  })
+  test('show should call fallback when endcard div is empty', () => {
+      plugin.renderFallback = jest.fn()
+      plugin.endcardContainer.innerHTML = ''
+      plugin.show()
+      expect(plugin.renderFallback).toHaveBeenCalledTimes(1)
+  })
+})

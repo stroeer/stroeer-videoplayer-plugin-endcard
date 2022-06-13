@@ -1,48 +1,77 @@
 import EndcardPlugin from './plugin'
 import { version } from '../package.json'
 import logger from './logger'
+import { noop } from './noop'
 import { IStroeerVideoplayer, IEndcardOptions } from '../types/types'
 import './endcard.scss'
 
-let endcardPlugin: EndcardPlugin
+class Plugin {
+  version: string
+  pluginName: string
+  onVideoElPlay: Function
+  onVideoElFirstQuartile: Function
+  onVideoElEnd: Function
 
-const onVideoElPlay = (e: Event): void => {
-  endcardPlugin.reset()
-  if (e.target !== null) e.target.removeEventListener('play', onVideoElPlay)
-}
+  constructor () {
+    this.version = version
+    this.pluginName = 'Endcard'
+    this.onVideoElPlay = noop
+    this.onVideoElFirstQuartile = noop
+    this.onVideoElEnd = noop
 
-const onVideoElFirstQuartile = (): void => {
-  endcardPlugin.render()
-}
+    return this
+  }
 
-const onVideoElEnd = (e: Event): void => {
-  if (e.target !== null) e.target.addEventListener('play', onVideoElPlay)
-  endcardPlugin.show()
-}
+  init = (StroeerVideoplayer: IStroeerVideoplayer, opts?: any): void => {
+    opts = opts ?? {}
 
-const plugin = {
-  pluginName: 'Endcard',
-  init: (stroeervideoplayer: IStroeerVideoplayer, opts: IEndcardOptions = {}) => {
     logger.log('opts', opts)
+    logger.log('version', this.version)
 
-    const videoEl = stroeervideoplayer.getVideoEl()
-    endcardPlugin = new EndcardPlugin(stroeervideoplayer, opts)
+    
+    const videoEl = StroeerVideoplayer.getVideoEl()
+    const endcardPlugin = new EndcardPlugin(StroeerVideoplayer, opts)
 
-    videoEl.addEventListener('contentVideoSecondOctile', onVideoElFirstQuartile)
-    videoEl.addEventListener('contentVideoEnded', onVideoElEnd)
-  },
-  deinit: (stroeervideoplayer: IStroeerVideoplayer) => {
-    const videoEl = stroeervideoplayer.getVideoEl()
-    const endcardContainer = stroeervideoplayer.getRootEl().querySelector('.plugin-endcard-container')
-
-    if (endcardContainer !== undefined) {
-      videoEl.removeEventListener('contentVideoSecondOctile', onVideoElFirstQuartile)
-      videoEl.removeEventListener('contentVideoEnded', onVideoElEnd)
+    this.onVideoElPlay = (): void => {
       endcardPlugin.reset()
+      videoEl.removeEventListener('play', this.onVideoElPlay)
+    }
+    
+    this.onVideoElFirstQuartile = (): void => {
+      endcardPlugin.render()
+    }
+    
+    this.onVideoElEnd = (e: Event): void => {
+      videoEl.addEventListener('play', this.onVideoElPlay)
+      endcardPlugin.show()
+    }
+
+    videoEl.addEventListener('contentVideoSecondOctile', this.onVideoElFirstQuartile)
+    videoEl.addEventListener('contentVideoEnded', this.onVideoElEnd)
+  }
+
+  deinit = (StroeerVideoplayer: IStroeerVideoplayer): void => {
+    const videoEl = StroeerVideoplayer.getVideoEl()
+    videoEl.removeEventListener('contentVideoSecondOctile', this.onVideoElFirstQuartile)
+    videoEl.removeEventListener('contentVideoEnded', this.onVideoElEnd)
+    
+    const endcardContainer = StroeerVideoplayer.getRootEl().querySelector('.plugin-endcard-container')
+    if (endcardContainer !== undefined) {
       endcardContainer.remove()
     }
-  },
-  version: version
+  }
 }
 
-export { plugin as StroeerVideoplayerEndcardPlugin }
+const pluginWrap = {
+  version: version,
+  pluginName: 'Endcard',
+  init: (StroeerVideoplayer: IStroeerVideoplayer, opts: IEndcardOptions = {}) => {
+    const plugin = new Plugin()
+    plugin.init(StroeerVideoplayer, opts)
+  },
+  deinit: (StroeerVideoplayer: IStroeerVideoplayer) => {
+    // plugin.deinit(StroeerVideoplayer)
+  }
+}
+
+export { pluginWrap as StroeerVideoplayerEndcardPlugin }

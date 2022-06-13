@@ -17,6 +17,7 @@ class EndcardPlugin {
   dataKeyMap: object
   transformedData: IData[]
   showFallback: boolean
+  isVideoFinished: boolean
   uiEl: HTMLDivElement
   revolverplayTime: number
   intervalTicker: NodeJS.Timeout | null
@@ -59,6 +60,7 @@ class EndcardPlugin {
     this.transformApiData =
       opts.transformApiData !== undefined ? opts.transformApiData : noopData
 
+    this.isVideoFinished = false
     this.uiEl = stroeervideoplayer.getUIEl()
 
     this.endcardContainer = document.createElement('div')
@@ -90,6 +92,7 @@ class EndcardPlugin {
     this.removeClickEvents()
     this.endcardContainer.innerHTML = ''
     this.hide()
+    this.isVideoFinished = false
   }
 
   revolverplay = (): void => {
@@ -224,6 +227,7 @@ class EndcardPlugin {
       'plugin-endcard-tile-single'
     )
     this.endcardContainer.innerHTML += replayTemplate
+    this.addClickEvents()
   }
 
   render = (): void => {
@@ -257,7 +261,8 @@ class EndcardPlugin {
           }
           this.endcardContainer.innerHTML += tileTemplate
         }
-        if(!this.endcardContainer.classList.contains('endcard-hidden')) {
+        this.addClickEvents()
+        if (this.isVideoFinished) {
           this.revolverplay()
         } 
       })
@@ -277,6 +282,7 @@ class EndcardPlugin {
 
   show = (): void => {
     this.uiEl.classList.add('plugin-endcard-ui-small')
+    this.isVideoFinished = true
 
     if (typeof this.videoplayer.exitFullscreen === 'function') {
       this.videoplayer.exitFullscreen()

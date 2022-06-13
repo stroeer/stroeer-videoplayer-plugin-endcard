@@ -17,6 +17,7 @@ class EndcardPlugin {
   dataKeyMap: object
   transformedData: IData[]
   showFallback: boolean
+  isVideoFinished: boolean
   uiEl: HTMLDivElement
   revolverplayTime: number
   intervalTicker: NodeJS.Timeout | null
@@ -59,6 +60,7 @@ class EndcardPlugin {
     this.transformApiData =
       opts.transformApiData !== undefined ? opts.transformApiData : noopData
 
+    this.isVideoFinished = false
     this.uiEl = stroeervideoplayer.getUIEl()
 
     this.endcardContainer = document.createElement('div')
@@ -90,6 +92,7 @@ class EndcardPlugin {
     this.removeClickEvents()
     this.endcardContainer.innerHTML = ''
     this.hide()
+    this.isVideoFinished = false
   }
 
   revolverplay = (): void => {
@@ -224,6 +227,7 @@ class EndcardPlugin {
       'plugin-endcard-tile-single'
     )
     this.endcardContainer.innerHTML += replayTemplate
+    this.addClickEvents()
   }
 
   render = (): void => {
@@ -240,6 +244,9 @@ class EndcardPlugin {
         this.transformedData = this.transformApiData(this.transformedData)
         logger.log(this.transformedData)
 
+        this.showFallback = false
+        this.endcardContainer.innerHTML = ''
+
         for (let i: number = 0; i < 5; i++) {
           const tileTemplate = getTile(
             i,
@@ -254,6 +261,10 @@ class EndcardPlugin {
           }
           this.endcardContainer.innerHTML += tileTemplate
         }
+        this.addClickEvents()
+        if (this.isVideoFinished) {
+          this.revolverplay()
+        } 
       })
       .catch((err) => {
         logger.log('Something went wrong with fetching api!', err)
@@ -271,9 +282,16 @@ class EndcardPlugin {
 
   show = (): void => {
     this.uiEl.classList.add('plugin-endcard-ui-small')
+    this.isVideoFinished = true
 
     if (typeof this.videoplayer.exitFullscreen === 'function') {
       this.videoplayer.exitFullscreen()
+    }
+    if (this.endcardContainer.childNodes.length === 0) {
+      this.showFallback = true
+      this.renderFallback()
+    } else {
+      this.revolverplay()
     }
     this.endcardContainer.classList.remove('endcard-hidden')
     this.dispatchEvent('plugin-endcard:show')

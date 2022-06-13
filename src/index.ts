@@ -17,9 +17,7 @@ const onVideoElFirstQuartile = (): void => {
 
 const onVideoElEnd = (e: Event): void => {
   if (e.target !== null) e.target.addEventListener('play', onVideoElPlay)
-  endcardPlugin.addClickEvents()
   endcardPlugin.show()
-  endcardPlugin.revolverplay()
 }
 
 const plugin = {

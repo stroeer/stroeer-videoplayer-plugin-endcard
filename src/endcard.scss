@@ -107,6 +107,13 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
   font-size: $endcard-plugin-font-size-medium;
 }
 
+.plugin-endcard-title-main {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 .plugin-endcard-title {
   margin: 0;
   padding: $endcard-plugin-spacing-small;

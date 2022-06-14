@@ -50,7 +50,7 @@ const getTile = (index: number, obj: IData, revolverplayTime: number): string =>
         `}
         <p class="plugin-endcard-title">
           ${index === 0 ? '<span class="plugin-endcard-title-pre">Nächstes Video</span>' : ''}
-          ${obj.title}
+          <span class="plugin-endcard-title-main">${obj.title}</span>
         </p>
       </div>
     </div>

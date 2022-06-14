@@ -231,7 +231,13 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
           Nächstes Video
         </span>
         
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       
@@ -303,7 +309,13 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       >
         
           
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       
@@ -375,7 +387,13 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       >
         
           
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       
@@ -447,7 +465,13 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       >
         
           
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       
@@ -519,7 +543,13 @@ exports[`Tile markup is rendered as expected when revolverplay is active 1`] = `
       >
         
           
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       
@@ -673,7 +703,13 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
           Nächstes Video
         </span>
         
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       
@@ -745,7 +781,13 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       >
         
           
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       
@@ -817,7 +859,13 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       >
         
           
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       
@@ -889,7 +937,13 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       >
         
           
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       
@@ -961,7 +1015,13 @@ exports[`Tile markup is rendered as expected when revolverplay is not active 1`]
       >
         
           
+          
+        <span
+          class="plugin-endcard-title-main"
+        >
           Bei voller Fahrt kommt plötzlich Panik auf
+        </span>
+        
         
       </p>
       

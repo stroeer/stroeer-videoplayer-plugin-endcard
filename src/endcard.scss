@@ -35,6 +35,9 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
   position: absolute;
   width: 100%;
   bottom: $endcard-plugin-controlbar-height-mobile;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .plugin-endcard-tile,
@@ -61,6 +64,15 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
 
 .plugin-endcard-tile-replay {
   z-index: 101;
+
+  .plugin-endcard-overlay {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+  }
 }
 
 .plugin-endcard-tile-single,
@@ -116,12 +128,14 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
 
 .plugin-endcard-title {
   margin: 0;
-  padding: $endcard-plugin-spacing-small;
+  padding: 0 $endcard-plugin-spacing-small;
   width: 100%;
   box-sizing: border-box;
   color: $endcard-plugin-text-color;
   font-weight: bold;
   font-size: $endcard-plugin-font-size-medium;
+  position: absolute;
+  bottom: 0;
 }
 
 .plugin-endcard-replay-title {
@@ -152,19 +166,23 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
   z-index: 1;
 }
 
-.plugin-endcard-revolverplay-icon {
-  display: block;
-  margin: 0 auto;
-}
-
+.plugin-endcard-revolverplay-icon,
 .plugin-endcard-play-icon {
   display: block;
-  margin: 0 auto $endcard-plugin-spacing-small;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  margin-left: -11px;
+  margin-top: -14px;
+}
+
+.plugin-endcard-revolverplay-icon {
+  margin-left: -51px;
+  margin-top: -37px;
 }
 
 .plugin-endcard-replay-icon {
   display: block;
-  margin: 0 auto;
 }
 
 .plugin-endcard-progress-value {
@@ -198,10 +216,15 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
 
   .plugin-endcard-title {
     background: $endcard-plugin-title-bg;
+    padding-bottom: $endcard-plugin-spacing-small;
 
     .plugin-endcard-tile-0 & {
       font-size: $endcard-plugin-font-size-large;
       padding: $endcard-plugin-spacing-large;
+
+      .plugin-endcard-title-main {
+        -webkit-line-clamp: 3;
+      }
     }
   }
 
@@ -222,10 +245,6 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
   .plugin-endcard-tile-replay {
     display: block;
     clear: left;
-
-    .plugin-endcard-overlay {
-      bottom: calc(50% - ((21px + #{$endcard-plugin-font-size-smaller} + #{$endcard-plugin-spacing-small}) / 2));
-    }
   }
 
   .plugin-endcard-tile-1,
@@ -249,7 +268,7 @@ $endcard-plugin-controlbar-height-mobile: 55px !default;
   }
 
   .plugin-endcard-revolverplay-icon {
-    margin-bottom: $endcard-plugin-spacing-large;
+    top: 50%;
   }
 
   .plugin-endcard-button-pause {

@@ -108,6 +108,10 @@ Callback which is triggered when an endcard video is started by revolverplay.
 
 Callback which is triggered when user clicks on "Anhalten"-button.
 
+### `onPlayCallback` - Function
+
+Callback which is triggered when a new video is played no matter via click or via revolverplay
+
 ### `dataKeyMap` - Object
 
 Object to map keys of API data structure.

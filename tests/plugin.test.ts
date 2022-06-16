@@ -227,6 +227,13 @@ describe('testing render with working fetch API', () => {
     await flushPromises()
     expect(plugin.transformApiData).toHaveBeenCalledTimes(1)
   })
+
+  test('play should call onPlayCallback', () => {
+    plugin.onPlayCallback = jest.fn()
+    plugin.transformedData = testData
+    plugin.play(0, true)
+    expect(plugin.onPlayCallback).toHaveBeenCalledWith(testData[0])
+  })
 })
 
 describe('testing render with failing fetch API', () => {

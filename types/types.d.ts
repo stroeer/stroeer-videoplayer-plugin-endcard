@@ -25,6 +25,7 @@ export interface IEndcardOptions {
   onClickToReplayCallback?: Function
   onRevolverplayCallback?: Function
   onRevolverplayPauseCallback?: Function
+  onPlayCallback?: (data: IData) => void
   dataKeyMap?: Object
   revolverplayTime?: number
   showFallback?: boolean

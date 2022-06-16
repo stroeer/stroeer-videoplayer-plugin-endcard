@@ -14,6 +14,7 @@ class EndcardPlugin {
   onClickToReplayCallback: Function
   onRevolverplayCallback: Function
   onRevolverplayPauseCallback: Function
+  onPlayCallback: (data: IData) => void
   dataKeyMap: object
   transformedData: IData[]
   showFallback: boolean
@@ -56,6 +57,7 @@ class EndcardPlugin {
       opts.onRevolverplayPauseCallback !== undefined
         ? opts.onRevolverplayPauseCallback
         : noop
+    this.onPlayCallback = opts.onPlayCallback !== undefined ? opts.onPlayCallback : noop;
 
     this.transformApiData =
       opts.transformApiData !== undefined ? opts.transformApiData : noopData
@@ -127,9 +129,11 @@ class EndcardPlugin {
   }
 
   play = (idx: number, autoplay: boolean): void => {
-    this.setEndcardUrl(this.transformedData[idx].endpoint)
-    this.videoplayer.replaceAndPlay(this.transformedData[idx], autoplay)
-    this.dispatchEvent('plugin-endcard:play')
+    const nextVideo = this.transformedData[idx]
+    this.setEndcardUrl(nextVideo.endpoint)
+    this.videoplayer.replaceAndPlay(nextVideo, autoplay)
+    this.onPlayCallback(nextVideo)
+    this.dispatchEvent('plugin-endcard:play', nextVideo)
   }
 
   clickToPlay = (e: Event): void => {
@@ -240,8 +244,7 @@ class EndcardPlugin {
 
     fetchAPI<object>(endpoint)
       .then((data) => {
-        this.transformedData = transformData(data, this.dataKeyMap)
-        this.transformedData = this.transformApiData(this.transformedData)
+        this.transformedData = this.transformApiData(transformData(data, this.dataKeyMap))
         logger.log(this.transformedData)
 
         this.showFallback = false

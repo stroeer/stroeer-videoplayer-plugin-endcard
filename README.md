@@ -129,6 +129,15 @@ If set to true the fallback (only replay tile) is shown.
 A function which gets the current API Data after it got transformed by the `dataKeyMap` and should return a conformal data object.
 This function can be used to filter or manipulate the data in an data format compliant way.
 
+## Events
+
+- `plugin-endcard:show`
+- `plugin-endcard:revolverplay-pause`
+- `plugin-endcard:click-to-replay`
+- `plugin-endcard:click-to-play`
+- `plugin-endcard:play`
+- `plugin-endcard:revolverplay`
+
 
 ## 🌐 Real World Example
 

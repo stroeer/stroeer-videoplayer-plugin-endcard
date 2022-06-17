@@ -110,6 +110,9 @@ myvideoplayer.initPlugin('Endcard', {
   onRevolverplayPauseCallback: () => {
     console.log('OnRevolverplayPauseCallback triggered')
   },
+  onPlayCallback: (data) => {
+    console.log('OnPlayCallback triggered with data: ', data)
+  },
   transformApiData: (data) => {
     console.log(data)
     return data

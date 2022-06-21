@@ -6,15 +6,13 @@ import { IStroeerVideoplayer, IEndcardOptions } from '../types/types'
 import './endcard.scss'
 
 class Plugin {
-  version: string
-  pluginName: string
+  public static version: string = version
+  public static pluginName: string = 'endcard'
   onVideoElPlay: Function
   onVideoElFirstQuartile: Function
   onVideoElEnd: Function
 
   constructor () {
-    this.version = version
-    this.pluginName = 'Endcard'
     this.onVideoElPlay = noop
     this.onVideoElFirstQuartile = noop
     this.onVideoElEnd = noop
@@ -22,11 +20,9 @@ class Plugin {
     return this
   }
 
-  init = (StroeerVideoplayer: IStroeerVideoplayer, opts?: any): void => {
-    opts = opts ?? {}
-
+  init = (StroeerVideoplayer: IStroeerVideoplayer, opts: IEndcardOptions = {}): void => {
     logger.log('opts', opts)
-    logger.log('version', this.version)
+    logger.log('version', Plugin.version)
 
     
     const videoEl = StroeerVideoplayer.getVideoEl()
@@ -62,16 +58,4 @@ class Plugin {
   }
 }
 
-const pluginWrap = {
-  version: version,
-  pluginName: 'Endcard',
-  init: (StroeerVideoplayer: IStroeerVideoplayer, opts: IEndcardOptions = {}) => {
-    const plugin = new Plugin()
-    plugin.init(StroeerVideoplayer, opts)
-  },
-  deinit: (StroeerVideoplayer: IStroeerVideoplayer) => {
-    // plugin.deinit(StroeerVideoplayer)
-  }
-}
-
-export { pluginWrap as StroeerVideoplayerEndcardPlugin }
+export { Plugin as StroeerVideoplayerEndcardPlugin }

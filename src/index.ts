@@ -7,7 +7,7 @@ import './endcard.scss'
 
 class Plugin {
   public static version: string = version
-  public static pluginName: string = 'Endcard'
+  public static pluginName: string = 'endcard'
   onVideoElPlay: Function
   onVideoElFirstQuartile: Function
   onVideoElEnd: Function

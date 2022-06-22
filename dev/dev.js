@@ -39,7 +39,7 @@ video.addEventListener('contentVideoStart', function () {
   console.log('playRound: ', playRound)
   if (playRound === 3) {
     console.log('DEINIT')
-    myvideoplayer.deinitPlugin('Endcard')
+    myvideoplayer.deinitPlugin('endcard')
   }
 })
 
@@ -83,7 +83,7 @@ const myvideoplayer = new StroeerVideoplayer(video)
 myvideoplayer.loadStreamSource()
 myvideoplayer.loadFirstChunk()
 
-myvideoplayer.initPlugin('Endcard', {
+myvideoplayer.initPlugin('endcard', {
   revolverplayTime: 7,
   dataKeyMap: {
     // key of endcard, key from API

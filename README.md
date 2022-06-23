@@ -30,7 +30,7 @@ The Stroeer Videoplayer Endcard Plugin works with data from a custom API but use
 The Stroeer Videoplayer Endcard Plugin uses determined [data keys](https://github.com/stroeer/stroeer-videoplayer-plugin-endcard/blob/main/types/types.d.ts#L1). If these keys are named different in your API, you can map as many keys as you like via `dataKeyMap` in options object.
 
 ```javascript
-myvideoplayer.initPlugin('Endcard', {
+myvideoplayer.initPlugin('endcard', {
   showEndcard: true,
 	dataKeyMap: {
 		// key of endcard, key from API
@@ -156,7 +156,7 @@ The only required data-attribute for the endcard to work is `data-endcard-url`.
 
 ```javascript
 const myvideoplayer = new StroeerVideoplayer(video)
-myvideoplayer.initPlugin('Endcard', {
+myvideoplayer.initPlugin('endcard', {
 	revolverplayTime: 7,
 	dataKeyMap: {
 		image_large: 'preview_image',

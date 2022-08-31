@@ -105,22 +105,28 @@ class EndcardPlugin {
       '[data-role="plugin-endcard-progress-value"]'
     )! as HTMLElement
     let remainingTime = this.revolverplayTime
+    
     const revolverplayTicker = (): void => {
-      ticker(this.revolverplayTime, remainingTime, progressSvgCircle, () => {
+      ticker(this.revolverplayTime, remainingTime, progressSvgCircle)
+      remainingTime--
+      if (remainingTime < 0) {
+        this.clearRevolverplayTimer()
         this.play(0, true)
         this.dispatchEvent('plugin-endcard:revolverplay')
         this.onRevolverplayCallback()
-      })
-      remainingTime--
+      }
     }
 
     revolverplayTicker()
-    this.intervalTicker = setInterval(revolverplayTicker, 1000)
+    if (this.intervalTicker === null) {
+      this.intervalTicker = setInterval(revolverplayTicker, 1000)
+    }
   }
 
   clearRevolverplayTimer = (): void => {
     if (this.intervalTicker !== null) {
       clearInterval(this.intervalTicker)
+      this.intervalTicker = null
     }
   }
 

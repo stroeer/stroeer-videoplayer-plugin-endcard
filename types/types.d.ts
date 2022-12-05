@@ -1,5 +1,6 @@
 export interface IData {
   title: string
+  duration: number
   playlists?: string[]
   poster?: string
   endpoint: string

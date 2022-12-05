@@ -50,6 +50,8 @@ These endpoint items are needed for the endcard plugin:
 
 `title: string` - caption/title of the video
 
+`duration: number` - duration of the video in seconds
+
 `image_small: string` - poster image in small size for all images and a browser width less than 769px
 
 `image_medium: string` - poster image in medium size for all images and a browser min-width: 769px
@@ -65,6 +67,7 @@ An API example could look like this:
 [
   {
     "title": "Elden Ring: Fundorte aller 7 legendären Zauber und Anrufungen",
+		"duration": 137,
     "image_small": "https://files.giga-video.de/8b/8f/d4/ce5267fe9772673bb448ea25f9_ciAyNDYgMTM4AzhmYzJmNzZiNGFm.jpg",
     "image_medium": "https://files.giga-video.de/8b/8f/d4/ce5267fe9772673bb448ea25f9_ciAyNDYgMTM4AzhmYzJmNzZiNGFm.jpg",
     "image_large": "https://files.giga-video.de/8b/8f/d4/ce5267fe9772673bb448ea25f9_ciAyNDYgMTM4AzhmYzJmNzZiNGFm.jpg",

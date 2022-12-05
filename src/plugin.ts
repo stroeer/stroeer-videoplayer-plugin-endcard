@@ -134,8 +134,13 @@ class EndcardPlugin {
     this.videoplayer.play()
   }
 
+  setDuration = (duration: number): void => {
+    this.videoplayer.getVideoEl().dataset.duration = duration.toString();
+  }
+
   play = (idx: number, autoplay: boolean): void => {
     const nextVideo = this.transformedData[idx]
+    this.setDuration(nextVideo.duration)
     this.setEndcardUrl(nextVideo.endpoint)
     this.videoplayer.replaceAndPlay(nextVideo, autoplay)
     this.onPlayCallback(nextVideo)

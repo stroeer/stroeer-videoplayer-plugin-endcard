@@ -32,7 +32,7 @@ const plugin = new EndcardPlugin(svp)
 
 plugin.transformedData = testData
 
-const createDom = () => {
+const createDom = ():void => {
   const tile1 = document.createElement('div')
   tile1.setAttribute('data-role', 'plugin-endcard-tile')
   tile1.setAttribute('data-idx', '2')

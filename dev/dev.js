@@ -81,7 +81,7 @@ video.addEventListener('plugin-endcard:revolverplay-pause', function () {
 
 const myvideoplayer = new StroeerVideoplayer(video)
 myvideoplayer.loadStreamSource()
-myvideoplayer.loadFirstChunk()
+
 
 myvideoplayer.initPlugin('endcard', {
   revolverplayTime: 7,
